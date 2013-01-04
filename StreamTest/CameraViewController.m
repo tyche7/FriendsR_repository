@@ -8,9 +8,7 @@
 
 #import "CameraViewController.h"
 
-@interface CameraViewController ()
 
-@end
 
 @implementation CameraViewController
 @synthesize imageView;

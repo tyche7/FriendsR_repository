@@ -13,17 +13,23 @@
 //UI Actionsheet
 //http://agilewarrior.wordpress.com/2012/01/31/how-to-add-an-action-sheet-to-your-iphone-application/
 
+// flip animation
+// http://ideiasbynavarro.blogspot.com/2011/09/ios-quick-tips-flip-animation.html
+// http://stackoverflow.com/questions/4622996/how-to-do-the-flip-animation-between-two-uiviewcontrollers-while-clicking-info-b
+
 #import <FacebookSDK/FacebookSDK.h>
 #import "RecommendViewController.h"
 #import "Rec.h"
 #import "CameraViewController.h"
 
+#define DataDownloaderRunMode @"myapp.run_mode" 
+
 
 @implementation RecommendViewController
 
-@synthesize primaryView, secondaryView;
 
-@synthesize scrollView, postView, photoImage, productField, brandField, storeField, priceField, rec, offset, currentField, imageButton, imageView, productImage;
+
+@synthesize scrollView, postView, photoImage, productField, brandField, storeField, priceField, rec, offset, currentField, imageButton, productImage;
 
 @synthesize saveButton, saveTestButton;
 
@@ -32,6 +38,8 @@
 @synthesize actionSheet= _actionSheet;
 
 @synthesize barView;
+
+@synthesize userId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,10 +50,16 @@
         // create a new bar button item
 
         
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTest:)];
-        
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(upload:)];
+        bbi.enabled = NO;
         // set this bar button item as the right item in the navigationItem
         [[self navigationItem] setRightBarButtonItem:bbi];
+        
+        
+        UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+        
+        bbiLeft.enabled = YES;
+        [[self navigationItem] setLeftBarButtonItem:bbiLeft];
 
         
     }
@@ -70,10 +84,6 @@
     
     
 
-   
-    // *****
-    //set up primary view - text method
-    // *****
 
     
     
@@ -81,7 +91,6 @@
     
     scrollView=[[UIScrollView alloc] initWithFrame:fullScreenRect];
     
-    primaryView = secondaryView;
     
     self.view=scrollView;
     
@@ -111,47 +120,11 @@
     
 
     
-    // Initialization code
-    // labels
-    
-    CGRect productLabelRect = CGRectMake(20,161,80,21);
-    UILabel *productLabel = [[UILabel alloc] initWithFrame:productLabelRect];
-    productLabel.textAlignment = UITextAlignmentRight;
-    productLabel.text = @"Product";
-    productLabel.font = [UIFont boldSystemFontOfSize:15];
-    
-    [scrollView addSubview:productLabel];
-    
-    CGRect brandLabelRect = CGRectMake(20,194,80,21);
-    UILabel *brandLabel = [[UILabel alloc] initWithFrame:brandLabelRect];
-    brandLabel.textAlignment = UITextAlignmentRight;
-    brandLabel.text = @"Brand";
-    brandLabel.font = [UIFont boldSystemFontOfSize:15];
-    
-    [scrollView addSubview:brandLabel];
-    
-    
-    CGRect storeLabelRect = CGRectMake(20,227,80,21);
-    UILabel *storeLabel = [[UILabel alloc] initWithFrame:storeLabelRect];
-    storeLabel.textAlignment = UITextAlignmentRight;
-    storeLabel.text = @"Store";
-    storeLabel.font = [UIFont boldSystemFontOfSize:15];
-    
-    [scrollView addSubview:storeLabel];
-    
-    CGRect priceLabelRect = CGRectMake(20,260,80,21);
-    UILabel *priceLabel = [[UILabel alloc] initWithFrame:priceLabelRect];
-    priceLabel.textAlignment = UITextAlignmentRight;
-    priceLabel.text = @"Price";
-    priceLabel.font = [UIFont boldSystemFontOfSize:15];
-    
-    [scrollView addSubview:priceLabel];
-    
     // TextField
     
 
     
-    CGRect productRect = CGRectMake(120,161,210,30);
+    CGRect productRect = CGRectMake(120,121,210,25);
     productField = [[UITextField alloc] initWithFrame:productRect];
     productField.placeholder = @"product name";
     productField.font = [UIFont systemFontOfSize:15];
@@ -163,7 +136,7 @@
     
     [scrollView addSubview:productField];
     
-    CGRect brandRect = CGRectMake(120,194,210,30);
+    CGRect brandRect = CGRectMake(120,151,210,25);
     brandField = [[UITextField alloc] initWithFrame:brandRect];
     brandField.placeholder = @"brand name";
     brandField.font = [UIFont systemFontOfSize:15];
@@ -175,7 +148,7 @@
     
     [scrollView addSubview:brandField];
     
-    CGRect storeRect = CGRectMake(120,227,210,30);
+    CGRect storeRect = CGRectMake(120,181,210,25);
     storeField = [[UITextField alloc] initWithFrame:storeRect];
     storeField.placeholder = @"store name";
     storeField.font = [UIFont systemFontOfSize:15];
@@ -188,7 +161,7 @@
     [scrollView addSubview:storeField];
     
     
-    CGRect priceRect = CGRectMake(120,260,210,30);
+    CGRect priceRect = CGRectMake(120,211,210,25);
     priceField = [[UITextField alloc] initWithFrame:priceRect];
     priceField.placeholder = @"price";
     priceField.font = [UIFont systemFontOfSize:15];
@@ -203,7 +176,7 @@
     
     // post
     
-    CGRect postRect = CGRectMake(20, 60, 280, 80);
+    CGRect postRect = CGRectMake(0, 0, 320, 80);
     postView = [[UITextView alloc] initWithFrame:postRect];
     postView.font = [UIFont systemFontOfSize:15];
     postView.editable = YES;
@@ -212,19 +185,26 @@
     //postView.textAlignment = UITextAlignmentLeft;
     //postView.text = @"write your recommendation";
     postView.backgroundColor = [UIColor lightGrayColor];
+    postView.returnKeyType = UIReturnKeyDone;
     
     [scrollView addSubview:postView];
     
 
         
-        imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [imageButton addTarget:self
-                   action:@selector(toggleMainViews:)
-         forControlEvents:UIControlEventTouchUpInside];
-        [imageButton setTitle:@"Photo" forState:UIControlStateNormal];
-        imageButton.frame = CGRectMake(20, 2, 70, 40);
-        [scrollView addSubview:imageButton];
-        
+    imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [imageButton addTarget:self
+                   action:@selector(selectMedium:)
+                    forControlEvents:UIControlEventTouchUpInside];
+    //[imageButton setTitle:@"Photo" forState:UIControlStateNormal];
+    UIImage *uploadPhotoImg = [UIImage imageNamed:@"upload-photo.png"];
+    [imageButton setImage:uploadPhotoImg forState:UIControlStateNormal];
+    imageButton.frame = CGRectMake(20, 121, 80, 100);
+    [scrollView addSubview:imageButton];
+    
+
+
+    
+    
     
     // release scrollView as self.view retains it
     
@@ -238,52 +218,15 @@
     // ******************
 
     
-        
-    // *****
-    //set up secondary view - text method
-    // *****
-    
-    secondaryView = [[UIView alloc] initWithFrame:fullScreenRect];
-    [secondaryView setBackgroundColor:[UIColor whiteColor]];
-    
-    
-    
-    // image
 
-     CGRect imageRect = CGRectMake(0, 0, 300, 350);
-     imageView = [[UIImageView alloc] initWithFrame:imageRect];
-     imageView.image = [UIImage imageNamed:@"hera_foundation.jpg"];
-     //imageView.image = [UIImage imageWithContentsOfFile:image-path];
-     imageView.contentMode = UIViewContentModeScaleAspectFit;
-     [secondaryView addSubview:imageView];
     
     
-    cameraButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [cameraButton setBackgroundColor:[UIColor whiteColor]];
-    [cameraButton addTarget:self
-                    action:@selector(useCamera:)
-          forControlEvents:UIControlEventTouchUpInside];
-    [cameraButton setTitle:@"Camera" forState:UIControlStateNormal];
-    cameraButton.frame = CGRectMake(13, 360, 80, 44);
-    [secondaryView addSubview:cameraButton];
+    
+    
+    
 
-
-    cameraRollButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [cameraRollButton addTarget:self
-                    action:@selector(useCameraRoll:)
-          forControlEvents:UIControlEventTouchUpInside];
-    [cameraRollButton setTitle:@"Camera Roll" forState:UIControlStateNormal];
-    cameraRollButton.frame = CGRectMake(100, 360, 112, 44);
-    [secondaryView addSubview:cameraRollButton];
     
-    saveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [saveButton setBackgroundColor:[UIColor whiteColor]];
-    [saveButton addTarget:self
-                   action:@selector(upload:)
-           forControlEvents:UIControlEventTouchUpInside];
-    [saveButton setTitle:@"Save" forState:UIControlStateNormal];
-    saveButton.frame = CGRectMake(240, 360, 80, 44);
-    [secondaryView addSubview:saveButton];
+
     
     
 
@@ -310,7 +253,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     
-    self.title = @"Post";
+    self.title = @"Recommend";
     
 }
 
@@ -409,6 +352,8 @@
     [rec setPostText:post];
     NSLog(@"post: %@", post);
     
+
+    
 }
 
 -(IBAction)textViewDidBeginEditing:(UITextView *)textView{
@@ -422,6 +367,9 @@
     NSString *post = textView.text;
     [rec setPostText:post];
     NSLog(@"post: %@", post);
+    
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+
     
 }
 
@@ -474,39 +422,20 @@
     
 }
 
-- (IBAction)toggleMainViews:(id)sender {
+- (IBAction)selectMedium:(id)sender {
     
-    displayingPrimary = YES;
-    
-    [UIView transitionFromView:(displayingPrimary ? primaryView : secondaryView)
-     
-                        toView:(displayingPrimary ? secondaryView : primaryView)
-     
-                      duration:1.0
-     
-                       options:(displayingPrimary ? UIViewAnimationOptionTransitionFlipFromRight :
-                                
-                                UIViewAnimationOptionTransitionFlipFromLeft)
-                                //|UIViewAnimationOptionShowHideTransitionViews
-     
-                    completion:^(BOOL finished) {
-                        
-                        if (finished) {
-                            
-                            if (displayingPrimary) self.view = secondaryView;
-                            else self.view = primaryView;
-                            
-                            displayingPrimary = !displayingPrimary;
-                            
-                            
-                        }
-                        
-                        
-                        
-                    }];
-    
+    NSLog(@"in select Medium");
+
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Medium Option" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Camera Roll", nil];
+        [actionSheet showInView:self.view];
+ 
+
 }
-- (IBAction)useCamera:(id)sender{
+
+- (IBAction)useCamera{
+    
+    NSLog(@"in useCamera");
+    
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -520,7 +449,7 @@
     
 }
 
-- (void)useCameraRoll:(id)sender{
+- (void)useCameraRoll{
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -542,8 +471,12 @@
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]){
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         
-        imageView.image = image;
+
+        [imageButton setImage:image forState:UIControlStateNormal];
+        //[photoImage setImage:image];
         productImage = image;
+        NSLog(@"**********PHOTO IS SET***********");
+        
         
         if (newMedia) {
             UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:finishedSavingWithError:contextInfo:), nil);
@@ -564,6 +497,49 @@
 }
 
 
+-(IBAction)cancel:(id)sender{
+    postView.text = @"";
+    productField.text = @"";
+    brandField.text = @"";
+    storeField.text = @"";
+    priceField.text = @"";
+    
+    UIImage *uploadPhotoImg = [UIImage imageNamed:@"upload-photo.png"];
+    [imageButton setImage:uploadPhotoImg forState:UIControlStateNormal];
+    
+}
+
+
+
++(UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize{
+  
+    CGSize scaledSize = newSize;
+    float scaleFactor = 1.0;
+    
+
+    
+    if( image.size.width > image.size.height ) {
+        scaleFactor = image.size.height / image.size.width;
+        scaledSize.width = newSize.width;
+        scaledSize.height = newSize.height * scaleFactor;
+    }
+    else {
+        scaleFactor = image.size.width / image.size.height;
+        scaledSize.height = newSize.height;
+        scaledSize.width = newSize.width * scaleFactor;
+    }
+    
+
+    
+    UIGraphicsBeginImageContextWithOptions(scaledSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, scaledSize.width, scaledSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+
+
 // upload to webserver
 
 //http://stackoverflow.com/questions/8042360/nsdata-and-uploading-images-via-post-in-ios
@@ -572,70 +548,159 @@
 
 //http://kelp.phate.org/2012/06/post-picture-to-google-image-search.html
 
+//http://www.iriphon.com/2011/11/09/ios-uploading-an-image-from-your-iphone-to-a-server/
+
 -(void)upload:(id)sender{
 
     NSLog(@"in upload");
     
     
-    //NSData* fileData = [[NSData alloc] initWithContentsOfFile:filePath;
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:@"http://localhost:5000/upload"]];
+    //**********
+    // if the image is a default image, then don't send this image to the server
+    
+    // **********
+    // **********
+    // FOR TEST
+    /*
+    rec.userId = 1;
+    rec.userName = @"Rachel";
+    rec.productName = @"cosmetics";
+    
+    
+    //rec.postTitle = @"Moist foundation";
+    rec.postText = @"It is a new type of foundation and it is so moist~. It leaves the skin nice a luminous, even skin-toned. It is the best foundation I have tried so far. \n";
+    
+     */
+    
+    if (!self.userId) {
+        self.userId = @"713673762";
+    }
+    NSLog(@"UPLOAD: %@", self.userId);
+    NSLog(@"UPLOAD: %@", rec.userName);
+    NSLog(@"UPLOAD: %@", rec.productName);
+    NSLog(@"UPLOAD: %@", rec.postText);
+
+    UIImage *testImage = [UIImage imageNamed:@"bibim.JPG"];
+    
+    
+    //need to create file with userId and timestamp
+    
+    //
+    
+    //
+    
+    //
+
+    NSDate *past = [NSDate date];
+    NSTimeInterval oldTime = [past timeIntervalSince1970];
+    NSString *timestamp = [[NSString alloc] initWithFormat:@"%0.0f", oldTime];
+
+    NSString *fileName = [[NSString alloc] initWithFormat:@"%@_%@.jpg", self.userId, timestamp];
+
+  
+    NSURL *theURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/upload"];
+
+    if (!productImage) {
+        NSLog(@"ERROR: product Image is NULL");
+    }
+    
+    
+    // Resize Image
+
+    
+    
+    // http://stackoverflow.com/questions/2658738/the-simplest-way-to-resize-an-uiimage
+    //http://stackoverflow.com/questions/6703502/how-to-resize-an-uiimage-while-maintaining-its-aspect-ratio
+    
+    //UIImage *uploadImg = photoImage.image;
+    
+    CGSize smallSize = CGSizeMake(480.0f, 480.0f);
+    UIImage *smallImage = [RecommendViewController imageWithImage:productImage  scaledToSize:smallSize];
+
+    
+    //convert the image to low resolution
+    //set number between 0~1
+    //UIImage* lowResImage = [UIImage imageWithData:UIImageJPEGRepresentation(smallImage, 0.8f)];
+     
+    NSData *imageData = UIImagePNGRepresentation(smallImage);
+    
+
+    
+    
+
+
+    
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:theURL
+                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                            timeoutInterval:60];
+    
     [request setHTTPMethod:@"POST"];
     
-    NSString *boundary = @"0xKhTmLbOuNdArY";
-    // This is important! //NSURLConnection is very sensitive to format.
+    // We need to add a header field named Content-Type with a value that tells that it's a form and also add a boundary.
+    // I just picked a boundary by using one from a previous trace, you can just copy/paste from the traces.
+    NSString *boundary = @"----WebKitFormBoundarycC4YiaUFwM44F6rT";
+    
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    // end of what we've added to the header
     
-                        
-    
+    // the body of the post
     NSMutableData *body = [NSMutableData data];
-                        
-    //for file
-    /*
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"param1\"; filename=\"thefilename\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[NSData dataWithData:fileData]];
-    */
     
-    NSData *imageData = UIImageJPEGRepresentation(productImage, 1.0);
-    
-    /*
-    // add image data
-    [body appendData:[[NSString stringWithFormat:@"--%@\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\n", rec.productName] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Type: image/jpeg\n\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:imageData];
-    [body appendData:[[NSString stringWithFormat:@"\n--%@--\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                        
-    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 
-    */
-    //for string parameter
-    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+       [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"user\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:rec.userName] dataUsingEncoding:NSUTF8StringEncoding]];
-                        
-    //for string parameter
+
+    
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Disposition: form-data; name=\"name\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%@",self.userId] dataUsingEncoding:NSUTF8StringEncoding]];
+
+    
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"name\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:rec.productName] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
-                        
-    //for string parameter
+    
+    
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Disposition: form-data; name=\"text\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"text\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:rec.postText] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                                           
-                        
-    // setting the body of the post to the reqeust
-    [request setHTTPBody:body];
     
-    // now lets make the connection to the web
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    
+    
+    // Now we need to append the different data 'segments'. We first start by adding the boundary.
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+    // Now append the image
+    // Note that the name of the form field is exactly the same as in the trace ('attachment[file]' in my case)!
+    // You can choose whatever filename you want.
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\r\n", fileName] dataUsingEncoding:NSUTF8StringEncoding]];
+                       
+                       
+    // We now need to tell the receiver what content type we have
+    // In my case it's a png image. If you have a jpg, set it to 'image/jpg'
+    [body appendData:[[NSString stringWithString:@"Content-Type: image/jpg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                       
+    // Now we append the actual image data
+    [body appendData:[NSData dataWithData:imageData]];
+                       
+    // and again the delimiting boundary
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                       
+    // adding the body we've created to the request
+    [request setHTTPBody:body];
+                       
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request 
+                                                                                     delegate:self 
+                                                                             startImmediately:NO]; 
+                       
+    [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:DataDownloaderRunMode]; 
+                       
+    [connection start];
 
 }
 
@@ -667,16 +732,18 @@
 
     
     NSLog(@"in saveTest");
+    /*
     if (self.actionSheet) {
         // do nothing
     } else {
+     */
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Save Option" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"share with all friends", @"share with some friends", @"share with public", nil];
         //[actionSheet showFromBarButtonItem:sender animated:YES];
         //CGRect tmpRect = CGRectMake(230, 2, 70, 40);
         //[actionSheet showFromRect:tmpRect inView:self.view animated:YES];
         [actionSheet showInView:self.view];
     
-}
+
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -685,10 +752,53 @@
     if (buttonIndex == [actionSheet destructiveButtonIndex]) {
         // destroy something
         NSLog(@"Destroy");
-    } else if ([choice isEqualToString:DO_SOMETHING_ELSE]){
+    } else if ([choice isEqualToString:@"Camera"]){
         // do something else
-        NSLog(@"Do something else");
+        NSLog(@"useCamera");
+        [self useCamera];
+        
+    } else if ([choice isEqualToString:@"Camera Roll"]){
+        // do something else
+        NSLog(@"use Camera Roll");
+        [self useCameraRoll];
+        
     }
+}
+
+
+
+//textview tutorial
+// (1)how to remove keyboard when the done button is pressed
+// (2)how to put the limitation on the length of text
+//http://mobile.tutsplus.com/tutorials/iphone/ios-sdk_uitextview_uitextviewdelegate_2/
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    NSLog(@"touchesBegan:withEvent:");
+    [self.view endEditing:YES];
+    [super touchesBegan:touches withEvent:event];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    NSCharacterSet *doneButtonCharacterSet = [NSCharacterSet newlineCharacterSet];
+    NSRange replacementTextRange = [text rangeOfCharacterFromSet:doneButtonCharacterSet];
+    NSUInteger location = replacementTextRange.location;
+    if (textView.text.length + text.length > 140){
+        if (location != NSNotFound){
+            [textView resignFirstResponder];
+        }
+        return NO;
+    }
+    else if (location != NSNotFound){
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView{
+    NSLog(@"textViewDidChange:");
+    NSLog(@"length: %d",textView.text.length);
+      NSLog(@"remained length: %d",140-textView.text.length);
 }
 
 

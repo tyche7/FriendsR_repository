@@ -10,7 +10,7 @@
 
 @interface Rec : NSObject
 
-@property (nonatomic) int recId;
+@property (nonatomic, strong) NSString *recId;
 @property (nonatomic) int userId;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSDate *date;

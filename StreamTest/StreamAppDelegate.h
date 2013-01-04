@@ -11,22 +11,33 @@
 
 @class LoginViewController;
 @class StreamViewController;
+@class RecommendViewController;
+@class SettingController;
 
 
 
 @interface StreamAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 extern NSString *const SCSessionStateChangedNotification;
 
+@property (strong, nonatomic) StreamViewController *rootController;
+
 @property (strong, nonatomic) UINavigationController *navController;
 @property (strong, nonatomic) UINavigationController *navController1;
 @property (strong, nonatomic) UINavigationController *navController2;
+
+
+@property (strong, nonatomic) RecommendViewController  *recommendController;
+@property (strong, nonatomic) SettingController   *settingController;
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
 @property (strong, nonatomic) StreamViewController *viewController;
 @property (strong, nonatomic) UIWindow *window;
 
+@property (strong, nonatomic) NSString *userid;
+@property (strong, nonatomic) NSString *username;
+
 //@property (strong, nonatomic) LoginViewController *loginController;
 
 - (void)openSession;
-
+- (void)populateUserDetails;
 @end

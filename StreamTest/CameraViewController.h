@@ -10,6 +10,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface CameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+
     BOOL newMedia;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;

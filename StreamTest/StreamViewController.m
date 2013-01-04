@@ -10,6 +10,7 @@
 // https://github.com/rs/SDWebImage
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import "StreamViewController.h"
 #import "StreamCell.h"
 #import "DetailViewController.h"
@@ -22,7 +23,7 @@
 
 @implementation StreamViewController
 
-@synthesize detailController, recs, responseData;
+@synthesize detailController, recs, responseData, userid, status_changed_to_login;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -49,6 +50,8 @@
 {
     [super viewDidLoad];
     
+
+    
     self.title = @"Favorites";
     
     // Load the NIB file
@@ -57,10 +60,22 @@
     // Register this NIB which contains the cell
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"StreamCell"];
     
-
+    //
+    //Let's think
+    //when user log in, we save its id into file,and reuse it.
+    //
+    
+    //userid = @"713673762";
+    NSLog(@"userid: %@", userid);
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries"];
+    if (userid)
+        urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries/%@", userid];
+    
+    
     // web connection
     self.responseData = [NSMutableData data];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://127.0.0.1:5000/entries"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     self.recs = [[NSMutableArray alloc] init];
@@ -69,11 +84,11 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    
+        
 
 }
 
@@ -91,8 +106,42 @@
 {
     [super viewWillAppear:animated];
     
-    // hide navigation bar
-    //[[self navigationController] setNavigationBarHidden:YES animated:NO];
+
+    NSLog(@"VIEW WILL APPEAR");
+    
+    if (status_changed_to_login) {
+    
+        
+        NSLog(@"VIEW WILL APPEAR: STATUS CHANGED TO LOGIN");
+    
+        // Load the NIB file
+        UINib *nib = [UINib nibWithNibName:@"StreamCell" bundle:nil];
+    
+        // Register this NIB which contains the cell
+        [[self tableView] registerNib:nib forCellReuseIdentifier:@"StreamCell"];
+    
+        //
+        //Let's think
+        //when user log in, we save its id into file,and reuse it.
+        //
+    
+        //userid = @"713673762";
+        NSLog(@"userid: %@", userid);
+    
+        NSString *urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries"];
+        if (userid)
+            urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries/userid/%@", userid];
+    
+    
+        // web connection
+        self.responseData = [NSMutableData data];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+        [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
+        self.recs = [[NSMutableArray alloc] init];
+    
+    
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -115,6 +164,8 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+
 
 #pragma mark - Table view data source
 
@@ -149,13 +200,13 @@
     cell.name = rec.userName;
     cell.date = @"Nov 27";
     cell.post = rec.postText;
-    NSString* imagePlace = [NSString stringWithFormat:@"http://127.0.0.1:5000/uploads/%@", rec.fileName];
+    NSString* imagePlace = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/photos/%@", rec.fileName];
     //cell.image = [UIImage imageNamed:imagePlace];
     //cell.image = [UIImage imageNamed:@"hera_foundation.jpg"];
     //cell.image = [UIImage imageNamed:rec.fileName];
     
     // Here we use the new provided setImageWithURL: method to load the web image
-    NSLog(@"imagePlace: %@",rec.fileName);
+    NSLog(@"imagePlace: %@",imagePlace);
 
     [cell.picView setImageWithURL:[NSURL URLWithString:imagePlace] placeholderImage:[UIImage imageNamed:@"hera_foundation.jpg"]];
 
@@ -224,7 +275,7 @@
     NSLog(@"detailConroller rec: productName %@", self.detailController.rec.productName);
     NSLog(@"detailConroller rec: postText %@", self.detailController.rec.postText);
     
-    StreamCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    StreamCell *cell = (StreamCell *)[tableView cellForRowAtIndexPath:indexPath];
     self.detailController.detailPicImage = cell.picView.image;
     
     [self.navigationController pushViewController:detailController animated:YES];
@@ -235,11 +286,31 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-  
-    //when the data is applied, the total height should be calculated 
-     
+    // http://stackoverflow.com/questions/2213024/uitableview-flexible-dynamic-heightforrowatindexpath
+    // Notice: from this method, it's not possible to get a cell using indexpath
+    // because indexpath is 0 when this method is called.
+    // StreamCell *cell = (StreamCell *)[tableView cellForRowAtIndexPath:indexPath];
+
+    // solution: to calcuate the cell height
+    // it's necessary to use data ojbects
+
+    Rec* rec = [recs objectAtIndex:indexPath.row];
+    UIFont* font = [UIFont fontWithName:@"Helvetica" size:14];
+    CGSize size= [rec.postText sizeWithFont:font];
+    CGFloat postTextHeight = ceil(size.width/300)*(float)size.height;
+    NSLog(@"post text height: %f", postTextHeight);
     
-    return 320.0;
+    
+    //Let's assume rec knows picHeight
+    //server needs to send the heigt of picture
+    CGFloat picHeight = 200;
+    
+    CGFloat contentHeight = postTextHeight + picHeight + 80;
+    
+    return MAX(contentHeight, 44.0f);
+    
+    
+    //return 320.0f;
 }
 
 
@@ -285,9 +356,11 @@
     for (NSDictionary *result in results) {
         NSString *icon = [result objectForKey:@"name"];
         NSLog(@"name: %@", icon);
+        NSLog(@"entryid: %@", [result objectForKey:@"entryid"]);
    
     
         Rec* rec = [[Rec alloc] init ];
+        [rec setRecId:[result objectForKey:@"entryid"]];
         [rec setFileName:[result objectForKey:@"name"]]; //file name: eg) "bibim.jpg"
         [rec setUserName:[result objectForKey:@"user"]];
         [rec setPostText:[result objectForKey:@"text"]];

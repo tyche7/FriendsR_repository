@@ -26,7 +26,9 @@ NSString *const SCSessionStateChangedNotification =
 @synthesize window = _window;
 @synthesize viewController = _viewController;
 @synthesize tabBarController =  _tabBarController;
-@synthesize navController, navController1, navController2;
+@synthesize navController, navController1, navController2, recommendController, settingController;
+@synthesize userid, username;
+@synthesize rootController;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -35,7 +37,8 @@ NSString *const SCSessionStateChangedNotification =
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    UIViewController *rootController = [[StreamViewController alloc] initWithNibName:@"StreamViewController"  bundle:nil];
+    rootController = [[StreamViewController alloc] initWithNibName:@"StreamViewController"  bundle:nil];
+ 
     navController = [[UINavigationController alloc] initWithRootViewController:rootController];
 
     UIViewController *recommendController = [[RecommendViewController  alloc] initWithNibName:@"RecommendViewController" bundle:nil];
@@ -49,6 +52,9 @@ NSString *const SCSessionStateChangedNotification =
     navController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Post" image:[UIImage imageNamed:@"write"] tag:2];
     navController2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"User" image:[UIImage imageNamed:@"user"] tag:3];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, navController1,  navController2, nil];
+    
+
+    
 
     self.window.rootViewController = self.tabBarController;
     
@@ -60,11 +66,16 @@ NSString *const SCSessionStateChangedNotification =
     
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded){
         // To -do, show logged in view (this won't display any UX).
-        [self openSession]; 
+        [self openSession];
+        
     }else {
         // No, display the login page
         [self showLoginView];
+      
     }
+    
+    [self populateUserDetails];
+    rootController.status_changed_to_login = true;
     
     
     return YES;
@@ -186,6 +197,7 @@ NSString *const SCSessionStateChangedNotification =
        FBSessionState state, NSError *error) {
          [self sessionStateChanged:session state:state error:error];
      }];
+
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -194,6 +206,29 @@ NSString *const SCSessionStateChangedNotification =
          annotation:(id)annotation
 {
     return [FBSession.activeSession handleOpenURL:url];
+}
+
+- (void)populateUserDetails
+{
+    NSLog(@"in populate User Details");
+    
+    if (FBSession.activeSession.isOpen) {
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection,
+           NSDictionary<FBGraphUser> *user,
+           NSError *error) {
+             if (!error) {
+                 
+                 NSLog(@"**user name: %@", user.name);
+                 NSLog(@"**user id: %@", user.id);
+                 NSLog(@"**user username: %@", user.username);
+                 
+                 [self.rootController setUserid:user.id];
+                 [self.recommendController setUserId:user.id];
+
+             }
+         }];
+    }
 }
 
 @end

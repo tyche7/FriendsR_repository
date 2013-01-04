@@ -20,6 +20,7 @@
 @synthesize image;
 @synthesize picView;
 
+
 #define kNameTag 1
 #define kDateTag 2
 #define kPostTag 3
@@ -30,7 +31,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        CGRect nameLabelRect = CGRectMake(10,5,70,15);
+        CGRect nameLabelRect = CGRectMake(10,5,150,15);
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameLabelRect];
         nameLabel.textAlignment = UITextAlignmentLeft;
         //nameLabel.text = @"user name";
@@ -100,6 +101,7 @@
         post = [p copy];
         UITextView *postView = (UITextView *)[self.contentView viewWithTag:kPostTag];
         postView.text = post;
+        
     }
 }
 
@@ -110,12 +112,12 @@
     UIImageView *detailPicView = (UIImageView *)[self.contentView viewWithTag:kImageTag];
     
     // the code below adjust the frame size according to the actual picture size.
-    /*
-    CGRect newimageRect = imageView.frame;
+    
+    CGRect newimageRect = picView.frame;
     newimageRect.size.width = i.size.width + 10;
     newimageRect.size.height = i.size.height + 10;
-    imageView.frame = newimageRect;
-    */
+    picView.frame = newimageRect;
+    
     detailPicView.image = i;
 }
 

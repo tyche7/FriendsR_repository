@@ -101,6 +101,8 @@
              if (!error) {
                  
                  NSLog(@"user name: %@", user.name);
+                 NSLog(@"user id: %@", user.id);
+                 NSLog(@"user username: %@", user.username);
                  self.userNameLabel.text = user.name;
                  self.userProfileImage.profileID = user.id;
              }
@@ -246,6 +248,13 @@
         id<FBGraphUser> friend = [self.selectedFriends objectAtIndex:0];
         friendsSubtitle = friend.name;
         
+        NSLog(@"friend name: %@", friend.name);
+        NSLog(@"friend id: %@", friend.id);
+        NSLog(@"friend username: %@", friend.username);
+        NSLog(@"friend fist name: %@", friend.first_name);
+        NSLog(@"friend last name: %@", friend.last_name);
+        
+
      
         
     }

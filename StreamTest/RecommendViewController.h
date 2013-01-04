@@ -20,8 +20,6 @@
 
 
 
-@property (nonatomic, strong) IBOutlet UIView *primaryView;
-@property (nonatomic, strong) IBOutlet UIView *secondaryView;
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UITextView *postView;
@@ -32,8 +30,9 @@
 @property (nonatomic, strong) IBOutlet UITextField *priceField;
 @property (nonatomic, strong) IBOutlet UIButton *imageButton;
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+
 @property (strong, nonatomic) UIImage *productImage;
+
 
 @property (strong, nonatomic) IBOutlet UIButton *cameraButton;
 @property (strong, nonatomic) IBOutlet UIButton *cameraRollButton;
@@ -45,9 +44,14 @@
 @property (nonatomic, strong) UITextField *currentField;
 
 @property (nonatomic, strong) Rec *rec;
+@property (nonatomic, strong) NSString* userId;
 
 @property (nonatomic, weak) UIActionSheet *actionSheet;
 @property (nonatomic, strong) UIImageView *barView;
+
+
++(UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
+
 
 -(IBAction) writePost:(id)sender;
 -(IBAction)textViewDidBeginEditing:(UITextView *)textView;
@@ -57,14 +61,16 @@
 -(IBAction) setStore:(id)sender;
 -(IBAction) setPrice:(id)sender;
 
-- (IBAction)toggleMainViews:(id)sender;
+- (IBAction)selectMedium:(id)sender;
 - (IBAction)saveTest:(UIButton *)sender;
 
+- (IBAction)cancel:(id)sender;
 - (int)sendRecmd;
-- (IBAction)useCamera:(id)sender;
-- (IBAction)useCameraRoll:(id)sender;
+- (IBAction)useCamera;
+- (IBAction)useCameraRoll;
 
 
 - (void)populateUserDetails;
+
 
 @end

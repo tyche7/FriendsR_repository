@@ -9,10 +9,11 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DetailViewController.h"
 #import "Rec.h"
+#import "Comment.h"
 
 @implementation DetailViewController
 
-@synthesize rec, scrollView, detailPicImage;
+@synthesize rec, scrollView, detailPicImage, commentTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -176,9 +177,24 @@
         [scrollView addSubview:infoLabel3];
         
     }
-        
     
+    // contentSize.height
+    
+    
+    //http://stackoverflow.com/questions/6860231/how-to-get-the-size-of-a-uitableviews-content-view
+    [commentTableView layoutIfNeeded];
+    // Allows you to perform layout before the drawing cycle happens.
+    //-layoutIfNeeded forces layout early. So it will correctly return the size. Like dreaming before doing.
 
+    
+    
+    //commentTableView = [[UITableView alloc] initWithFrame:CGRectMake(commentTableView.frame.origin.x, commentTableView.frame.origin.y, commentTableView.frame.size.width, commentTableView.contentSize.height) style:UITableViewStylePlain];
+    
+    commentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 450, 320, commentTableView.contentSize.height) style:UITableViewStylePlain];
+    commentTableView.dataSource = self;
+    commentTableView.delegate = self;
+    
+    [self.view addSubview:commentTableView];
 
     
     
@@ -197,9 +213,6 @@
     // Do any additional setup after loading the view from its nib.
     
 
-    
-    
-    
 }
 
 - (void)viewDidUnload
@@ -218,6 +231,13 @@
     
     // Need to check the difference btw loadview and viewWillAppear
 
+    NSString* urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/comments/entryid/%@", rec.recId];
+    NSLog(urlString);
+    
+    // web connection
+    self.responseData = [NSMutableData data];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     [self loadView];
     
@@ -229,5 +249,120 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = (UITableViewCell*)[tableView
+                                               dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:CellIdentifier];
+        
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+        //cell.textLabel.lineBreakMode = UILineBreakModeTailTruncation;
+        //cell.textLabel.clipsToBounds = YES;
+        
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.detailTextLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+        cell.detailTextLabel.textColor = [UIColor colorWithRed:0.4
+                                                         green:0.6
+                                                          blue:0.8
+                                                         alpha:1];
+        cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
+        cell.detailTextLabel.clipsToBounds = YES;
+    }
+    
+    Comment* cmt = [self.comments objectAtIndex:indexPath.row];
+    
+
+    cell.textLabel.text = cmt.comment;
+    cell.detailTextLabel.text = cmt.userName;
+
+    
+    return cell;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.comments count];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+}
+
+// This method will be called several times as the data arrives
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"didReceiveResponse");
+    [self.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [self.responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"didFailWithError");
+    NSLog([NSString stringWithFormat:@"Connection failed: %@", [error description]]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"connectionDidFinishLoading");
+    NSLog(@"Succeeded! Received %d bytes of data",[self.responseData length]);
+    
+    // convert to JSON
+    NSError *myError = nil;
+    NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+    
+    // show all values
+    for(id key in res) {
+        
+        id value = [res objectForKey:key];
+        
+        NSString *keyAsString = (NSString *)key;
+        NSString *valueAsString = (NSString *)value;
+        
+        NSLog(@"key: %@", keyAsString);
+        NSLog(@"value: %@", valueAsString);
+    }
+    
+    // extract specific value...
+    NSArray *results = [res objectForKey:@"items"];
+    self.comments = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *result in results) {
+        NSString *icon = [result objectForKey:@"name"];
+
+        NSLog(@"comment: %@", [result objectForKey:@"comment"]);
+        
+        
+        Comment* comment = [[Comment alloc] init ];
+        [comment setCommentId:[result objectForKey:@"id"]];
+
+        [comment setUserName:[result objectForKey:@"user"]];
+        [comment setUserId:[result objectForKey:@"userid"]];
+        
+        [comment setComment:[result objectForKey:@"comment"]];
+        
+        [self.comments addObject:comment];
+        
+    } //end for
+    
+    //reload data
+    [self loadView];
+    [[self commentTableView] reloadData];
+    
+}
+
 
 @end

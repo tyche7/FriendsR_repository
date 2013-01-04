@@ -10,8 +10,9 @@
 #import <Foundation/Foundation.h>
 @class DetailViewController;
 
-@interface StreamViewController : UITableViewController{
+@interface StreamViewController : UITableViewController  {
     
+
     NSMutableArray *recs;
 
 
@@ -20,6 +21,10 @@
 @property (nonatomic, strong) NSMutableArray *recs;
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, strong) IBOutlet DetailViewController *detailController;
+
+@property (nonatomic) BOOL status_changed_to_login;
+@property (nonatomic, strong) NSString *userid;
+
 
 
 
