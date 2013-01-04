@@ -59,11 +59,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "StreamTest/DetailViewController.h"
-         timestampString = "371763746.158368"
+         timestampString = "377822150.681057"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "14"
-         endingLineNumber = "14"
+         startingLineNumber = "15"
+         endingLineNumber = "15"
          landmarkName = "rec"
          landmarkType = "19">
       </FileBreakpoint>
@@ -72,24 +72,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/RecommendViewController.m"
-         timestampString = "377560663.562578"
+         timestampString = "378985500.445667"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "142"
-         endingLineNumber = "142"
-         landmarkName = "-loadView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "StreamTest/RecommendViewController.m"
-         timestampString = "377560663.562578"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "239"
-         endingLineNumber = "239"
+         startingLineNumber = "219"
+         endingLineNumber = "219"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -98,11 +85,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/StreamViewController.m"
-         timestampString = "375613400.012432"
+         timestampString = "377810567.314752"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "152"
-         endingLineNumber = "152"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
