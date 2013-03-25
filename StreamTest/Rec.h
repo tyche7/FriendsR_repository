@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Rec : NSObject
+@interface Rec : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *recId;
-@property (nonatomic) int userId;
+@property (nonatomic) int userId;   
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) UIImage *userImage;
@@ -25,6 +25,10 @@
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *additionalInfo;
 @property (nonatomic, strong) NSString *fileName;
+@property (nonatomic) int rating;
+@property (nonatomic) int purchasePlaceType;
+@property (nonatomic) int ageBand;
+
 
 @property (nonatomic, strong) NSMutableArray *comments;
 

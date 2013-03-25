@@ -1,0 +1,315 @@
+//
+//  UserStore.m
+//  StreamTest
+//
+//  Created by Naehee Kim on 3/21/13.
+//
+//
+
+#import <FacebookSDK/FacebookSDK.h>
+#import "UserStore.h"
+//#import "StreamAppDelegate.h"
+#import "UserData.h"
+
+
+
+//local db changes
+#define kFilename @"archive"
+#define kDataKey @"Data"
+
+
+
+@implementation UserStore
+
+@synthesize userData;
+
+//remove later
+@synthesize username;
+@synthesize userid;
+
+
++ (UserStore *)sharedStore{
+    static UserStore *userStore = nil;
+    if (!userStore) {
+        userStore = [[UserStore alloc] init];
+        userStore.userData = [[UserData alloc] init];
+        
+
+        /*
+        [[NSNotificationCenter defaultCenter]
+         addObserver:userStore
+         selector:@selector(sessionStateChanged:)
+         name:SCSessionStateChangedNotification
+         object:nil];
+         */
+    }
+    
+    return userStore;
+}
+
+/*
+- (void)sessionStateChanged:(NSNotification*)notification {
+    
+    // need to think about this method
+    // who is going to call? how the return value is back to the caller?
+    
+    NSLog(@"in sessionStateChanged");
+    
+    [self populateUserDetails];
+    [self requestFriends];
+    
+}
+*/
+
+- (void)fetchUserDataWithCompletion:(void (^)(UserData* userData, NSError *err))block{
+    
+    
+    NSLog(@"In fetchUserDataWithCompletion");
+    if (FBSession.activeSession.isOpen) {
+           NSLog(@"FBsession is open");
+        // this is what populateUserDetails did
+     
+        
+        // Do any additional setup after loading the view, typically from a nib.
+        NSString *filepath = [self dataFilePath];
+        if([[NSFileManager defaultManager] fileExistsAtPath:filepath]){
+            NSLog(@"user data available in ios archive");
+            NSData *data = [[NSMutableData alloc]
+                            initWithContentsOfFile:[self dataFilePath]];
+            NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc]
+                                             initForReadingWithData:data];
+            UserData *aUserData = [unarchiver decodeObjectForKey:kDataKey];
+            [unarchiver finishDecoding];
+            
+            NSLog(@"print object %@", aUserData.username);
+  
+            
+            // After getting user data from internal file system
+            // run block code
+            // This is the controller's completion code
+            block(aUserData,nil);
+            
+        }
+        else{
+            NSLog(@"No saved data. Let's get from facebook");
+            if (FBSession.activeSession.isOpen) {
+                [[FBRequest requestForMe] startWithCompletionHandler:
+                 ^(FBRequestConnection *connection,
+                   NSDictionary<FBGraphUser> *user,
+                   NSError *error) {
+                     if (!error) {
+                         NSLog(@"user name is %@", user.name);
+                         NSLog(@"user id is %@", user.id);
+                         NSString *userFullName = [NSString stringWithFormat: @"%@%@", user.first_name,user.last_name];
+                         NSString *userPictureURL = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", user.id];
+                         NSLog(@"user picture is %@", userPictureURL);
+                     
+                     
+                     UserData *aUserdata = [[UserData alloc] init];
+                     aUserdata.userID = user.id;
+                     aUserdata.username = userFullName;
+                     aUserdata.userImageURL = userPictureURL;
+                     
+                     NSMutableData *data = [[NSMutableData alloc] init];
+                     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]
+                                                  initForWritingWithMutableData:data];
+                     [archiver encodeObject:aUserdata forKey:kDataKey];
+                     [archiver finishEncoding];
+                     
+                     [data writeToFile:[self dataFilePath] atomically:YES];
+                     NSLog(@"writing to file %@", data);
+                     
+                     // After getting user data,
+                     // (1) set the userData property for other controllers to use this data
+                     // (2) call the block code
+                     // This is the controller's completion code
+                     
+                     [[UserStore sharedStore] setUserData:aUserdata];
+                     block(aUserdata,nil);
+                     
+                     }
+                     
+                 }];
+            }
+        }
+        
+        
+        
+    }else{
+        // if facebook session is not open, return error code
+        // need to create err object ****
+        
+          NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+        [errorDetail setValue:@"Facebook session is not open" forKey:NSLocalizedDescriptionKey];
+        NSError *error = [NSError errorWithDomain:@"Facebook connection" code:700 userInfo:errorDetail];
+        
+        // This is the controller's completion code
+        block(nil,error);
+        
+    }
+    
+}
+
+// need to check
+- (void)viewUnDidLoad
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+// need to check
+-(void)logoutButtonWasPressed:(id)sender {
+    [FBSession.activeSession closeAndClearTokenInformation];
+}
+
+-(void) uploadFriendsList:(NSString*)friendList {
+    
+    NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendslist"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:toddlefriendsURL
+                                                                cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                            timeoutInterval:60];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSMutableData *body = [NSMutableData data];
+    
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"friends\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    //[body appendData:[[NSArray  arrayWithArray:friends] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%s", friendList] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [request setHTTPBody:body];
+    NSURLConnection *newconnection = [[NSURLConnection alloc] initWithRequest:request
+                                                                     delegate:self
+                                                             startImmediately:YES  ];
+    
+}
+
+
+- (void)fetchUserFriendsWithCompletion:(void (^)(NSArray* friendList,NSError *err))block{
+    
+    // requestFriends
+
+    NSLog(@"In requestFriends");
+    
+    if (FBSession.activeSession.isOpen) {
+        
+    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id data, NSError *error) {
+        if(error) {
+            NSLog(@"Error requesting /me/friends", error);
+            return;
+        }
+        NSString *friendlist = @"";
+        
+        NSArray* friends = (NSArray*)[data data];
+        NSLog(@"You have %d friends", [friends count]);
+        
+        
+        //This is the controller's completion code
+        block(nil,nil);
+        
+        // To store or update friendslist into server side DB,
+        // send friends' uid
+        
+        
+        for (int i=0; i<[friends count]; i++){
+            //NSLog(@"%@", [friends objectAtIndex:i]);
+            NSString *friend_id = [[friends objectAtIndex:i] objectForKey:@"id"];
+            NSLog(@"and id is %s", friend_id.UTF8String);
+            friendlist = [NSString stringWithFormat: @"%@|%@", friendlist, friend_id];
+        }
+        NSLog(@"Your frindslist: %s",friendlist.UTF8String);
+        
+        NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendslist"];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:toddlefriendsURL
+                                                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                                timeoutInterval:60];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        NSMutableData *body = [NSMutableData data];
+        
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"friends\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        //[body appendData:[[NSArray  arrayWithArray:friends] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@", friendlist] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        [request setHTTPBody:body];
+        NSURLConnection *newconnection = [[NSURLConnection alloc] initWithRequest:request
+                                                                         delegate:self
+                                                                 startImmediately:YES  ];
+    }];
+    }
+    
+    
+}
+
+
+- (void)populateUserDetails
+{
+    
+    NSLog(@"In populateUserDetails");
+    
+	// Do any additional setup after loading the view, typically from a nib.
+    NSString *filepath = [self dataFilePath];
+    if([[NSFileManager defaultManager] fileExistsAtPath:filepath]){
+        NSLog(@"user data available in ios archive");
+        NSData *data = [[NSMutableData alloc]
+                        initWithContentsOfFile:[self dataFilePath]];
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc]
+                                         initForReadingWithData:data];
+        UserData *userData = [unarchiver decodeObjectForKey:kDataKey];
+        [unarchiver finishDecoding];
+        
+        NSLog(@"print object %s", userData.username);
+        userid.text = userData.userID;
+        username.text = userData.username;
+    }
+    else{
+        NSLog(@"No saved data. Let's get from facebook");
+        if (FBSession.activeSession.isOpen) {
+            [[FBRequest requestForMe] startWithCompletionHandler:
+             ^(FBRequestConnection *connection,
+               NSDictionary<FBGraphUser> *user,
+               NSError *error) {
+                 if (!error) {
+                     NSLog(@"user name is %@", user.name);
+                     NSLog(@"user id is %@", user.id);
+                     NSString *userFullName = [NSString stringWithFormat: @"%@%@", user.first_name,user.last_name];
+                     NSString *userPictureURL = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", user.id];
+                     NSLog(@"user picture is %@", userPictureURL);
+                 
+                 
+                 UserData *userdata = [[UserData alloc] init];
+                 userdata.userID = user.id;
+                 userdata.username = userFullName;
+
+                 userdata.userImageURL = userPictureURL;
+                 
+                 NSMutableData *data = [[NSMutableData alloc] init];
+                 NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]
+                                              initForWritingWithMutableData:data];
+                 [archiver encodeObject:userdata forKey:kDataKey];
+                 [archiver finishEncoding];
+                 
+                 [data writeToFile:[self dataFilePath] atomically:YES];
+                 NSLog(@"writing to file %@", data);
+                     
+                 }
+                 
+             }];
+        }
+    }
+    NSLog(@"Exit populatedetails");
+}
+
+//local db changes
+-(NSString *)dataFilePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSLog(@"----------***********----------database path is %s", [documentsDirectory UTF8String]);
+    return [documentsDirectory stringByAppendingPathComponent:kFilename];
+}
+
+
+
+@end

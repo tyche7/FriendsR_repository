@@ -11,24 +11,22 @@
 @class DetailViewController;
 
 @interface StreamViewController : UITableViewController  {
-    
-
-    NSMutableArray *recs;
-
-
+    __block  BOOL fetchUserDataDidCallAndSet;
 }
 
 @property (nonatomic, strong) NSMutableArray *recs;
-@property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong) NSArray *searchResults;
 @property (nonatomic, strong) IBOutlet DetailViewController *detailController;
-
-@property (nonatomic) BOOL status_changed_to_login;
 @property (nonatomic, strong) NSString *userid;
+@property  (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) UIActivityIndicatorView *mainSpinner;
 
 
+- (void)fetchUserData;
+- (void)fetchData;
+- (IBAction)showSearchBar;
 
-
-
+- (UIActivityIndicatorView *)showActivityIndicatorOnView:(UIView*)aView;
 
 
 @end

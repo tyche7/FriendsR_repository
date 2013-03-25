@@ -14,8 +14,11 @@
 @property (strong, nonatomic) NSString *date;
 @property (strong, nonatomic) NSString *post;
 @property (strong, nonatomic) UIImage *image;
+@property (nonatomic) int rating;
 @property (strong, nonatomic) UIImageView *picView;
-
+@property (strong, nonatomic) UIImageView *ratingView;
+@property (strong, nonatomic) NSString *productNameAndPurchasePlace;
+@property (nonatomic) int ageBand;
 
 
 @end

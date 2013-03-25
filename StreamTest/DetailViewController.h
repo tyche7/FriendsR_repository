@@ -12,14 +12,15 @@
 
 @interface DetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic) int originalHeight;
 @property (nonatomic, strong) Rec *rec;
 @property (nonatomic, strong) NSMutableArray *comments;
 @property (nonatomic, strong) NSMutableData *responseData;
-
-
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImage *detailPicImage;
-
 @property (nonatomic, strong) UITableView *commentTableView;
+@property (nonatomic, strong) NSString *productNameAndPurchasePlace;
+
+- (void)renderTable;
 
 @end

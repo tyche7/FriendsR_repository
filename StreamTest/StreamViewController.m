@@ -15,6 +15,10 @@
 #import "StreamCell.h"
 #import "DetailViewController.h"
 #import "Rec.h"
+#import "DataFeedStore.h"
+#import "UserStore.h"
+#import "StreamAppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kNameTag 1
 #define kDateTag 2
@@ -23,7 +27,8 @@
 
 @implementation StreamViewController
 
-@synthesize detailController, recs, responseData, userid, status_changed_to_login;
+@synthesize detailController, recs, searchResults, userid, dateFormatter;
+@synthesize mainSpinner;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -32,6 +37,8 @@
     if (self) {
         // Custom initialization
    
+        fetchUserDataDidCallAndSet = NO;
+        
     }
     return self;
 }
@@ -52,7 +59,7 @@
     
 
     
-    self.title = @"Favorites";
+    self.title = @"Toddle";
     
     // Load the NIB file
     UINib *nib = [UINib nibWithNibName:@"StreamCell" bundle:nil];
@@ -60,36 +67,70 @@
     // Register this NIB which contains the cell
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"StreamCell"];
     
-    //
-    //Let's think
-    //when user log in, we save its id into file,and reuse it.
-    //
     
-    //userid = @"713673762";
-    NSLog(@"userid: %@", userid);
-    
-    NSString *urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries"];
-    if (userid)
-        urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries/%@", userid];
-    
-    
-    // web connection
-    self.responseData = [NSMutableData data];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     self.recs = [[NSMutableArray alloc] init];
     
+    
+    // set dateFormatter
+    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM dd"];
+ 
+    
+
+    
+    //add search button
+    UIBarButtonItem *searchBtn = [[UIBarButtonItem  alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(showSearchBar)];
+    
+  
+    self.navigationItem.rightBarButtonItem = searchBtn;
     
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-        
 
+    
+       self.tableView.contentOffset = CGPointMake(0.0, 44.0);
+    
+    
+    // showing activity indicator
+    
+    mainSpinner = [self showActivityIndicatorOnView:self.parentViewController.view];
+    
+    // faetch user data : try it when fb session is open
+    if(FBSession.activeSession.isOpen){
+        [self fetchUserData];
+        
+        // Set fetchUserDataDidCall in the completion block in fetchUserData
+        
+        
+    }
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(sessionStateChanged:)
+     name:SCSessionStateChangedNotification
+     object:nil];
+
+    
+    
+
+}
+
+- (void)sessionStateChanged:(NSNotification*)notification {
+    
+    
+    NSLog(@"in sessionStateChanged");
+    
+    if (!fetchUserDataDidCallAndSet) {
+         NSLog(@"fetch user data");
+         [self fetchUserData];
+    }
+
+
+    
 }
 
 
@@ -99,6 +140,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     
+ 
 
 }
 
@@ -106,41 +148,20 @@
 {
     [super viewWillAppear:animated];
     
+ 
 
     NSLog(@"VIEW WILL APPEAR");
     
-    if (status_changed_to_login) {
+    // ****************************************
+    // for test, termporarily comment out 
+    //fetch data whenever this controller becomes activated
+    //Need to handle the case that fetchData is called, before having userData *****
+    //of call fetchData, only after user post his data or explicitly want to refresh the view.
+    //[self fetchData];
+    // ***************************************
     
-        
-        NSLog(@"VIEW WILL APPEAR: STATUS CHANGED TO LOGIN");
-    
-        // Load the NIB file
-        UINib *nib = [UINib nibWithNibName:@"StreamCell" bundle:nil];
-    
-        // Register this NIB which contains the cell
-        [[self tableView] registerNib:nib forCellReuseIdentifier:@"StreamCell"];
-    
-        //
-        //Let's think
-        //when user log in, we save its id into file,and reuse it.
-        //
-    
-        //userid = @"713673762";
-        NSLog(@"userid: %@", userid);
-    
-        NSString *urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries"];
-        if (userid)
-            urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries/userid/%@", userid];
-    
-    
-        // web connection
-        self.responseData = [NSMutableData data];
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-        [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-        self.recs = [[NSMutableArray alloc] init];
-    
-    
+    if (fetchUserDataDidCallAndSet) {
+        [self fetchData];
     }
 }
 
@@ -162,9 +183,36 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    // portrait only
+    return (interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
+#pragma mark - Activity Indicator
+
+- (UIActivityIndicatorView *)showActivityIndicatorOnView:(UIView*)aView
+{
+    CGSize viewSize = aView.bounds.size;
+    
+    // create new dialog box view and components
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc]
+                                                      initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    // other size? change it
+    activityIndicatorView.bounds = CGRectMake(0, 0, 65, 65);
+    activityIndicatorView.hidesWhenStopped = YES;
+    activityIndicatorView.alpha = 0.7f;
+    //activityIndicatorView.backgroundColor = [UIColor blackColor];
+    //activityIndicatorView.layer.cornerRadius = 10.0f;
+    
+    // display it in the center of your view
+    activityIndicatorView.center = CGPointMake(viewSize.width / 2.0, viewSize.height / 2.0);
+    
+    [aView addSubview:activityIndicatorView];
+    
+    [activityIndicatorView startAnimating];
+    
+    return activityIndicatorView;
+}
 
 
 #pragma mark - Table view data source
@@ -178,9 +226,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    // Return the number of rows in the section.
+     // Return the number of rows in the section.
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView){
+        return [searchResults count];
+    }else{
+   
     return [recs count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -194,24 +247,110 @@
         cell = [[StreamCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier];
     }
     
+    Rec* rec;
     
-    Rec* rec = [recs objectAtIndex:indexPath.row];
+    if (tableView == self.searchDisplayController.searchResultsTableView){
+        rec = [searchResults objectAtIndex:indexPath.row];
+    }else{
+    
+        rec = [recs objectAtIndex:indexPath.row];
+    }
     
     cell.name = rec.userName;
-    cell.date = @"Nov 27";
-    cell.post = rec.postText;
+    cell.date = [dateFormatter stringFromDate:rec.date];
+    cell.rating = rec.rating;
+    cell.ageBand = 0; //set initial value
+
+  
+    
+    //NSLog(@"TIME: %@", rec.date);
+    //cell.post = rec.postText;
     NSString* imagePlace = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/photos/%@", rec.fileName];
-    //cell.image = [UIImage imageNamed:imagePlace];
-    //cell.image = [UIImage imageNamed:@"hera_foundation.jpg"];
-    //cell.image = [UIImage imageNamed:rec.fileName];
     
-    // Here we use the new provided setImageWithURL: method to load the web image
-    NSLog(@"imagePlace: %@",imagePlace);
+    if (!rec.purchasePlace || [rec.purchasePlace isEqualToString:@"None"] || [rec.purchasePlace isEqualToString:@""]) {
+        cell.productNameAndPurchasePlace = rec.productName;
+    }
+    else{
+        cell.productNameAndPurchasePlace = [NSString stringWithFormat:@"%@ from %@", rec.productName, rec.purchasePlace];
+    }
+    
+    
+    [cell.picView setImage:[UIImage imageNamed:@"hera_foundation.jpg"]];
+    
+    
+    
+    //Downloads the image at the given URL if not present in cache or return the cached version otherwise.
+    
+   // SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    
+   
+    NSLog(@"%@ image is being downloaded", rec.productName);
+    // NSLog(@"%@", imagePlace);
+    
+    // showing activity indicator
+    UIActivityIndicatorView *spinner;
+    spinner = [self showActivityIndicatorOnView:cell.picView];
+    
+    
+    [cell.picView setImageWithURL:[NSURL URLWithString:imagePlace]
+        placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
+     {    // stopping activity indicator
+         [spinner stopAnimating];
+         
+         
+         if (image)
+         {
+             // do something with image
+             NSLog(@"%@ Image has been dowloaded, and now is set", rec.productName);
+             //NSLog(@"cell ageband:%d", cell.ageBand);
+             
+             // **********
+             // need to handle this warning message
+             // *************
+             // for testing temorarily comment it out
+             
+             //cell.ageBand = rec.ageBand;
+             
+         }
+  }];
+    
+    /*
+    
+    [manager downloadWithURL:imagePlace
+                     options:0
+                    progress:^(NSUInteger receivedSize, long long expectedSize) // a block called while image is downloading
+     {
+         // progression tracking code
+         
+         // how to set placeholder image?
+         
+         
 
-    [cell.picView setImageWithURL:[NSURL URLWithString:imagePlace] placeholderImage:[UIImage imageNamed:@"hera_foundation.jpg"]];
+
+     }
+        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL dummy) // a block called when operation has been completed
+     {
+        
+         // stopping activity indicator
+        [spinner stopAnimating];
+         
+         
+         if (image)
+         {
+             // do something with image
+             NSLog(@"%@ Image has been dowloaded, and now is set", rec.productName);
+             //NSLog(@"cell ageband:%d", cell.ageBand);
+             
+        
+             [cell.picView setImage:image];
+             cell.ageBand = rec.ageBand;
+             
+         }
+     }];
 
     
-
+ */
     
 
     
@@ -272,12 +411,15 @@
     
     self.detailController.title = @"Detail View";
     self.detailController.rec = [recs objectAtIndex:indexPath.row];
+
     NSLog(@"detailConroller rec: productName %@", self.detailController.rec.productName);
     NSLog(@"detailConroller rec: postText %@", self.detailController.rec.postText);
     
     StreamCell *cell = (StreamCell *)[tableView cellForRowAtIndexPath:indexPath];
     self.detailController.detailPicImage = cell.picView.image;
+    self.detailController.productNameAndPurchasePlace = cell.productNameAndPurchasePlace;
     
+    self.detailController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailController animated:YES];
     
     
@@ -294,18 +436,20 @@
     // solution: to calcuate the cell height
     // it's necessary to use data ojbects
 
-    Rec* rec = [recs objectAtIndex:indexPath.row];
+    //Rec* rec = [recs objectAtIndex:indexPath.row];
+    
+     //CGFloat postTextHeight = 0;
+    
+    /* commented out for MVP version
     UIFont* font = [UIFont fontWithName:@"Helvetica" size:14];
     CGSize size= [rec.postText sizeWithFont:font];
     CGFloat postTextHeight = ceil(size.width/300)*(float)size.height;
     NSLog(@"post text height: %f", postTextHeight);
+    */
     
+   
     
-    //Let's assume rec knows picHeight
-    //server needs to send the heigt of picture
-    CGFloat picHeight = 200;
-    
-    CGFloat contentHeight = postTextHeight + picHeight + 80;
+    CGFloat contentHeight = 320.f;
     
     return MAX(contentHeight, 44.0f);
     
@@ -313,71 +457,113 @@
     //return 320.0f;
 }
 
-
-// This method will be called several times as the data arrives
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"didReceiveResponse");
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"didFailWithError");
-    NSLog([NSString stringWithFormat:@"Connection failed: %@", [error description]]);
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"connectionDidFinishLoading");
-    NSLog(@"Succeeded! Received %d bytes of data",[self.responseData length]);
+- (void)fetchUserData{
     
-    // convert to JSON
-    NSError *myError = nil;
-    NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
-    
-    // show all values
-    for(id key in res) {
+    [[UserStore sharedStore] fetchUserDataWithCompletion:^(UserData *userData, NSError *err) {
+        //when the request completes, this block will be called.
         
-        id value = [res objectForKey:key];
-        
-        NSString *keyAsString = (NSString *)key;
-        NSString *valueAsString = (NSString *)value;
-        
-        NSLog(@"key: %@", keyAsString);
-        NSLog(@"value: %@", valueAsString);
-    }
-    
-    // extract specific value...
-    NSArray *results = [res objectForKey:@"items"];
-    
-    for (NSDictionary *result in results) {
-        NSString *icon = [result objectForKey:@"name"];
-        NSLog(@"name: %@", icon);
-        NSLog(@"entryid: %@", [result objectForKey:@"entryid"]);
-   
-    
-        Rec* rec = [[Rec alloc] init ];
-        [rec setRecId:[result objectForKey:@"entryid"]];
-        [rec setFileName:[result objectForKey:@"name"]]; //file name: eg) "bibim.jpg"
-        [rec setUserName:[result objectForKey:@"user"]];
-        [rec setPostText:[result objectForKey:@"text"]];
-        [rec setProductName:[result objectForKey:@"productName"]];
-        [rec setBrandName:[result objectForKey:@"brandName"]];
-        [rec setPurchasePlace:[result objectForKey:@"purchasePlace"]];
-        [rec setPrice:[result objectForKey:@"price"]];
-    
-        [recs addObject:rec];
+        if (!err) {
+            // now dissmiss splash view which blocks or hides the StreamView
+            [mainSpinner stopAnimating];
+            // now fetchData using userData
+            [self fetchData];
+            
+            
+            fetchUserDataDidCallAndSet = YES;
+            
+ 
+            
+        }
+    }];
+}
 
-    } //end for
+- (void)fetchUserFreinds{
     
-    //reload data
-    [[self tableView] reloadData];
+    [[UserStore sharedStore] fetchUserFriendsWithCompletion:^(NSArray *friendList, NSError *err) {
+        if (!err) {
+            
+            // now dissmis splahs view if it is running
+            [mainSpinner stopAnimating];
+            
+            //do nothing for now
+
+            
+        }
+    }];
+}
+
+
+- (void)fetchData{
+    //Initiate the request
+    
+    //recs come from cache
+    recs = [[DataFeedStore sharedStore] fetchRecommendationsWithCompletion:^(NSMutableArray *fetchedRecommendations, NSError *err) {
+        // when the request completes, this block will be called.
+        
+        if (!err){
+            // How many items are there currently?
+            int currentItemCount = [recs count];
+            
+            // fetched from web server
+            recs = fetchedRecommendations;
+            
+            // How many items are there now?
+            int newItemCount = [recs count];
+            
+            // for each new item, insert a new row
+            int itemDelta = newItemCount - currentItemCount;
+            if (itemDelta>0){
+                NSMutableArray* rows = [NSMutableArray array];
+                for (int i=0; i<itemDelta; i++){
+                    NSIndexPath *ip = [NSIndexPath indexPathForRow:i inSection:0];
+                    [rows addObject:ip];
+                }
+                
+                [[ self tableView] insertRowsAtIndexPaths:rows withRowAnimation:UITableViewRowAnimationTop];
+            }
+            
+            
+        }else{
+            //if things went bad, show an alert view
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:[err localizedDescription] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+            [av show];
+        }
+        
+        [[self tableView] reloadData];
+        
+    }];
     
 }
 
+// reference: http://www.appcoda.com/how-to-add-search-bar-uitableview/
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
+
+// reference: http://www.peterfriese.de/using-nspredicate-to-filter-data/
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate
+                                    predicateWithFormat:@"productName contains[cd] %@",
+                                    searchText];
+    
+    searchResults = [recs filteredArrayUsingPredicate:resultPredicate];
+}
+
+
+- (IBAction)showSearchBar{
+       self.tableView.contentOffset = CGPointMake(0.0, 0.0);
+}
 
 
 

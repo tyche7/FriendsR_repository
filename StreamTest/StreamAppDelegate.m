@@ -11,7 +11,7 @@
 #import "StreamAppDelegate.h"
 #import "StreamViewController.h"
 #import "DetailViewController.h"
-#import "RecommendViewController.h"
+#import "PostViewController.h"
 #import "MyViewController.h"
 #import "SettingController.h"
 #import "LoginViewController.h"
@@ -26,8 +26,7 @@ NSString *const SCSessionStateChangedNotification =
 @synthesize window = _window;
 @synthesize viewController = _viewController;
 @synthesize tabBarController =  _tabBarController;
-@synthesize navController, navController1, navController2, recommendController, settingController;
-@synthesize userid, username;
+@synthesize navController, navController1, navController2;
 @synthesize rootController;
 
 
@@ -41,20 +40,17 @@ NSString *const SCSessionStateChangedNotification =
  
     navController = [[UINavigationController alloc] initWithRootViewController:rootController];
 
-    UIViewController *recommendController = [[RecommendViewController  alloc] initWithNibName:@"RecommendViewController" bundle:nil];
-    navController1 = [[UINavigationController alloc] initWithRootViewController:recommendController];
+    UIViewController *postController = [[PostViewController  alloc] initWithNibName:@"PostViewController" bundle:nil];
+    navController1 = [[UINavigationController alloc] initWithRootViewController:postController];
     
     UIViewController *settingController= [[SettingController alloc] initWithNibName:@"SettingController" bundle:nil];
     navController2 = [[UINavigationController alloc] initWithRootViewController:settingController];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    navController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Favorites" image:[UIImage imageNamed:@"coffee"] tag:1];
+    navController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Toddle" image:[UIImage imageNamed:@"coffee"] tag:1];
     navController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Post" image:[UIImage imageNamed:@"write"] tag:2];
     navController2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"User" image:[UIImage imageNamed:@"user"] tag:3];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, navController1,  navController2, nil];
-    
-
-    
 
     self.window.rootViewController = self.tabBarController;
     
@@ -74,8 +70,17 @@ NSString *const SCSessionStateChangedNotification =
       
     }
     
-    [self populateUserDetails];
-    rootController.status_changed_to_login = true;
+    //After a user logged in Facebook, populate user details
+    //While getting user details and friends info either from facebook server or local archive,
+    //Showing modal view - behave SYNCHRONOUSLY; Block the whole user interaction and show SPLASH page.
+    //After getting 'notification' through block or delegate method, dismiss the modal view
+    
+    
+    
+    
+    
+    //[self populateUserDetails];
+    //rootController.status_changed_to_login = true;
     
     
     return YES;
@@ -121,6 +126,8 @@ NSString *const SCSessionStateChangedNotification =
      See also applicationDidEnterBackground:.
      */
 }
+
+
 
 - (void)showLoginView
 {
@@ -208,27 +215,6 @@ NSString *const SCSessionStateChangedNotification =
     return [FBSession.activeSession handleOpenURL:url];
 }
 
-- (void)populateUserDetails
-{
-    NSLog(@"in populate User Details");
-    
-    if (FBSession.activeSession.isOpen) {
-        [[FBRequest requestForMe] startWithCompletionHandler:
-         ^(FBRequestConnection *connection,
-           NSDictionary<FBGraphUser> *user,
-           NSError *error) {
-             if (!error) {
-                 
-                 NSLog(@"**user name: %@", user.name);
-                 NSLog(@"**user id: %@", user.id);
-                 NSLog(@"**user username: %@", user.username);
-                 
-                 [self.rootController setUserid:user.id];
-                 [self.recommendController setUserId:user.id];
 
-             }
-         }];
-    }
-}
 
 @end
