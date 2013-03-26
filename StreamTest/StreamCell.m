@@ -43,12 +43,14 @@
         CGRect nameLabelRect = CGRectMake(10,5,150,15);
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameLabelRect];
         nameLabel.textAlignment = UITextAlignmentLeft;
+        nameLabel.backgroundColor = [UIColor clearColor];
         nameLabel.tag = kNameTag;
         nameLabel.font = [UIFont boldSystemFontOfSize:14];
         [self.contentView addSubview:nameLabel];
         
         CGRect dateLabelRect = CGRectMake(240, 5, 70, 15);
         UILabel *dateLabel = [[UILabel alloc] initWithFrame:dateLabelRect];
+        dateLabel.backgroundColor = [UIColor clearColor];
         dateLabel.textAlignment = UITextAlignmentRight;
         dateLabel.tag = kDateTag;
         dateLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -80,8 +82,7 @@
         UILabel *ageLabel = [[UILabel alloc] initWithFrame:transparentAgeRect];
         ageLabel.textAlignment = UITextAlignmentCenter;
         ageLabel.tag = kAgeLabelTag;
-        //ageLabel.backgroundColor = [UIColor clearColor];
-        ageLabel.backgroundColor= [UIColor blackColor];
+        ageLabel.backgroundColor = [UIColor clearColor];
         ageLabel.alpha = 0.f; //0.f transparent <- -> 1.f opaque
         ageLabel.font = [UIFont systemFontOfSize:14];
         ageLabel.textColor = [UIColor whiteColor];
@@ -91,6 +92,7 @@
         CGRect productNameLabelRect = CGRectMake(0, 280, 320, 20);
         UILabel *productNameLabel = [[UILabel alloc] initWithFrame:productNameLabelRect];
         productNameLabel.textAlignment = UITextAlignmentCenter;
+        productNameLabel.backgroundColor = [UIColor clearColor];
         productNameLabel.tag = kProductLabelTag;
         productNameLabel.adjustsFontSizeToFitWidth = YES;
         

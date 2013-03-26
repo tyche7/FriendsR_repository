@@ -77,6 +77,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
+
     // Do any additional setup after loading the view from its nib.
     
     // create a recommendation object
@@ -106,7 +109,7 @@
     
 
     
-    NSArray *ratingArray = [NSArray arrayWithObjects: [UIImage imageNamed:@"love.png"], [UIImage imageNamed:@"hate.png"], nil];
+    NSArray *ratingArray = [NSArray arrayWithObjects: [UIImage imageNamed:@"pink_heart2.png"], [UIImage imageNamed:@"broken_heart.png"], nil];
     ratingSegmentedControl = [[UISegmentedControl alloc] initWithItems:ratingArray];
     ratingSegmentedControl.frame = CGRectMake(85, 320, 150, 30);
     ratingSegmentedControl.segmentedControlStyle = UISegmentedControlStylePlain;
@@ -390,14 +393,14 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"ProductName";
+            cell.textLabel.text = @"Product Name";
             inputTextField.placeholder = @"Required";
             inputTextField.tag = productFieldTag;
             self.productField = inputTextField;
             break;
             
         case 1:
-            cell.textLabel.text = @"Purchased at";
+            cell.textLabel.text = @"Purchased At";
             inputTextField.placeholder = @"optional";
             inputTextField.tag = purchaseFieldTag;
             self.purchasePlaceField = inputTextField;
@@ -421,7 +424,7 @@
             break;
             
         case 3:
-            cell.textLabel.text = @"Note";
+            cell.textLabel.text = @"Comments";
             inputTextField.placeholder = @"optional";
             [inputTextField setEnabled:NO];
             inputTextField.tag = noteFieldTag;
@@ -660,7 +663,7 @@
         
     NSString* msg;
     if ([productField.text length] == 0) {
-        msg = @"Please enter procut name";
+        msg = @"Please enter a product name";
         [self showAlertView:@"Message" andMessage:msg];
         return;
     }

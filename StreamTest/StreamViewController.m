@@ -57,6 +57,7 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
 
     
     self.title = @"Toddle";

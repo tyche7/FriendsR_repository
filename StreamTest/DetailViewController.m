@@ -56,7 +56,10 @@
     scrollView.contentSize=CGSizeMake(320,DEFAULT_TABLE_HEIGHT);
     //scrollView.contentInset=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
     scrollView.scrollIndicatorInsets=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
-    scrollView.backgroundColor = [UIColor whiteColor];
+    //scrollView.backgroundColor = [UIColor whiteColor];
+    
+    scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
+    
     self.view=scrollView;
     
     // add a view, or views, as a subview of the scroll view.
@@ -90,6 +93,7 @@
     productNameLabel.adjustsFontSizeToFitWidth = YES;
     productNameLabel.text = productNameAndPurchasePlace;
     productNameLabel.font = [UIFont boldSystemFontOfSize:15];
+    productNameLabel.backgroundColor = [UIColor clearColor];
     [scrollView addSubview:productNameLabel];
     
     
@@ -141,6 +145,7 @@
         UILabel *ageLabel = [[UILabel alloc] initWithFrame:ageRect];
         ageLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
         ageLabel.text = [NSString stringWithFormat:@"Good for %@", ageRange];
+        ageLabel.backgroundColor = [UIColor clearColor];
         
         [scrollView addSubview:ageLabel];
         
@@ -177,6 +182,7 @@
     nameLabel.text = rec.userName;
     nameLabel.textAlignment = UITextAlignmentLeft;
     nameLabel.font = [UIFont systemFontOfSize:14];
+    nameLabel.backgroundColor = [UIColor clearColor];
     [scrollView addSubview:nameLabel];
     
     // user's note  
@@ -186,6 +192,7 @@
     postView.font = [UIFont fontWithName:@"Helvetica" size:13];
     postView.text = rec.postText;
     postView.textAlignment = UITextAlignmentLeft;
+    postView.backgroundColor = [UIColor clearColor];
     [scrollView addSubview:postView];
     
 
@@ -231,6 +238,8 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
+    
     // Do any additional setup after loading the view from its nib.
     
     NSLog(@"user: %@", rec.userName);
@@ -248,7 +257,7 @@
    
     
      NSLog(@"content size HEIGHT: %f", commentTableView.contentSize.height);
-
+    
 }
 
 - (void)viewDidUnload
