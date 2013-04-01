@@ -102,8 +102,9 @@
     
     // faetch user data : try it when fb session is open
     if(FBSession.activeSession.isOpen){
-        [self fetchUserData];
         
+        [self fetchUserData];
+        NSLog(@"fetch friends data");
         // Set fetchUserDataDidCall in the completion block in fetchUserData
         
         
@@ -128,6 +129,10 @@
     if (!fetchUserDataDidCallAndSet) {
          NSLog(@"fetch user data");
          [self fetchUserData];
+        // Vimal start
+        NSLog(@"fetch friends data");
+        [self fetchUserFreinds];
+        // Vimal end
     }
 
 
@@ -467,6 +472,7 @@
             // now dissmiss splash view which blocks or hides the StreamView
             [mainSpinner stopAnimating];
             // now fetchData using userData
+            NSLog(@"fetchdata 1");
             [self fetchData];
             
             
@@ -502,6 +508,7 @@
         // when the request completes, this block will be called.
         
         if (!err){
+            NSLog(@"getting product recs");
             // How many items are there currently?
             int currentItemCount = [recs count];
             

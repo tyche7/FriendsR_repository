@@ -81,8 +81,8 @@
             UserData *aUserData = [unarchiver decodeObjectForKey:kDataKey];
             [unarchiver finishDecoding];
             
-            NSLog(@"print object %@", aUserData.username);
-  
+            NSLog(@"print object - username %@", aUserData.username);
+            NSLog(@"print object - userID %@", aUserData.userID);
             
             // After getting user data from internal file system
             // run block code
@@ -92,11 +92,12 @@
         }
         else{
             NSLog(@"No saved data. Let's get from facebook");
-            if (FBSession.activeSession.isOpen) {
+            if (FBSession.activeSession.isOpen)
+            {
                 [[FBRequest requestForMe] startWithCompletionHandler:
-                 ^(FBRequestConnection *connection,
-                   NSDictionary<FBGraphUser> *user,
-                   NSError *error) {
+                 ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error)
+                 
+                {
                      if (!error) {
                          NSLog(@"user name is %@", user.name);
                          NSLog(@"user id is %@", user.id);
@@ -104,6 +105,59 @@
                          NSString *userPictureURL = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", user.id];
                          NSLog(@"user picture is %@", userPictureURL);
                      
+                         //Vimal start
+                         //code to send user data to server. Move it if there is better place to put this
+                         
+                         NSURL *theURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploaduserdata"];
+                         
+                         
+                         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:theURL
+                                                                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                                                 timeoutInterval:60];
+                         
+                         [request setHTTPMethod:@"POST"];
+                         
+                         // We need to add a header field named Content-Type with a value that tells that it's a form and also add a boundary.
+                         // I just picked a boundary by using one from a previous trace, you can just copy/paste from the traces.
+                         NSString *boundary = @"----WebKitFormBoundaryDonotknowhatIamdoing";
+                         
+                         NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+                         
+                         [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+                         // end of what we've added to the header
+                         
+                         // the body of the post
+                        
+                         NSMutableData *body = [NSMutableData data];
+                          
+                         
+                         /*[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfbID\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithString:user.id] dataUsingEncoding:NSUTF8StringEncoding]];*/
+                         
+                         
+                         //[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"username\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithFormat:@"%@",userFullName] dataUsingEncoding:NSUTF8StringEncoding]];
+                         NSLog(@"before post username %@",userFullName);
+                         
+                         /*[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userimageurl\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithString:userPictureURL] dataUsingEncoding:NSUTF8StringEncoding]];*/
+                         
+                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                         
+                     
+                         
+                         // adding the body we've created to the request
+                        
+               
+                         [request setHTTPBody:body];
+                         
+                         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request
+                                                                                       delegate:self
+                                                                               startImmediately:YES  ];
+                         //Vimal end
                      
                      UserData *aUserdata = [[UserData alloc] init];
                      aUserdata.userID = user.id;
@@ -134,7 +188,6 @@
         }
         
         
-        
     }else{
         // if facebook session is not open, return error code
         // need to create err object ****
@@ -163,7 +216,7 @@
 
 -(void) uploadFriendsList:(NSString*)friendList {
     
-    NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendslist"];
+    NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendsdata"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:toddlefriendsURL
                                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                             timeoutInterval:60];
@@ -214,12 +267,12 @@
         for (int i=0; i<[friends count]; i++){
             //NSLog(@"%@", [friends objectAtIndex:i]);
             NSString *friend_id = [[friends objectAtIndex:i] objectForKey:@"id"];
-            NSLog(@"and id is %s", friend_id.UTF8String);
+            
             friendlist = [NSString stringWithFormat: @"%@|%@", friendlist, friend_id];
         }
-        NSLog(@"Your frindslist: %s",friendlist.UTF8String);
+        NSLog(@"friendslist: %s",friendlist.UTF8String);
         
-        NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendslist"];
+        NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendsdata"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:toddlefriendsURL
                                                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                                 timeoutInterval:60];
