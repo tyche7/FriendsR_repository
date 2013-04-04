@@ -30,7 +30,7 @@
     // Construct the cache path
     NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     cachePath = [cachePath stringByAppendingPathComponent:@"applearchive"];
-    
+    NSLog(@"cache path %@",cachePath);
     // Load the cached data
     
     NSMutableArray* cachedRecArray = [NSKeyedUnarchiver unarchiveObjectWithFile:cachePath];

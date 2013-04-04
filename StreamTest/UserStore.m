@@ -14,7 +14,7 @@
 
 
 //local db changes
-#define kFilename @"archive"
+#define kFilename @"userarchive"
 #define kDataKey @"Data"
 
 
@@ -78,16 +78,16 @@
                             initWithContentsOfFile:[self dataFilePath]];
             NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc]
                                              initForReadingWithData:data];
-            UserData *aUserData = [unarchiver decodeObjectForKey:kDataKey];
+            userData = [unarchiver decodeObjectForKey:kDataKey];
             [unarchiver finishDecoding];
             
-            NSLog(@"print object - username %@", aUserData.username);
-            NSLog(@"print object - userID %@", aUserData.userID);
+            NSLog(@"print object - username %@", userData.username);
+            NSLog(@"print object - userID %@", userData.userID);
             
             // After getting user data from internal file system
             // run block code
             // This is the controller's completion code
-            block(aUserData,nil);
+            block(userData,nil);
             
         }
         else{
@@ -129,29 +129,27 @@
                          // the body of the post
                         
                          NSMutableData *body = [NSMutableData data];
-                          
                          
-                         /*[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfbID\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-                         [body appendData:[[NSString stringWithString:user.id] dataUsingEncoding:NSUTF8StringEncoding]];*/
-                         
-                         
-                         //[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"username\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-                         [body appendData:[[NSString stringWithFormat:@"%@",userFullName] dataUsingEncoding:NSUTF8StringEncoding]];
-                         NSLog(@"before post username %@",userFullName);
-                         
-                         /*[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userimageurl\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-                         [body appendData:[[NSString stringWithString:userPictureURL] dataUsingEncoding:NSUTF8StringEncoding]];*/
                          
                          [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"id\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithString:user.id] dataUsingEncoding:NSUTF8StringEncoding]];
                          
-                     
+                         
+                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"username\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithFormat:@"%@",userFullName] dataUsingEncoding:NSUTF8StringEncoding]];
+                         
+                         
+                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userimageurl\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                         [body appendData:[[NSString stringWithString:userPictureURL] dataUsingEncoding:NSUTF8StringEncoding]];
+                         
+                         
+                         // and again the delimiting boundary
+                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
                          
                          // adding the body we've created to the request
-                        
-               
                          [request setHTTPBody:body];
                          
                          NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request
@@ -159,15 +157,15 @@
                                                                                startImmediately:YES  ];
                          //Vimal end
                      
-                     UserData *aUserdata = [[UserData alloc] init];
-                     aUserdata.userID = user.id;
-                     aUserdata.username = userFullName;
-                     aUserdata.userImageURL = userPictureURL;
+                     
+                     userData.userID = user.id;
+                     userData.username = userFullName;
+                     userData.userImageURL = userPictureURL;
                      
                      NSMutableData *data = [[NSMutableData alloc] init];
                      NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]
                                                   initForWritingWithMutableData:data];
-                     [archiver encodeObject:aUserdata forKey:kDataKey];
+                     [archiver encodeObject:userData forKey:kDataKey];
                      [archiver finishEncoding];
                      
                      [data writeToFile:[self dataFilePath] atomically:YES];
@@ -178,8 +176,8 @@
                      // (2) call the block code
                      // This is the controller's completion code
                      
-                     [[UserStore sharedStore] setUserData:aUserdata];
-                     block(aUserdata,nil);
+                     [[UserStore sharedStore] setUserData:userData];
+                     block(userData,nil);
                      
                      }
                      
@@ -221,15 +219,27 @@
                                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                             timeoutInterval:60];
     [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    NSString *boundary = @"----WebKitFormBoundaryDonotknowhatIamdoingprintingfriendslist";
+    
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
     
     NSMutableData *body = [NSMutableData data];
     
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"friends\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    //[body appendData:[[NSArray  arrayWithArray:friends] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"%s", friendList] dataUsingEncoding:NSUTF8StringEncoding]];
     
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithString:userid] dataUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"userid friends update %@",userData.userID);
+    
+    // and again the delimiting boundary
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // adding the body we've created to the request
     [request setHTTPBody:body];
     NSURLConnection *newconnection = [[NSURLConnection alloc] initWithRequest:request
                                                                      delegate:self
@@ -270,22 +280,34 @@
             
             friendlist = [NSString stringWithFormat: @"%@|%@", friendlist, friend_id];
         }
-        NSLog(@"friendslist: %s",friendlist.UTF8String);
+        //NSLog(@"friendslist: %s",friendlist.UTF8String);
         
         NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendsdata"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:toddlefriendsURL
                                                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                                 timeoutInterval:60];
         [request setHTTPMethod:@"POST"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        NSString *boundary = @"----WebKitFormBoundaryDonotknowhatIamdoingprintingfriendslist";
+        
+        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+        
+        [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
         
         NSMutableData *body = [NSMutableData data];
         
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"friends\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        //[body appendData:[[NSArray  arrayWithArray:friends] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"%@", friendlist] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%s", friendlist.UTF8String] dataUsingEncoding:NSUTF8StringEncoding]];
         
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:userData.userID] dataUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"userid friends update %@",userData.userID);
+        
+        // and again the delimiting boundary
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        // adding the body we've created to the request
         [request setHTTPBody:body];
         NSURLConnection *newconnection = [[NSURLConnection alloc] initWithRequest:request
                                                                          delegate:self
@@ -357,7 +379,7 @@
 
 //local db changes
 -(NSString *)dataFilePath {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSLog(@"----------***********----------database path is %s", [documentsDirectory UTF8String]);
     return [documentsDirectory stringByAppendingPathComponent:kFilename];
