@@ -40,7 +40,7 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *ratingSegmentedControl;
 
 @property (nonatomic, strong) Rec *rec;
-@property (nonatomic, strong) NSString* userId;
+
 
 @property (nonatomic, strong) NSString* ageLabel;
 
