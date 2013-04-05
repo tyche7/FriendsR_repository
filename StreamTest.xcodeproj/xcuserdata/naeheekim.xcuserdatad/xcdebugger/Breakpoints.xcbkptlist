@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/StreamCell.m"
-         timestampString = "386878528.029828"
+         timestampString = "386881301.333183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "175"
-         endingLineNumber = "175"
+         startingLineNumber = "184"
+         endingLineNumber = "184"
          landmarkName = "-setRating:"
          landmarkType = "5">
       </FileBreakpoint>
