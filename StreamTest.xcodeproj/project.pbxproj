@@ -79,7 +79,7 @@
 		653C96CC17017A1800EB72AA /* broken_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96CB17017A1800EB72AA /* broken_heart.png */; };
 		653C96CE17017C7E00EB72AA /* pink_heart2.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96CD17017C7E00EB72AA /* pink_heart2.png */; };
 		653C96D01701FF0900EB72AA /* nav_button_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96CF1701FF0900EB72AA /* nav_button_black.png */; };
-		653C96D41702078400EB72AA /* navButton_Black_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96D31702078400EB72AA /* navButton_Black_2.png */; };
+		65BFE821170EA21600CACE5E /* topnav_button_black4.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE820170EA21600CACE5E /* topnav_button_black4.png */; };
 		E24BB77617023BEE005DCA9A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24BB77517023BEE005DCA9A /* FacebookSDK.framework */; };
 		E24BB77817023C0B005DCA9A /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24BB77717023C0B005DCA9A /* SDWebImage.framework */; };
 /* End PBXBuildFile section */
@@ -125,11 +125,11 @@
 		18F51BB316D7E928005894B3 /* hate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hate.png; sourceTree = "<group>"; };
 		300DFECC168259EF00696D06 /* upload-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload-photo.png"; sourceTree = "<group>"; };
 		3019A20A16484C0900D31552 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		3019A20D164850D600D31552 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = photo.png; path = "../../iconbeast-lite/iconbeast lite - png/photo.png"; sourceTree = "<group>"; };
+		3019A20D164850D600D31552 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
 		301E52B616621563005FE793 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		30262B691685193500A02C3B /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		30262B6A1685193500A02C3B /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
-		307B2A28162DCFBC00864D99 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = write.png; path = "../../iconbeast-lite/iconbeast lite - png/write.png"; sourceTree = "<group>"; };
+		307B2A28162DCFBC00864D99 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		308742401657153100E17AA9 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		308742411657153100E17AA9 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		308742421657153100E17AA9 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 		653C96CB17017A1800EB72AA /* broken_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = broken_heart.png; sourceTree = "<group>"; };
 		653C96CD17017C7E00EB72AA /* pink_heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink_heart2.png; sourceTree = "<group>"; };
 		653C96CF1701FF0900EB72AA /* nav_button_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_button_black.png; sourceTree = "<group>"; };
-		653C96D31702078400EB72AA /* navButton_Black_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navButton_Black_2.png; path = ../navButton_Black_2.png; sourceTree = "<group>"; };
+		65BFE820170EA21600CACE5E /* topnav_button_black4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topnav_button_black4.png; sourceTree = "<group>"; };
 		E24BB77517023BEE005DCA9A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		E24BB77717023C0B005DCA9A /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -326,7 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				1866D07B17024A73008796F0 /* write.png */,
-				653C96D31702078400EB72AA /* navButton_Black_2.png */,
+				65BFE820170EA21600CACE5E /* topnav_button_black4.png */,
 				653C96CF1701FF0900EB72AA /* nav_button_black.png */,
 				653C96C91701738000EB72AA /* furley_bg.png */,
 				653C96C71701725C00EB72AA /* furley_bg_@2X.png */,
@@ -449,8 +449,8 @@
 				653C96CC17017A1800EB72AA /* broken_heart.png in Resources */,
 				653C96CE17017C7E00EB72AA /* pink_heart2.png in Resources */,
 				653C96D01701FF0900EB72AA /* nav_button_black.png in Resources */,
-				653C96D41702078400EB72AA /* navButton_Black_2.png in Resources */,
 				1866D07C17024A73008796F0 /* write.png in Resources */,
+				65BFE821170EA21600CACE5E /* topnav_button_black4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
