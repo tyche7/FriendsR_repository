@@ -144,6 +144,7 @@ static NSMutableArray *sharedConnectionList = nil;
                 [rec setRecId:[result objectForKey:@"entryid"]];
                 [rec setFileName:[result objectForKey:@"name"]]; //file name: eg) "bibim.jpg"
                 [rec setUserName:[result objectForKey:@"user"]];
+                [rec setUserId:[[result objectForKey:@"userid"] intValue]];
                 [rec setPostText:[result objectForKey:@"text"]];
                 [rec setProductName:[result objectForKey:@"productName"]];
                 [rec setBrandName:[result objectForKey:@"brandName"]];

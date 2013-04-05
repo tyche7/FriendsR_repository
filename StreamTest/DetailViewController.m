@@ -161,10 +161,13 @@
     
     UIImageView *profileView = [[UIImageView alloc] initWithFrame:profileRect];
     
+    
+    NSString* urlString = [NSString stringWithFormat:@"https://graph.facebook.com/%d/picture",rec.userId];
 
-    NSLog(@"userImageURL:%@", [[[UserStore sharedStore] userData] userImageURL]);
-    [profileView setImageWithURL:[NSURL URLWithString:[[[UserStore sharedStore] userData] userImageURL]]
+    NSLog(@"urlstring:%@", urlString);
+    [profileView setImageWithURL:[NSURL URLWithString:urlString]
                 placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+  
      
     // **********
     // need to download the latest version of SDWEbImage

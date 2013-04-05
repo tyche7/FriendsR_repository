@@ -93,7 +93,8 @@
     
 
     
-       self.tableView.contentOffset = CGPointMake(0.0, 44.0);
+    self.tableView.contentOffset = CGPointMake(0.0, 44.0);
+    self.tableView.separatorColor = [UIColor clearColor];
     
     
     // showing activity indicator

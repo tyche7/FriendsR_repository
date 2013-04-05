@@ -95,8 +95,10 @@
         productNameLabel.backgroundColor = [UIColor clearColor];
         productNameLabel.tag = kProductLabelTag;
         productNameLabel.adjustsFontSizeToFitWidth = YES;
+        productNameLabel.minimumFontSize = 13;
         
         productNameLabel.font = [UIFont boldSystemFontOfSize:14];
+        
         [self.contentView addSubview:productNameLabel];
         
         CGRect ratingRect = CGRectMake(30, 280, 20, 25);
