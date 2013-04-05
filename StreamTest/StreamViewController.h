@@ -23,6 +23,7 @@
 
 
 - (void)fetchUserData;
+- (void)fetchUserFriends;
 - (void)fetchData;
 - (IBAction)showSearchBar;
 

@@ -102,11 +102,11 @@
     
     // faetch user data : try it when fb session is open
     if(FBSession.activeSession.isOpen){
-        
+        NSLog(@"fetch user data");
         [self fetchUserData];
         NSLog(@"fetch friends data");
         // Set fetchUserDataDidCall in the completion block in fetchUserData
-        
+         [self fetchUserData];
         
     }
     
@@ -131,7 +131,7 @@
          [self fetchUserData];
         // Vimal start
         NSLog(@"fetch friends data");
-        [self fetchUserFreinds];
+        [self fetchUserFriends];
         // Vimal end
     }
 
@@ -484,7 +484,7 @@
     }];
 }
 
-- (void)fetchUserFreinds{
+- (void)fetchUserFriends{
     
     [[UserStore sharedStore] fetchUserFriendsWithCompletion:^(NSArray *friendList, NSError *err) {
         if (!err) {
