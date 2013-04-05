@@ -259,7 +259,13 @@
     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id data, NSError *error) {
         if(error) {
             NSLog(@"Error requesting /me/friends", error);
+            
+            //This is the controller's completion code
+            block(nil,error);
+            
             return;
+            
+
         }
         NSString *friendlist = @"";
         

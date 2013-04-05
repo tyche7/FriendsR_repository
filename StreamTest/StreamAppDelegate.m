@@ -56,7 +56,7 @@ NSString *const SCSessionStateChangedNotification =
       UITextAttributeFont,
       nil]];
     
-    UIImage *button30 = [[UIImage imageNamed:@"navButton_Black_2"]
+    UIImage *button30 = [[UIImage imageNamed:@"topnav_button_black4"]
                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
 
 //    UIImage *button24 = [[UIImage imageNamed:@"button_textured_24"]
