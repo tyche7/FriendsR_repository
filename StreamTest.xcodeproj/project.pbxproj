@@ -564,7 +564,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StreamTest/StreamTest-Prefix.pch";
 				INFOPLIST_FILE = "StreamTest/StreamTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				New_Setting = "";
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
@@ -590,7 +590,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StreamTest/StreamTest-Prefix.pch";
 				INFOPLIST_FILE = "StreamTest/StreamTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				New_Setting = "";
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",

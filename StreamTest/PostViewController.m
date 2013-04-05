@@ -691,7 +691,7 @@
     }
     
     if (!rec.userName){
-        rec.userName = @"Naehee Kim";
+        rec.userName = @"Fake Name";
     }
     
     
