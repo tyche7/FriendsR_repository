@@ -93,7 +93,8 @@
     
 
     
-       self.tableView.contentOffset = CGPointMake(0.0, 44.0);
+    self.tableView.contentOffset = CGPointMake(0.0, 44.0);
+    self.tableView.separatorColor = [UIColor clearColor];
     
     
     // showing activity indicator
@@ -104,9 +105,8 @@
     if(FBSession.activeSession.isOpen){
         NSLog(@"fetch user data");
         [self fetchUserData];
-        NSLog(@"fetch friends data");
         // Set fetchUserDataDidCall in the completion block in fetchUserData
-         [self fetchUserData];
+
         
     }
     
@@ -129,10 +129,7 @@
     if (!fetchUserDataDidCallAndSet) {
          NSLog(@"fetch user data");
          [self fetchUserData];
-        // Vimal start
-        NSLog(@"fetch friends data");
-        [self fetchUserFriends];
-        // Vimal end
+
     }
 
 
@@ -261,6 +258,8 @@
     
         rec = [recs objectAtIndex:indexPath.row];
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.name = rec.userName;
     cell.date = [dateFormatter stringFromDate:rec.date];
@@ -469,14 +468,15 @@
         //when the request completes, this block will be called.
         
         if (!err) {
-            // now dissmiss splash view which blocks or hides the StreamView
+           
             [mainSpinner stopAnimating];
-            // now fetchData using userData
-            NSLog(@"fetchdata 1");
-            [self fetchData];
+            
+            // now fetch User Friends after getting user data
+            
+            [self fetchUserFriends];
+
             
             
-            fetchUserDataDidCallAndSet = YES;
             
  
             
@@ -488,11 +488,15 @@
     
     [[UserStore sharedStore] fetchUserFriendsWithCompletion:^(NSArray *friendList, NSError *err) {
         if (!err) {
-            
-            // now dissmis splahs view if it is running
+             // now dissmiss splash view which blocks or hides the StreamView
+
             [mainSpinner stopAnimating];
             
-            //do nothing for now
+            fetchUserDataDidCallAndSet = YES;
+            
+            NSLog(@"fetch recommendations - fetchData method");
+            [self fetchData];
+            
 
             
         }

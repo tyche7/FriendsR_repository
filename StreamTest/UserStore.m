@@ -23,9 +23,6 @@
 
 @synthesize userData;
 
-//remove later
-@synthesize username;
-@synthesize userid;
 
 
 + (UserStore *)sharedStore{
@@ -70,7 +67,7 @@
         // this is what populateUserDetails did
      
         
-        // Do any additional setup after loading the view, typically from a nib.
+      
         NSString *filepath = [self dataFilePath];
         if([[NSFileManager defaultManager] fileExistsAtPath:filepath]){
             NSLog(@"user data available in ios archive");
@@ -233,7 +230,7 @@
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:userid] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithString:userData.userID] dataUsingEncoding:NSUTF8StringEncoding]];
     NSLog(@"userid friends update %@",userData.userID);
     
     // and again the delimiting boundary
@@ -342,8 +339,7 @@
         [unarchiver finishDecoding];
         
         NSLog(@"print object %s", userData.username);
-        userid.text = userData.userID;
-        username.text = userData.username;
+
     }
     else{
         NSLog(@"No saved data. Let's get from facebook");

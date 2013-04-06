@@ -21,6 +21,8 @@
 #import "PostViewController.h"
 #import "Rec.h"
 #import "DataFeedStore.h"
+#import "UserStore.h"
+#import "UserData.h"
 #import "CameraViewController.h"
 #import "OptionViewController.h"
 #import "AgeListViewController.h"
@@ -43,7 +45,7 @@
 @synthesize cameraButton, cameraRollButton;
 @synthesize actionSheet= _actionSheet;
 @synthesize barView;
-@synthesize userId,ageLabel;
+@synthesize ageLabel;
 @synthesize bbiRight;
 @synthesize productImageisSet;
 @synthesize spinner;
@@ -683,19 +685,13 @@
     rec.productName = productField.text;
     rec.purchasePlace = purchasePlaceField.text;
     
-    // for test **
+
     
-    if (!self.userId) {
-        self.userId = @"713673762";
-        
-    }
+    UserStore *userStore = [UserStore sharedStore];
+    rec.userName = userStore.userData.username;
+ 
     
-    if (!rec.userName){
-        rec.userName = @"Fake Name";
-    }
-    
-    
-    NSLog(@"UPLOAD: %@", self.userId);
+    NSLog(@"UPLOAD: %@", userStore.userData.userID);
     NSLog(@"UPLOAD: %@", rec.userName);
     NSLog(@"UPLOAD: %@", rec.productName);
     NSLog(@"UPLOAD: %@", rec.postText);
@@ -709,17 +705,14 @@
     // show activity indicator
     self.spinner = [self showActivityIndicatorOnView:self.parentViewController.view];
     
-    
 
-
-    
     //need to create file with userId and timestamp
     
     NSDate *past = [NSDate date];
     NSTimeInterval oldTime = [past timeIntervalSince1970];
     NSString *timestamp = [[NSString alloc] initWithFormat:@"%0.0f", oldTime];
     
-    NSString *fileName = [[NSString alloc] initWithFormat:@"%@_%@.jpg", self.userId, timestamp];
+    NSString *fileName = [[NSString alloc] initWithFormat:@"%@_%@.jpg", userStore.userData.userID, timestamp];
     
     
     NSURL *theURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/upload"];
@@ -756,7 +749,7 @@
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"%@",self.userId] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%@",userStore.userData.userID] dataUsingEncoding:NSUTF8StringEncoding]];
     
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];

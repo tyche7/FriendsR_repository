@@ -13,9 +13,6 @@
 
 @interface UserStore : NSObject
 
-//remove late
-@property (weak, nonatomic) IBOutlet UILabel *username;
-@property (weak, nonatomic) IBOutlet UILabel *userid;
 
 
 @property (strong, nonatomic) UserData *userData;

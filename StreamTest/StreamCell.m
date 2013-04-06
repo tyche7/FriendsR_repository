@@ -40,21 +40,30 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        CGRect nameLabelRect = CGRectMake(10,5,150,15);
+        
+        CGRect frameRect = CGRectMake(10, 5, 300, 310);
+        UIView *frameView = [[UIView alloc] initWithFrame:frameRect];
+        frameView.backgroundColor = [UIColor whiteColor];
+        [self.contentView addSubview:frameView];
+        
+        
+        CGRect nameLabelRect = CGRectMake(30,5,150,15);
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameLabelRect];
         nameLabel.textAlignment = UITextAlignmentLeft;
         nameLabel.backgroundColor = [UIColor clearColor];
         nameLabel.tag = kNameTag;
         nameLabel.font = [UIFont boldSystemFontOfSize:14];
-        [self.contentView addSubview:nameLabel];
+        nameLabel.textColor = [UIColor grayColor];
+        [frameView addSubview:nameLabel];
         
-        CGRect dateLabelRect = CGRectMake(240, 5, 70, 15);
+        CGRect dateLabelRect = CGRectMake(210, 5, 70, 15);
         UILabel *dateLabel = [[UILabel alloc] initWithFrame:dateLabelRect];
         dateLabel.backgroundColor = [UIColor clearColor];
         dateLabel.textAlignment = UITextAlignmentRight;
         dateLabel.tag = kDateTag;
+        dateLabel.textColor = [UIColor grayColor];
         dateLabel.font = [UIFont boldSystemFontOfSize:14];
-        [self.contentView addSubview:dateLabel];
+        [frameView addSubview:dateLabel];
         
         /* commendted out for MVP version
         CGRect postRect = CGRectMake(10, 25, 300, 60);
@@ -67,7 +76,7 @@
         [self.contentView addSubview:postView];
          */
         
-        CGRect imageRect = CGRectMake(50, 50, 220, 220);
+        CGRect imageRect = CGRectMake(30, 30, 240, 240);
         
         picView = [[UIImageView alloc] initWithFrame:imageRect];
         //http://stackoverflow.com/questions/3182649/ios-sdk-uiviewcontentmodescaleaspectfit-vs-uiviewcontentmodescaleaspectfill
@@ -75,10 +84,10 @@
         //imageView.contentMode = UIViewContentModeScaleAspectFill;
         picView.clipsToBounds = YES;
         picView.tag =kImageTag;
-        [self.contentView addSubview:picView];
+        [frameView addSubview:picView];
         
         
-        CGRect transparentAgeRect = CGRectMake(50, 250, 220, 20);
+        CGRect transparentAgeRect = CGRectMake(50, 230, 240, 20);
         UILabel *ageLabel = [[UILabel alloc] initWithFrame:transparentAgeRect];
         ageLabel.textAlignment = UITextAlignmentCenter;
         ageLabel.tag = kAgeLabelTag;
@@ -86,25 +95,27 @@
         ageLabel.alpha = 0.f; //0.f transparent <- -> 1.f opaque
         ageLabel.font = [UIFont systemFontOfSize:14];
         ageLabel.textColor = [UIColor whiteColor];
-        [self.contentView addSubview:ageLabel];
+        [frameView addSubview:ageLabel];
         
         
-        CGRect productNameLabelRect = CGRectMake(0, 280, 320, 20);
+        CGRect productNameLabelRect = CGRectMake(10, 280, 300, 20);
         UILabel *productNameLabel = [[UILabel alloc] initWithFrame:productNameLabelRect];
         productNameLabel.textAlignment = UITextAlignmentCenter;
         productNameLabel.backgroundColor = [UIColor clearColor];
         productNameLabel.tag = kProductLabelTag;
         productNameLabel.adjustsFontSizeToFitWidth = YES;
+        productNameLabel.minimumFontSize = 13;
         
         productNameLabel.font = [UIFont boldSystemFontOfSize:14];
-        [self.contentView addSubview:productNameLabel];
+        
+        [frameView addSubview:productNameLabel];
         
         CGRect ratingRect = CGRectMake(30, 280, 20, 25);
         
         ratingView = [[UIImageView alloc] initWithFrame:ratingRect];
         ratingView.contentMode = UIViewContentModeScaleAspectFill;
         ratingView.tag =kRatingImageTag;
-        [self.contentView addSubview:ratingView];
+        [frameView addSubview:ratingView];
         
         
         
