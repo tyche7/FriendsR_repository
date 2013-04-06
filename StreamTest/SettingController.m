@@ -58,7 +58,7 @@
      name:SCSessionStateChangedNotification
      object:nil];
     
-    self.title = @"You";
+    self.title = @"toddle";
 }
 
 - (void)viewDidUnload
