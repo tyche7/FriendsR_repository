@@ -60,7 +60,7 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
 
     
-    self.title = @"Toddle";
+    self.title = @"toddle";
     
     // Load the NIB file
     UINib *nib = [UINib nibWithNibName:@"StreamCell" bundle:nil];
