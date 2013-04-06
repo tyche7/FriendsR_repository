@@ -44,17 +44,12 @@ NSString *const SCSessionStateChangedNotification =
 //                                       forBarMetrics:UIBarMetricsLandscapePhone];
     
     // Customize the title text for *all* UINavigationBars
-    [[UINavigationBar appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0],
-      UITextAttributeTextColor,
-      [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
-      UITextAttributeTextShadowColor,
-      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-      UITextAttributeTextShadowOffset,
-      [UIFont fontWithName:@"Lilly" size:0.0],
-      UITextAttributeFont,
-      nil]];
+    [[UINavigationBar appearance] setTitleTextAttributes: @{
+                                UITextAttributeTextColor: [UIColor colorWithRed:56.0/255.0 green:152.0/255.0 blue:255.0/255.0 alpha:1.0],
+                          UITextAttributeTextShadowColor: [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
+                         UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)],
+                                     UITextAttributeFont: [UIFont fontWithName:@"Lilly" size:20.0f]
+     }];
     
     UIImage *button30 = [[UIImage imageNamed:@"topnav_button_black4"]
                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
