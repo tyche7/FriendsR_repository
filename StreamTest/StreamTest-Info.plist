@@ -45,6 +45,12 @@
 	</array>
 	<key>UILaunchImageFile~iphone</key>
 	<string>SplashScreen1</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lilly__.ttf</string>
+	</array>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
