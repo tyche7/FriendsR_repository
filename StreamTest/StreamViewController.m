@@ -117,6 +117,8 @@
      object:nil];
 
     
+    // set StreamViewController as UserStore's delegate
+    [[UserStore sharedStore] setDelegate:self];
     
 
 }
@@ -575,6 +577,14 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 - (IBAction)showSearchBar{
        self.tableView.contentOffset = CGPointMake(0.0, 0.0);
+}
+
+
+-(void)friendsUpadteToServerDidFinish{
+    
+    //now friendsList are stored to the remote server; reload data to show all friends' posts.
+    
+    [[self tableView] reloadData];
 }
 
 

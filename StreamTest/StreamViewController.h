@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "UserStore.h"
 @class DetailViewController;
 
-@interface StreamViewController : UITableViewController  {
+@interface StreamViewController : UITableViewController <FriendsUpdateDelegate> {
     __block  BOOL fetchUserDataDidCallAndSet;
 }
 
@@ -29,5 +30,7 @@
 
 - (UIActivityIndicatorView *)showActivityIndicatorOnView:(UIView*)aView;
 
+
+-(void)friendsUpadteToServerDidFinish;
 
 @end

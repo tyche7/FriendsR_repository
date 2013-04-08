@@ -388,5 +388,14 @@
 }
 
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    
+    NSLog(@"friendsUpload");
+    
+    [self.delegate friendsUpadteToServerDidFinish];
+    
+}
+
 
 @end

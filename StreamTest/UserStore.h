@@ -8,14 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+
+@protocol FriendsUpdateDelegate <NSObject>
+
+-(void)friendsUpadteToServerDidFinish;
+
+@end
+
 @class UserData;
 
 
-@interface UserStore : NSObject
+@interface UserStore : NSObject <NSURLConnectionDelegate>
 
 
 
 @property (strong, nonatomic) UserData *userData;
+@property (weak, nonatomic) id <FriendsUpdateDelegate> delegate;
+
 
 + (UserStore *)sharedStore;
 
