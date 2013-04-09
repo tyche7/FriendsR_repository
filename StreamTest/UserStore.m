@@ -67,7 +67,8 @@
         // this is what populateUserDetails did
      
         
-      
+        // remove local data storage for user info
+        /*
         NSString *filepath = [self dataFilePath];
         if([[NSFileManager defaultManager] fileExistsAtPath:filepath]){
             NSLog(@"user data available in ios archive");
@@ -87,7 +88,7 @@
             block(userData,nil);
             
         }
-        else{
+        else{*/
             NSLog(@"No saved data. Let's get from facebook");
             if (FBSession.activeSession.isOpen)
             {
@@ -180,7 +181,8 @@
                      
                  }];
             }
-        }
+        // remove local data storage for user info
+       /* }*/
         
         
     }else{
@@ -328,8 +330,9 @@
     NSLog(@"In populateUserDetails");
     
 	// Do any additional setup after loading the view, typically from a nib.
+    // remove local data storage for user info
     NSString *filepath = [self dataFilePath];
-    if([[NSFileManager defaultManager] fileExistsAtPath:filepath]){
+   /* if([[NSFileManager defaultManager] fileExistsAtPath:filepath]){
         NSLog(@"user data available in ios archive");
         NSData *data = [[NSMutableData alloc]
                         initWithContentsOfFile:[self dataFilePath]];
@@ -341,7 +344,7 @@
         NSLog(@"print object %s", userData.username);
 
     }
-    else{
+    else{*/
         NSLog(@"No saved data. Let's get from facebook");
         if (FBSession.activeSession.isOpen) {
             [[FBRequest requestForMe] startWithCompletionHandler:
@@ -361,21 +364,24 @@
                  userdata.username = userFullName;
 
                  userdata.userImageURL = userPictureURL;
-                 
-                 NSMutableData *data = [[NSMutableData alloc] init];
+                     
+                 // remove local data storage for user info
+                     
+                 /*NSMutableData *data = [[NSMutableData alloc] init];
                  NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]
                                               initForWritingWithMutableData:data];
                  [archiver encodeObject:userdata forKey:kDataKey];
                  [archiver finishEncoding];
                  
                  [data writeToFile:[self dataFilePath] atomically:YES];
-                 NSLog(@"writing to file %@", data);
+                 NSLog(@"writing to file %@", data);*/
                      
                  }
                  
              }];
         }
-    }
+    // remove local data storage for user info
+    /*}*/
     NSLog(@"Exit populatedetails");
 }
 
