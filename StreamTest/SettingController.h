@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyRecommendationViewController.h"
 
 @interface SettingController : UIViewController < UITableViewDataSource, UITableViewDelegate,  FBFriendPickerDelegate>
 
+//Vimal added
+@property (nonatomic, strong) MyRecommendationViewController* myRecommendationViewController;
 
 @property (strong, nonatomic) NSArray* selectedFriends;
+@property (strong, nonatomic) IBOutlet UILabel *userLocationLabel;
 
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *userProfileImage;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;

@@ -685,6 +685,7 @@
     rec.productName = productField.text;
     rec.purchasePlace = purchasePlaceField.text;
     
+
     
     UserStore *userStore = [UserStore sharedStore];
     rec.userName = userStore.userData.username;

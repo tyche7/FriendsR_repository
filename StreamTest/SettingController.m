@@ -16,8 +16,10 @@
 
 @synthesize friendPickerController = _friendPickerController;
 @synthesize selectedFriends = _selectedFriends;
+//@synthesize userLocationLabel = _userLocationLabel;
 
 @synthesize menuTableView;
+@synthesize myRecommendationViewController;
 
 @synthesize navigationControllerOfSettingController;
 
@@ -63,11 +65,13 @@
 
 - (void)viewDidUnload
 {
+    //[self setUserLocationLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.friendPickerController = nil;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -103,8 +107,10 @@
                  NSLog(@"user name: %@", user.name);
                  NSLog(@"user id: %@", user.id);
                  NSLog(@"user username: %@", user.username);
+                 NSLog(@"user location: %@", [user.location objectForKey:@"name"]);
                  self.userNameLabel.text = user.name;
                  self.userProfileImage.profileID = user.id;
+                 self.userLocationLabel.text = [user.location objectForKey:@"name"];
              }
          }];
     }
@@ -159,27 +165,9 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"What are you eating?";
-            cell.detailTextLabel.text = @"Select one";
-            cell.imageView.image = [UIImage imageNamed:@"action-eating.png"];
-            break;
-            
-        case 1:
-            cell.textLabel.text = @"Where are you?";
-            cell.detailTextLabel.text = @"Select one";
-            cell.imageView.image = [UIImage imageNamed:@"action-location.png"];
-            break;
-            
-        case 2:
-            cell.textLabel.text = @"With whom?";
-            cell.detailTextLabel.text = @"Select friends";
-            cell.imageView.image = [UIImage imageNamed:@"action-people.png"];
-            break;
-            
-        case 3:
-            cell.textLabel.text = @"Got a picture?";
-            cell.detailTextLabel.text = @"Take one";
-            cell.imageView.image = [UIImage imageNamed:@"action-photo.png"];
+            cell.textLabel.text = @"My posts";
+            //cell.detailTextLabel.text = @"Select one";
+            //cell.imageView.image = [UIImage imageNamed:@"action-eating.png"];
             break;
             
         default:
@@ -190,7 +178,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -201,23 +189,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
-        case 2:
-            if (!self.friendPickerController) {
-                self.friendPickerController = [[FBFriendPickerViewController alloc]
-                                               initWithNibName:nil bundle:nil];
-                
-                // Set the friend picker delegate
-                self.friendPickerController.delegate = self;
-                
-                self.friendPickerController.title = @"Select friends";
+        case 0:
+            if(!self.myRecommendationViewController){
+                self.myRecommendationViewController = [[MyRecommendationViewController alloc] init];
+                //self.ageController.delegate = self;
             }
-            
-            [self.friendPickerController loadData];
-            [self.navigationController pushViewController:self.friendPickerController
-                                                 animated:true];
+            [self.navigationController pushViewController:self.myRecommendationViewController animated:true];
             break;
+            
     }
 }
+
+
 
 - (void)updateCellIndex:(int)index withSubtitle:(NSString*)subtitle {
     UITableViewCell *cell = (UITableViewCell *)[self.menuTableView
