@@ -187,9 +187,9 @@
 		65BFE824170FE7FA00CACE5E /* Lilly__.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lilly__.ttf; sourceTree = "<group>"; };
 		E24BB77517023BEE005DCA9A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		E24BB77717023C0B005DCA9A /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
-		E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRecommendationViewController.h; sourceTree = "<group>"; };
-		E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRecommendationViewController.m; sourceTree = "<group>"; };
-		E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyRecommendationViewController.xib; sourceTree = "<group>"; };
+		E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyRecommendationViewController.h; path = ../MyRecommendationViewController.h; sourceTree = "<group>"; };
+		E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyRecommendationViewController.m; path = ../MyRecommendationViewController.m; sourceTree = "<group>"; };
+		E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyRecommendationViewController.xib; path = ../MyRecommendationViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,9 +233,6 @@
 		308E52841610F4E800C90EDE = {
 			isa = PBXGroup;
 			children = (
-				E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */,
-				E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */,
-				E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */,
 				65BFE822170FE58500CACE5E /* SplashScreen1@2x.png */,
 				301E52B616621563005FE793 /* ImageIO.framework */,
 				30C574CC165C3BA900827A95 /* libsqlite3.dylib */,
@@ -287,6 +284,9 @@
 				18D422B716DFF5BA0051EE06 /* WebServerConnection.m */,
 				18D422B016DFEC9A0051EE06 /* DataFeedStore.h */,
 				18D422B116DFEC9A0051EE06 /* DataFeedStore.m */,
+				E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */,
+				E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */,
+				E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */,
 				30C3133716117EBF002657B9 /* StreamViewController.h */,
 				30C3133816117EBF002657B9 /* StreamViewController.m */,
 				30C3133916117EBF002657B9 /* StreamViewController.xib */,

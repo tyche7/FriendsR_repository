@@ -12,11 +12,13 @@
 #define kUserNameKey @"UserName"
 #define kUserImageURLKey @"UserImageURL"
 
+
 @implementation UserData
 
 @synthesize userID;
 @synthesize username;
 @synthesize userImageURL;
+@synthesize toddleFriends;
 
 #pragma mark NSCoding
 - (void)encodeWithCoder:(NSCoder *)enCoder{

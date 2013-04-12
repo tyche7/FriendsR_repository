@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserStore.h"
+#import "UserData.h"
+
 @class Rec;
 @class Comment;
 
@@ -20,7 +23,7 @@
 @property (nonatomic, strong) UIImage *detailPicImage;
 @property (nonatomic, strong) UITableView *commentTableView;
 @property (nonatomic, strong) NSString *productNameAndPurchasePlace;
-
+@property (nonatomic, strong) UserData *myUserdata;
 - (void)renderTable;
 
 @end
