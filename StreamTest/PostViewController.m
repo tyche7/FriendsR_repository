@@ -6,16 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-//http://developer.apple.com/library/ios/#documentation/windowsviews/conceptual/UIScrollView_pg/CreatingBasicScrollViews/CreatingBasicScrollViews.html
-
-//http://developer.apple.com/library/ios/#documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html
-
-//UI Actionsheet
-//http://agilewarrior.wordpress.com/2012/01/31/how-to-add-an-action-sheet-to-your-iphone-application/
-
-// flip animation
-// http://ideiasbynavarro.blogspot.com/2011/09/ios-quick-tips-flip-animation.html
-// http://stackoverflow.com/questions/4622996/how-to-do-the-flip-animation-between-two-uiviewcontrollers-while-clicking-info-b
 
 #import <FacebookSDK/FacebookSDK.h>
 #import "PostViewController.h"
@@ -647,13 +637,6 @@
 
 // upload to webserver
 
-//http://stackoverflow.com/questions/8042360/nsdata-and-uploading-images-via-post-in-ios
-
-// http://jinru.wordpress.com/2010/04/14/iphone-sending-post-file-uploading-with-nsurlconnection/
-
-//http://kelp.phate.org/2012/06/post-picture-to-google-image-search.html
-
-//http://www.iriphon.com/2011/11/09/ios-uploading-an-image-from-your-iphone-to-a-server/
 
 -(void)saveButtonWasPressed:(id)sender{
     

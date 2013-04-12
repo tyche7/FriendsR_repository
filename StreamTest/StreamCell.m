@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-// reference: iphone 5 programming - book
 
 #import "StreamCell.h"
 

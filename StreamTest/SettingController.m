@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-// reference: https://developers.facebook.com/docs/tutorials/ios-sdk-tutorial/show-friends/
-
 #import <FacebookSDK/FacebookSDK.h>
 #import "SettingController.h"
 #import "StreamAppDelegate.h"
