@@ -13,5 +13,6 @@
 @property (copy, nonatomic) NSString *userID;   
 @property (copy, nonatomic) NSString *username;
 @property (copy, nonatomic) NSString *userImageURL;
+@property (copy, nonatomic) NSArray *toddleFriends;
 
 @end

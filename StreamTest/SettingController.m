@@ -9,6 +9,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "SettingController.h"
 #import "StreamAppDelegate.h"
+#import "UserStore.h"
+#import "UserData.h"
 
 @implementation SettingController
 
@@ -51,6 +53,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UserStore *userStore = [UserStore sharedStore];
+    UserData *myUserData =  userStore.userData;
+    NSLog(@"my userID is %@", myUserData.userID);
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -59,6 +64,65 @@
      object:nil];
     
     self.title = @"toddle";
+    
+    //code to get friends from web server
+    NSString *urlString = @"http://groups.ischool.berkeley.edu/friendly/friends/userid/726566112";
+    
+    
+    //PHP file name is being set from the parent view
+    //[databaseURL appendString:urlString];
+    
+    //call ASIHTTP delegates (Used to connect to database)
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    //SynchronousRequest to grab the data
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSError *error;
+    NSURLResponse *response;
+    
+    NSMutableData *result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (!result) {
+        //Display error message here
+        NSLog(@"Error");
+    } else {
+        
+        //TODO: set up stuff that needs to work on the data here.
+        //NSLog(@"%@", result);
+        NSString* newStr = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
+       // NSLog(@"%@", newStr);
+        
+
+        NSError *myError1 = nil;
+        NSDictionary *resJSON = [NSJSONSerialization JSONObjectWithData: [newStr dataUsingEncoding:NSUTF8StringEncoding]
+                                        options: NSJSONReadingMutableContainers
+                                          error: &myError1];
+       // NSLog(@"results JSON : %@", resJSON);
+        
+        NSError *myError = nil;
+        NSDictionary *res = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&myError];
+        
+        // show all values
+        NSArray *results = [res objectForKey:@"items"];
+        myUserData.toddleFriends = results;
+        
+        for (id friend in results) {
+            NSLog(@"friendid: %@", [friend objectForKey:@"friendid"]);
+            NSLog(@"friendname: %@", [friend objectForKey:@"friendname"]);
+            NSLog(@"friendurl: %@", [friend objectForKey:@"friendurl"]);
+        }
+        
+        /*for(id key in res) {
+            
+            id value = [res objectForKey:key];
+            
+            NSString *keyAsString = (NSString *)key;
+            NSString *valueAsString = (NSString *)value;
+            
+            NSLog(@"key: %@", keyAsString);
+            NSLog(@"value: %@", valueAsString);
+        }*/
+    }
+
 }
 
 - (void)viewDidUnload
@@ -163,7 +227,7 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"My posts";
+            cell.textLabel.text = @"My friends";
             //cell.detailTextLabel.text = @"Select one";
             //cell.imageView.image = [UIImage imageNamed:@"action-eating.png"];
             break;
