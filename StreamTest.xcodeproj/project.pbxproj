@@ -85,8 +85,6 @@
 		65BFE823170FE58500CACE5E /* SplashScreen1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE822170FE58500CACE5E /* SplashScreen1@2x.png */; };
 		65BFE825170FE7FA00CACE5E /* Lilly__.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE824170FE7FA00CACE5E /* Lilly__.ttf */; };
 		E24BB77617023BEE005DCA9A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24BB77517023BEE005DCA9A /* FacebookSDK.framework */; };
-		E2B945691713F67C0059FA0E /* MyRecommendationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */; };
-		E2B9456A1713F67C0059FA0E /* MyRecommendationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,9 +187,9 @@
 		65BFE822170FE58500CACE5E /* SplashScreen1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreen1@2x.png"; sourceTree = "<group>"; };
 		65BFE824170FE7FA00CACE5E /* Lilly__.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lilly__.ttf; sourceTree = "<group>"; };
 		E24BB77517023BEE005DCA9A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
-		E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRecommendationViewController.h; sourceTree = "<group>"; };
-		E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRecommendationViewController.m; sourceTree = "<group>"; };
-		E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyRecommendationViewController.xib; sourceTree = "<group>"; };
+		E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyRecommendationViewController.h; path = "/Users/naeheekim/toddle dev/FriendsR_repository-master/StreamTest/ToddleRepository/MyRecommendationViewController.h"; sourceTree = "<absolute>"; };
+		E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyRecommendationViewController.m; path = "/Users/naeheekim/toddle dev/FriendsR_repository-master/StreamTest/ToddleRepository/MyRecommendationViewController.m"; sourceTree = "<absolute>"; };
+		E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyRecommendationViewController.xib; path = "/Users/naeheekim/toddle dev/FriendsR_repository-master/StreamTest/ToddleRepository/MyRecommendationViewController.xib"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,9 +235,6 @@
 			children = (
 				1852B9421718828D009162DF /* SplashScreen1-568h@2x.png */,
 				181CC9A31714B77600CA7857 /* SDWebImage.framework */,
-				E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */,
-				E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */,
-				E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */,
 				65BFE822170FE58500CACE5E /* SplashScreen1@2x.png */,
 				301E52B616621563005FE793 /* ImageIO.framework */,
 				30C574CC165C3BA900827A95 /* libsqlite3.dylib */,
@@ -473,7 +468,6 @@
 				65BFE821170EA21600CACE5E /* topnav_button_black4.png in Resources */,
 				65BFE823170FE58500CACE5E /* SplashScreen1@2x.png in Resources */,
 				65BFE825170FE7FA00CACE5E /* Lilly__.ttf in Resources */,
-				E2B9456A1713F67C0059FA0E /* MyRecommendationViewController.xib in Resources */,
 				1852B9431718828D009162DF /* SplashScreen1-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,7 +498,6 @@
 				1812660316F2E69A0079B9F5 /* NoteViewController.m in Sources */,
 				187ED9DE16FBABB20040F013 /* UserStore.m in Sources */,
 				188110EF16FBBA1200DDDF32 /* UserData.m in Sources */,
-				E2B945691713F67C0059FA0E /* MyRecommendationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
