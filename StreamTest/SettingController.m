@@ -68,8 +68,8 @@
     self.title = @"toddle";
     
     //code to get friends from web server
-    NSString *urlString = @"http://groups.ischool.berkeley.edu/friendly/friends/userid/726566112";
-    
+    //NSString *urlString = @"http://groups.ischool.berkeley.edu/friendly/friends/userid/726566112";
+    NSString *urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/friends/userid/%@", myUserData.userID];
     
     //PHP file name is being set from the parent view
     //[databaseURL appendString:urlString];
