@@ -48,7 +48,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    NSLog(@"You have %d toddle friends", [myUserdata.toddleFriends count]);
+    NSLog(@"You have %d friends on toddle ", [myUserdata.toddleFriends count]);
     return [myUserdata.toddleFriends count];
 }
 
