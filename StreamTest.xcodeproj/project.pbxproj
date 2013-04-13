@@ -18,6 +18,7 @@
 		181E552416EB16EE00A8F4CD /* OptionViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 181E552316EB16EE00A8F4CD /* OptionViewController.h */; };
 		181E552616EB170E00A8F4CD /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E552516EB170E00A8F4CD /* OptionViewController.m */; };
 		181E552816EE66C000A8F4CD /* PostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181E552716EE66C000A8F4CD /* PostViewController.xib */; };
+		1852B9431718828D009162DF /* SplashScreen1-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852B9421718828D009162DF /* SplashScreen1-568h@2x.png */; };
 		1866D07C17024A73008796F0 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = 1866D07B17024A73008796F0 /* write.png */; };
 		187ED9DE16FBABB20040F013 /* UserStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 187ED9DD16FBABB20040F013 /* UserStore.m */; };
 		188110EF16FBBA1200DDDF32 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 188110EE16FBBA1200DDDF32 /* UserData.m */; };
@@ -102,6 +103,7 @@
 		181E552316EB16EE00A8F4CD /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
 		181E552516EB170E00A8F4CD /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
 		181E552716EE66C000A8F4CD /* PostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewController.xib; sourceTree = "<group>"; };
+		1852B9421718828D009162DF /* SplashScreen1-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreen1-568h@2x.png"; sourceTree = "<group>"; };
 		1866D07B17024A73008796F0 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		187ED9DC16FBABB10040F013 /* UserStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserStore.h; sourceTree = "<group>"; };
 		187ED9DD16FBABB20040F013 /* UserStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserStore.m; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		308E52841610F4E800C90EDE = {
 			isa = PBXGroup;
 			children = (
+				1852B9421718828D009162DF /* SplashScreen1-568h@2x.png */,
 				181CC9A31714B77600CA7857 /* SDWebImage.framework */,
 				E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */,
 				E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */,
@@ -471,6 +474,7 @@
 				65BFE823170FE58500CACE5E /* SplashScreen1@2x.png in Resources */,
 				65BFE825170FE7FA00CACE5E /* Lilly__.ttf in Resources */,
 				E2B9456A1713F67C0059FA0E /* MyRecommendationViewController.xib in Resources */,
+				1852B9431718828D009162DF /* SplashScreen1-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
