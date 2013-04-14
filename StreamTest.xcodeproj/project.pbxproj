@@ -80,10 +80,12 @@
 		653C96CE17017C7E00EB72AA /* pink_heart2.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96CD17017C7E00EB72AA /* pink_heart2.png */; };
 		653C96D01701FF0900EB72AA /* nav_button_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96CF1701FF0900EB72AA /* nav_button_black.png */; };
 		65BFE821170EA21600CACE5E /* topnav_button_black4.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE820170EA21600CACE5E /* topnav_button_black4.png */; };
-		65BFE823170FE58500CACE5E /* SplashScreen1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE822170FE58500CACE5E /* SplashScreen1@2x.png */; };
 		65BFE825170FE7FA00CACE5E /* Lilly__.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE824170FE7FA00CACE5E /* Lilly__.ttf */; };
 		65BFE827171A0BE800CACE5E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE826171A0BE800CACE5E /* icon@2x.png */; };
 		65BFE829171A0BFB00CACE5E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE828171A0BFB00CACE5E /* icon.png */; };
+		65BFE82B171A1C9D00CACE5E /* SplashScreen1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE82A171A1C9C00CACE5E /* SplashScreen1@2x.png */; };
+		65BFE831171A219600CACE5E /* SplashScreenBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE830171A219500CACE5E /* SplashScreenBackground2.png */; };
+		65BFE833171A280B00CACE5E /* loginBackgroundIPadLandscape@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE832171A280A00CACE5E /* loginBackgroundIPadLandscape@2x.jpg */; };
 		E24BB77617023BEE005DCA9A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24BB77517023BEE005DCA9A /* FacebookSDK.framework */; };
 		E24BB77817023C0B005DCA9A /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24BB77717023C0B005DCA9A /* SDWebImage.framework */; };
 		E2B945691713F67C0059FA0E /* MyRecommendationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */; };
@@ -185,10 +187,12 @@
 		653C96CD17017C7E00EB72AA /* pink_heart2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pink_heart2.png; sourceTree = "<group>"; };
 		653C96CF1701FF0900EB72AA /* nav_button_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_button_black.png; sourceTree = "<group>"; };
 		65BFE820170EA21600CACE5E /* topnav_button_black4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topnav_button_black4.png; sourceTree = "<group>"; };
-		65BFE822170FE58500CACE5E /* SplashScreen1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreen1@2x.png"; sourceTree = "<group>"; };
 		65BFE824170FE7FA00CACE5E /* Lilly__.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lilly__.ttf; sourceTree = "<group>"; };
 		65BFE826171A0BE800CACE5E /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		65BFE828171A0BFB00CACE5E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		65BFE82A171A1C9C00CACE5E /* SplashScreen1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SplashScreen1@2x.png"; path = "../../../iOS elements/SplashScreen1@2x.png"; sourceTree = "<group>"; };
+		65BFE830171A219500CACE5E /* SplashScreenBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SplashScreenBackground2.png; path = "../../../../iOS elements/SplashScreenBackground2.png"; sourceTree = "<group>"; };
+		65BFE832171A280A00CACE5E /* loginBackgroundIPadLandscape@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "loginBackgroundIPadLandscape@2x.jpg"; path = "FBUserSettingsViewResources.bundle/images/loginBackgroundIPadLandscape@2x.jpg"; sourceTree = "<group>"; };
 		E24BB77517023BEE005DCA9A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		E24BB77717023C0B005DCA9A /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyRecommendationViewController.h; path = ../MyRecommendationViewController.h; sourceTree = "<group>"; };
@@ -237,9 +241,9 @@
 		308E52841610F4E800C90EDE = {
 			isa = PBXGroup;
 			children = (
+				65BFE82A171A1C9C00CACE5E /* SplashScreen1@2x.png */,
 				65BFE828171A0BFB00CACE5E /* icon.png */,
 				65BFE826171A0BE800CACE5E /* icon@2x.png */,
-				65BFE822170FE58500CACE5E /* SplashScreen1@2x.png */,
 				301E52B616621563005FE793 /* ImageIO.framework */,
 				30C574CC165C3BA900827A95 /* libsqlite3.dylib */,
 				3019A20A16484C0900D31552 /* MobileCoreServices.framework */,
@@ -345,6 +349,7 @@
 		30F581E7163F10AF00718C60 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				65BFE830171A219500CACE5E /* SplashScreenBackground2.png */,
 				1866D07B17024A73008796F0 /* write.png */,
 				65BFE820170EA21600CACE5E /* topnav_button_black4.png */,
 				653C96CF1701FF0900EB72AA /* nav_button_black.png */,
@@ -366,6 +371,7 @@
 				653C96CB17017A1800EB72AA /* broken_heart.png */,
 				308C6F7C1664016F00AD4E94 /* navigationBarLogo.png */,
 				308C6F7A1664016300AD4E94 /* navigationBarBackgroundRetro.png */,
+				65BFE832171A280A00CACE5E /* loginBackgroundIPadLandscape@2x.jpg */,
 				18C7B25416D59F6700813A66 /* Icon@2x.png */,
 				3019A20D164850D600D31552 /* photo.png */,
 				18C7B25216D59F6100813A66 /* Icon.png */,
@@ -471,11 +477,13 @@
 				653C96D01701FF0900EB72AA /* nav_button_black.png in Resources */,
 				1866D07C17024A73008796F0 /* write.png in Resources */,
 				65BFE821170EA21600CACE5E /* topnav_button_black4.png in Resources */,
-				65BFE823170FE58500CACE5E /* SplashScreen1@2x.png in Resources */,
 				65BFE825170FE7FA00CACE5E /* Lilly__.ttf in Resources */,
 				E2B9456A1713F67C0059FA0E /* MyRecommendationViewController.xib in Resources */,
 				65BFE827171A0BE800CACE5E /* icon@2x.png in Resources */,
 				65BFE829171A0BFB00CACE5E /* icon.png in Resources */,
+				65BFE82B171A1C9D00CACE5E /* SplashScreen1@2x.png in Resources */,
+				65BFE831171A219600CACE5E /* SplashScreenBackground2.png in Resources */,
+				65BFE833171A280B00CACE5E /* loginBackgroundIPadLandscape@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
