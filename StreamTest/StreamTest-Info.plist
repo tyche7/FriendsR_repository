@@ -62,7 +62,7 @@
 		<string>Lilly__.ttf</string>
 	</array>
 	<key>UILaunchImageFile~iphone</key>
-	<string>SplashScreen1</string>
+	<string>SplashScreen1@2x.png</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
