@@ -19,6 +19,8 @@
 		181E552616EB170E00A8F4CD /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E552516EB170E00A8F4CD /* OptionViewController.m */; };
 		181E552816EE66C000A8F4CD /* PostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181E552716EE66C000A8F4CD /* PostViewController.xib */; };
 		1852B9431718828D009162DF /* SplashScreen1-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1852B9421718828D009162DF /* SplashScreen1-568h@2x.png */; };
+		1853A76717193FB400B47745 /* MyRecommendationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853A76517193FB400B47745 /* MyRecommendationViewController.m */; };
+		1853A76817193FB400B47745 /* MyRecommendationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1853A76617193FB400B47745 /* MyRecommendationViewController.xib */; };
 		1866D07C17024A73008796F0 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = 1866D07B17024A73008796F0 /* write.png */; };
 		187ED9DE16FBABB20040F013 /* UserStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 187ED9DD16FBABB20040F013 /* UserStore.m */; };
 		188110EF16FBBA1200DDDF32 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 188110EE16FBBA1200DDDF32 /* UserData.m */; };
@@ -102,6 +104,9 @@
 		181E552516EB170E00A8F4CD /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
 		181E552716EE66C000A8F4CD /* PostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewController.xib; sourceTree = "<group>"; };
 		1852B9421718828D009162DF /* SplashScreen1-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreen1-568h@2x.png"; sourceTree = "<group>"; };
+		1853A76417193FB400B47745 /* MyRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRecommendationViewController.h; sourceTree = "<group>"; };
+		1853A76517193FB400B47745 /* MyRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRecommendationViewController.m; sourceTree = "<group>"; };
+		1853A76617193FB400B47745 /* MyRecommendationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyRecommendationViewController.xib; sourceTree = "<group>"; };
 		1866D07B17024A73008796F0 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		187ED9DC16FBABB10040F013 /* UserStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserStore.h; sourceTree = "<group>"; };
 		187ED9DD16FBABB20040F013 /* UserStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserStore.m; sourceTree = "<group>"; };
@@ -187,9 +192,6 @@
 		65BFE822170FE58500CACE5E /* SplashScreen1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreen1@2x.png"; sourceTree = "<group>"; };
 		65BFE824170FE7FA00CACE5E /* Lilly__.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lilly__.ttf; sourceTree = "<group>"; };
 		E24BB77517023BEE005DCA9A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
-		E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyRecommendationViewController.h; path = "/Users/naeheekim/toddle dev/FriendsR_repository-master/StreamTest/ToddleRepository/MyRecommendationViewController.h"; sourceTree = "<absolute>"; };
-		E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyRecommendationViewController.m; path = "/Users/naeheekim/toddle dev/FriendsR_repository-master/StreamTest/ToddleRepository/MyRecommendationViewController.m"; sourceTree = "<absolute>"; };
-		E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyRecommendationViewController.xib; path = "/Users/naeheekim/toddle dev/FriendsR_repository-master/StreamTest/ToddleRepository/MyRecommendationViewController.xib"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,9 +287,9 @@
 				18D422B716DFF5BA0051EE06 /* WebServerConnection.m */,
 				18D422B016DFEC9A0051EE06 /* DataFeedStore.h */,
 				18D422B116DFEC9A0051EE06 /* DataFeedStore.m */,
-				E2B945661713F67C0059FA0E /* MyRecommendationViewController.h */,
-				E2B945671713F67C0059FA0E /* MyRecommendationViewController.m */,
-				E2B945681713F67C0059FA0E /* MyRecommendationViewController.xib */,
+				1853A76417193FB400B47745 /* MyRecommendationViewController.h */,
+				1853A76517193FB400B47745 /* MyRecommendationViewController.m */,
+				1853A76617193FB400B47745 /* MyRecommendationViewController.xib */,
 				30C3133716117EBF002657B9 /* StreamViewController.h */,
 				30C3133816117EBF002657B9 /* StreamViewController.m */,
 				30C3133916117EBF002657B9 /* StreamViewController.xib */,
@@ -469,6 +471,7 @@
 				65BFE823170FE58500CACE5E /* SplashScreen1@2x.png in Resources */,
 				65BFE825170FE7FA00CACE5E /* Lilly__.ttf in Resources */,
 				1852B9431718828D009162DF /* SplashScreen1-568h@2x.png in Resources */,
+				1853A76817193FB400B47745 /* MyRecommendationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +501,7 @@
 				1812660316F2E69A0079B9F5 /* NoteViewController.m in Sources */,
 				187ED9DE16FBABB20040F013 /* UserStore.m in Sources */,
 				188110EF16FBBA1200DDDF32 /* UserData.m in Sources */,
+				1853A76717193FB400B47745 /* MyRecommendationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
