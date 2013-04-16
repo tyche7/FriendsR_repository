@@ -99,7 +99,7 @@
                      if (!error) {
                          NSLog(@"user name is %@", user.name);
                          NSLog(@"user id is %@", user.id);
-                         NSString *userFullName = [NSString stringWithFormat: @"%@%@", user.first_name,user.last_name];
+                         NSString *userFullName = [NSString stringWithFormat: @"%@ %@", user.first_name,user.last_name];
                          NSString *userPictureURL = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", user.id];
                          NSLog(@"user picture is %@", userPictureURL);
                      
