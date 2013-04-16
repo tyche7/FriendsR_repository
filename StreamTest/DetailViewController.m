@@ -77,12 +77,12 @@
     [scrollView addSubview:imageView];
     
     // rating image
-    CGRect ratingRect = CGRectMake(0, 0, 50, 50);
+    CGRect ratingRect = CGRectMake(5, 5, 23, 20);
     UIImageView *ratingView = [[UIImageView alloc] initWithFrame:ratingRect];
     if (rec.rating == love) {
-            ratingView.image = [UIImage imageNamed:@"love.png"];
+            ratingView.image = [UIImage imageNamed:@"pink_heart2.png"];
     }else{
-            ratingView.image = [UIImage imageNamed:@"hate.png"];
+            ratingView.image = [UIImage imageNamed:@"broken_heart.png"];
     }
     [scrollView addSubview:ratingView];
     

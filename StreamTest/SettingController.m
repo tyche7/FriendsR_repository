@@ -63,7 +63,7 @@
      name:SCSessionStateChangedNotification
      object:nil];
     
-    self.title = @"toddle";
+    self.title = @"Profile";
     
     //code to get friends from web server
     //NSString *urlString = @"http://groups.ischool.berkeley.edu/friendly/friends/userid/726566112";

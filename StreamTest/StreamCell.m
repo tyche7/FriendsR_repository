@@ -103,7 +103,7 @@
         productNameLabel.backgroundColor = [UIColor clearColor];
         productNameLabel.tag = kProductLabelTag;
         productNameLabel.adjustsFontSizeToFitWidth = YES;
-        productNameLabel.minimumFontSize = 13;
+        productNameLabel.minimumFontSize = 11;
         
         productNameLabel.font = [UIFont boldSystemFontOfSize:14];
         
@@ -182,11 +182,11 @@
         UIImageView *rView = (UIImageView *)[self.contentView viewWithTag:kRatingImageTag];
     
         if (r == love) {  //love
-            rView.image = [UIImage imageNamed:@"love.png"];
+            rView.image = [UIImage imageNamed:@"pink_heart2.png"];
 
         }else //hate
         {
-            rView.image = [UIImage imageNamed:@"hate.png"];
+            rView.image = [UIImage imageNamed:@"broken_heart.png"];
         }
 
 }

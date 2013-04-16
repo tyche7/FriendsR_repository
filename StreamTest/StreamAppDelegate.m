@@ -51,7 +51,7 @@ NSString *const SCSessionStateChangedNotification =
                                      UITextAttributeFont: [UIFont fontWithName:@"Lilly" size:20.0f]
      }];
     
-    UIImage *button30 = [[UIImage imageNamed:@"topnav_button_black4"]
+    UIImage *button30 = [[UIImage imageNamed:@"topnav_black_button"]
                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
 
 //    UIImage *button24 = [[UIImage imageNamed:@"button_textured_24"]
@@ -59,6 +59,12 @@ NSString *const SCSessionStateChangedNotification =
     
     [[UIBarButtonItem appearance] setBackgroundImage:button30 forState:UIControlStateNormal
                                           barMetrics:UIBarMetricsDefault];
+    
+    UIImage *backButtonImage = [[UIImage imageNamed:@"topnav_back_button"]
+                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+
 
 //    [[UIBarButtonItem appearance] setBackgroundImage:button24 forState:UIControlStateNormal
 //                                          barMetrics:UIBarMetricsLandscapePhone];
@@ -99,7 +105,7 @@ NSString *const SCSessionStateChangedNotification =
     navController2 = [[UINavigationController alloc] initWithRootViewController:settingController];
     
     self.tabBarController = [[UITabBarController alloc] init];
-    navController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Toddle" image:[UIImage imageNamed:@"coffee"] tag:1];
+    navController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Toddle" image:[UIImage imageNamed:@"toddle2"] tag:1];
     navController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Post" image:[UIImage imageNamed:@"write"] tag:2];
     navController2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"User" image:[UIImage imageNamed:@"user"] tag:3];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, navController1,  navController2, nil];

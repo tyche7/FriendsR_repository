@@ -129,7 +129,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
      */
     
-    self.title = @"toddle";
+    self.title = @"Post";
     
     
   
