@@ -51,7 +51,7 @@ NSString *const SCSessionStateChangedNotification =
                                      UITextAttributeFont: [UIFont fontWithName:@"Lilly" size:20.0f]
      }];
     
-    UIImage *button30 = [[UIImage imageNamed:@"topnav_button_black4"]
+    UIImage *button30 = [[UIImage imageNamed:@"topnav_black_button"]
                          resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
 
 //    UIImage *button24 = [[UIImage imageNamed:@"button_textured_24"]
@@ -59,6 +59,12 @@ NSString *const SCSessionStateChangedNotification =
     
     [[UIBarButtonItem appearance] setBackgroundImage:button30 forState:UIControlStateNormal
                                           barMetrics:UIBarMetricsDefault];
+    
+    UIImage *backButtonImage = [[UIImage imageNamed:@"topnav_back_button"]
+                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+
 
 //    [[UIBarButtonItem appearance] setBackgroundImage:button24 forState:UIControlStateNormal
 //                                          barMetrics:UIBarMetricsLandscapePhone];
