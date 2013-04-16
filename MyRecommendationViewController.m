@@ -36,9 +36,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
     UserStore *userstore = [UserStore sharedStore];
     self.myUserdata = userstore.userData;
-    
+
     // Do any additional setup after loading the view from its nib.
 }
 
