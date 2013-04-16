@@ -297,6 +297,10 @@
     spinner = [self showActivityIndicatorOnView:cell.picView];
     
     
+    //create cell reference
+    
+    __weak StreamCell *weakReferenceToCell = cell;
+    
     [cell.picView setImageWithURL:[NSURL URLWithString:imagePlace]
         placeholderImage:[UIImage imageNamed:@"placeholder.png"]
       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
@@ -315,7 +319,7 @@
              // *************
              // for testing temorarily comment it out
              
-             cell.ageBand = rec.ageBand;
+             weakReferenceToCell.ageBand = rec.ageBand;
              
          }
   }];
