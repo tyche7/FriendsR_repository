@@ -228,7 +228,7 @@
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"friends\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"%s", friendList] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%@", friendList] dataUsingEncoding:NSUTF8StringEncoding]];
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -257,7 +257,7 @@
         
     [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id data, NSError *error) {
         if(error) {
-            NSLog(@"Error requesting /me/friends", error);
+            NSLog(@"Error requesting /me/friends");
             
             //This is the controller's completion code
             block(nil,error);
@@ -331,7 +331,7 @@
     
 	// Do any additional setup after loading the view, typically from a nib.
     // remove local data storage for user info
-    NSString *filepath = [self dataFilePath];
+    //NSString *filepath = [self dataFilePath];
    /* if([[NSFileManager defaultManager] fileExistsAtPath:filepath]){
         NSLog(@"user data available in ios archive");
         NSData *data = [[NSMutableData alloc]

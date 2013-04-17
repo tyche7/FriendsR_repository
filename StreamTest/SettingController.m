@@ -88,14 +88,15 @@
         
         //TODO: set up stuff that needs to work on the data here.
         //NSLog(@"%@", result);
-        NSString* newStr = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
+        //NSString* newStr = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
        // NSLog(@"%@", newStr);
         
 
-        NSError *myError1 = nil;
-        NSDictionary *resJSON = [NSJSONSerialization JSONObjectWithData: [newStr dataUsingEncoding:NSUTF8StringEncoding]
-                                        options: NSJSONReadingMutableContainers
-                                          error: &myError1];
+        //NSError *myError1 = nil;
+        
+        //NSDictionary *resJSON = [NSJSONSerialization JSONObjectWithData: [newStr dataUsingEncoding:NSUTF8StringEncoding]
+                                       // options: NSJSONReadingMutableContainers
+                                        //  error: &myError1];
        // NSLog(@"results JSON : %@", resJSON);
         
         NSError *myError = nil;

@@ -7,9 +7,8 @@
 //
 
 
+#import <QuartzCore/QuartzCore.h>
 #import "StreamCell.h"
-
-    
 
 @implementation StreamCell
 
@@ -43,24 +42,32 @@
         CGRect frameRect = CGRectMake(10, 5, 300, 310);
         UIView *frameView = [[UIView alloc] initWithFrame:frameRect];
         frameView.backgroundColor = [UIColor whiteColor];
+
+        [frameView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+        [frameView.layer setBorderWidth:0.5f];
+        [frameView.layer setShadowColor:[UIColor grayColor].CGColor];
+        [frameView.layer setShadowOpacity:0.5];
+        [frameView.layer setShadowRadius:3.0];
+        [frameView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+        
         [self.contentView addSubview:frameView];
         
         
-        CGRect nameLabelRect = CGRectMake(30,5,150,15);
+        CGRect nameLabelRect = CGRectMake(30,8,150,15);
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameLabelRect];
         nameLabel.textAlignment = UITextAlignmentLeft;
         nameLabel.backgroundColor = [UIColor clearColor];
         nameLabel.tag = kNameTag;
         nameLabel.font = [UIFont boldSystemFontOfSize:14];
-        nameLabel.textColor = [UIColor grayColor];
+        nameLabel.textColor = [UIColor darkGrayColor];
         [frameView addSubview:nameLabel];
         
-        CGRect dateLabelRect = CGRectMake(210, 5, 70, 15);
+        CGRect dateLabelRect = CGRectMake(200, 8, 70, 15);
         UILabel *dateLabel = [[UILabel alloc] initWithFrame:dateLabelRect];
         dateLabel.backgroundColor = [UIColor clearColor];
         dateLabel.textAlignment = UITextAlignmentRight;
         dateLabel.tag = kDateTag;
-        dateLabel.textColor = [UIColor grayColor];
+        dateLabel.textColor = [UIColor darkGrayColor];
         dateLabel.font = [UIFont boldSystemFontOfSize:14];
         [frameView addSubview:dateLabel];
         
@@ -86,18 +93,21 @@
         [frameView addSubview:picView];
         
         
-        CGRect transparentAgeRect = CGRectMake(50, 230, 240, 20);
+        CGRect transparentAgeRect = CGRectMake(30, 250, 240, 20);
         UILabel *ageLabel = [[UILabel alloc] initWithFrame:transparentAgeRect];
         ageLabel.textAlignment = UITextAlignmentCenter;
         ageLabel.tag = kAgeLabelTag;
-        ageLabel.backgroundColor = [UIColor clearColor];
+        ageLabel.backgroundColor = [UIColor blackColor];
         ageLabel.alpha = 0.f; //0.f transparent <- -> 1.f opaque
         ageLabel.font = [UIFont systemFontOfSize:14];
         ageLabel.textColor = [UIColor whiteColor];
         [frameView addSubview:ageLabel];
         
+        // bring ageLabel to the top
+        [frameView bringSubviewToFront:ageLabel];
         
-        CGRect productNameLabelRect = CGRectMake(10, 280, 300, 20);
+        
+        CGRect productNameLabelRect = CGRectMake(60, 280, 200, 20);
         UILabel *productNameLabel = [[UILabel alloc] initWithFrame:productNameLabelRect];
         productNameLabel.textAlignment = UITextAlignmentCenter;
         productNameLabel.backgroundColor = [UIColor clearColor];

@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/StreamCell.m"
-         timestampString = "386881301.333183"
+         timestampString = "387873854.802828"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "184"
-         endingLineNumber = "184"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
          landmarkName = "-setRating:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -65,8 +65,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "610"
          endingLineNumber = "610"
-         landmarkName = "@implementation PostViewController"
-         landmarkType = "3">
+         landmarkName = "-showActivityIndicatorOnView:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -112,12 +112,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/StreamViewController.m"
-         timestampString = "386876265.534647"
+         timestampString = "387871704.406762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "461"
-         endingLineNumber = "461"
-         landmarkName = "-tableView:heightForRowAtIndexPath:"
+         startingLineNumber = "458"
+         endingLineNumber = "458"
+         landmarkName = "-fetchUserFriends"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "385676742.283102"
+         timestampString = "387873226.943061"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>

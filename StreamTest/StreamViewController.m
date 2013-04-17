@@ -314,10 +314,7 @@
              NSLog(@"%@ Image has been dowloaded, and now is set", rec.productName);
              //NSLog(@"cell ageband:%d", cell.ageBand);
              
-             // **********
-             // need to handle this warning message
-             // *************
-             // for testing temorarily comment it out
+
              
              weakReferenceToCell.ageBand = rec.ageBand;
              

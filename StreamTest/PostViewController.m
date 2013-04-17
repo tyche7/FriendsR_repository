@@ -131,7 +131,7 @@
     
     self.title = @"Post";
     
-    
+    self.infoTableView.scrollEnabled = NO;
   
 
     
@@ -788,12 +788,11 @@
     // adding the body we've created to the request
     [request setHTTPBody:body];
     
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request
+    [[NSURLConnection alloc] initWithRequest:request
                                                                   delegate:self
                                                           startImmediately:YES  ];
     
-    //[connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:DataDownloaderRunMode];
-    //[connection start];
+
     
 
     

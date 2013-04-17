@@ -35,7 +35,7 @@
 
 //local DB chnages
 -(NSString *)dataFilePath;
--(void)applicationWillResignActive:(NSNotification *)notification;
+//-(void)applicationWillResignActive:(NSNotification *)notification;
 
 
 

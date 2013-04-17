@@ -7,6 +7,7 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 #import "DetailViewController.h"
 #import "DataFeedStore.h"
 #import "Rec.h"
@@ -144,7 +145,13 @@
         CGRect ageRect = CGRectMake(20, 360, 280, 20);
         UILabel *ageLabel = [[UILabel alloc] initWithFrame:ageRect];
         ageLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
-        ageLabel.text = [NSString stringWithFormat:@"Good for %@", ageRange];
+        
+        if (rec.rating == love) {
+            ageLabel.text = [NSString stringWithFormat:@"Good for %@", ageRange];
+        }else{
+            ageLabel.text = [NSString stringWithFormat:@"Not Good for %@", ageRange];
+        }
+
         ageLabel.backgroundColor = [UIColor clearColor];
         
         [scrollView addSubview:ageLabel];
@@ -166,17 +173,14 @@
 
     NSLog(@"urlstring:%@", urlString);
     [profileView setImageWithURL:[NSURL URLWithString:urlString]
-                placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-  
-     
-    // **********
-    // need to download the latest version of SDWEbImage
-    // and apply this option
-    
-   //    options:SDWebImageRefreshCached];
+                placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                options:SDWebImageRefreshCached];
+
     
 
     profileView.contentMode = UIViewContentModeScaleAspectFit;
+    profileView.layer.cornerRadius = 5.0f;
+    profileView.layer.masksToBounds = YES;
     [scrollView addSubview:profileView];
     
     // user's name
@@ -189,7 +193,7 @@
     [scrollView addSubview:nameLabel];
     
     // user's note  
-    CGRect postRect = CGRectMake(70, 420, 240, 50);
+    CGRect postRect = CGRectMake(70, 420, 240, 150);
     UITextView *postView = [[UITextView alloc] initWithFrame:postRect];
     [postView setEditable:NO];
     postView.font = [UIFont fontWithName:@"Helvetica" size:13];
@@ -204,7 +208,7 @@
     
 
 
-    originalHeight = 480;
+    originalHeight = 600;
     if (rec.ageBand !=0) originalHeight -= 20; // - heigh of ageRect
     
     
@@ -215,12 +219,6 @@
 
 - (void)renderTable
 {
-    //it's not working
-    //http://stackoverflow.com/questions/6860231/how-to-get-the-size-of-a-uitableviews-content-view
-    //[commentTableView layoutIfNeeded];
-    // Allows you to perform layout before the drawing cycle happens.
-    //-layoutIfNeeded forces layout early. So it will correctly return the size. Like dreaming before doing.
-    
     
     int tableHeight = CELL_HEIGHT * [self.comments count];
     
