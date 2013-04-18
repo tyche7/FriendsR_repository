@@ -270,7 +270,7 @@
     
     //NSLog(@"TIME: %@", rec.date);
     //cell.post = rec.postText;
-    NSString* imagePlace = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/photos/%@", rec.fileName];
+    NSString* imagePlace = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/photos/%@", rec.fileName];
     
     if (!rec.purchasePlace || [rec.purchasePlace isEqualToString:@"None"] || [rec.purchasePlace isEqualToString:@""]) {
         cell.productNameAndPurchasePlace = rec.productName;

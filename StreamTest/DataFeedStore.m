@@ -49,10 +49,10 @@
     NSString* userid = [[[UserStore sharedStore] userData] userID];
     NSLog(@"userID: %@", userid);
     
-    NSString *urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries"];
+    NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/entries"];
     
     if (userid)
-        urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/entries/userid/%@", userid];
+        urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/entries/userid/%@", userid];
     
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -100,7 +100,7 @@
     // get user's comments
     
     
-    NSString *urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/comments/entryid/%@", recId];
+    NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/comments/entryid/%@", recId];
     
     
     

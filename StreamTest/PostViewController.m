@@ -645,7 +645,7 @@
     NSString *fileName = [[NSString alloc] initWithFormat:@"%@_%@.jpg", userStore.userData.userID, timestamp];
     
     
-    NSURL *theURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/upload"];
+    NSURL *theURL = [NSURL URLWithString:@"http://tyche92.pythonanywhere.com/upload"];
     
     if (!productImage) {
         NSLog(@"ERROR: product Image is NULL");

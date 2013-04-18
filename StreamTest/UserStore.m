@@ -91,7 +91,7 @@
                          //Vimal start
                          //code to send user data to server. Move it if there is better place to put this
                          
-                         NSURL *theURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploaduserdata"];
+                         NSURL *theURL = [NSURL URLWithString:@"http://tyche92.pythonanywhere.com/uploaduserdata"];
                          
                          
                          NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:theURL
@@ -196,7 +196,7 @@
 
 -(void) uploadFriendsList:(NSString*)friendList {
     
-    NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendsdata"];
+    NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://tyche92.pythonanywhere.com/uploadfriendsdata"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:toddlefriendsURL
                                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                             timeoutInterval:60];
@@ -270,7 +270,7 @@
         }
         //NSLog(@"friendslist: %s",friendlist.UTF8String);
         
-        NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://groups.ischool.berkeley.edu/friendly/uploadfriendsdata"];
+        NSURL *toddlefriendsURL = [NSURL URLWithString:@"http://tyche92.pythonanywhere.com/uploadfriendsdata"];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:toddlefriendsURL
                                                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                                 timeoutInterval:60];
