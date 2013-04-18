@@ -80,9 +80,6 @@
     rec.ageBand = -1;  //set as -1
     
     
-    //set up UIs
-    
-    
     // post
     
     imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -97,8 +94,6 @@
     
     
     // TextField
-    
-    
 
     
     NSArray *ratingArray = [NSArray arrayWithObjects: [UIImage imageNamed:@"pink_heart2.png"], [UIImage imageNamed:@"broken_heart.png"], nil];
@@ -120,21 +115,12 @@
     bbiRight = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveButtonWasPressed:)];
     // set this bar button item as the right item in the navigationItem
     [[self navigationItem] setRightBarButtonItem:bbiRight];
-    
-    
-    // register keyboard notification
-    /*
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
-     */
+
     
     self.title = @"Post";
     
     self.infoTableView.scrollEnabled = NO;
   
-
-    
 }
 
 - (void)viewDidUnload
@@ -164,9 +150,6 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-
-
 
 
 
@@ -219,7 +202,6 @@
 
 
 
-
 - (IBAction)useCamera{
     
     NSLog(@"in useCamera");
@@ -266,8 +248,6 @@
         //[photoImage setImage:image];
         productImage = image;
         productImageisSet = YES;
-    
-        NSLog(@"**********PHOTO IS SET***********");
         
         
         if (newMedia) {
@@ -337,7 +317,7 @@
     UITableViewCell *cell = (UITableViewCell*)[tableView
                                                dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
         
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -348,7 +328,9 @@
         cell.textLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
         cell.textLabel.lineBreakMode = UILineBreakModeTailTruncation;
         cell.textLabel.clipsToBounds = YES;
+   
         
+        /*
         cell.detailTextLabel.font = [UIFont systemFontOfSize:10];
         cell.detailTextLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
         cell.detailTextLabel.textColor = [UIColor colorWithRed:0.4
@@ -357,6 +339,7 @@
                                                          alpha:1];
         cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
         cell.detailTextLabel.clipsToBounds = YES;
+         */
          
     }
 
@@ -366,20 +349,12 @@
     inputTextField.font = [UIFont systemFontOfSize:13];
     inputTextField.keyboardType = UIKeyboardTypeDefault;
     inputTextField.returnKeyType = UIReturnKeyNext;
-
-    
-
-    //inputTextField.backgroundColor = [UIColor whiteColor];
     inputTextField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
-    //inputTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
     inputTextField.textAlignment = UITextAlignmentLeft;
-  
-    
-    //[inputTextField addTarget:self action:@selector(textFieldIsTouched:) forControlEvents:UIControlEventAllTouchEvents];
     inputTextField.delegate = self;
     
     inputTextField.clearButtonMode = UITextFieldViewModeNever; // no clear 'x' button to the right
-    [inputTextField setEnabled: YES];
+
     
     [cell.contentView addSubview:inputTextField];
     
@@ -388,6 +363,7 @@
             cell.textLabel.text = @"Product Name";
             inputTextField.placeholder = @"Required";
             inputTextField.tag = productFieldTag;
+            [inputTextField setEnabled: YES];
             self.productField = inputTextField;
             break;
             
@@ -395,6 +371,7 @@
             cell.textLabel.text = @"Purchased At";
             inputTextField.placeholder = @"optional";
             inputTextField.tag = purchaseFieldTag;
+            [inputTextField setEnabled: YES];
             self.purchasePlaceField = inputTextField;
             break;
             
@@ -477,36 +454,6 @@
     
     cell.detailTextLabel.text = subtitle;
 }
-
-
-/*
-//setInfo
-
-- (IBAction)setInfo:(UITextField *)textField{
-    
-    switch (textField.tag) {
-        case productFieldTag: //productname
-            NSLog(@"productfield is set as %@", textField.text);
-            rec.productName = textField.text;
-            if ([self allRequiredInfoSet]) {
-                bbiRight.enabled = YES;
-            }
-            break;
-        case purchaseFieldTag: //purchase place
-            rec.purchasePlace = textField.text;
-            break;
-        case ageFieldTag: //age
-            break;
-        case noteFieldTag: //note
-            break;
-        default:
-            break;
-    }
-    
-}
-*/
-
-
 
 
 

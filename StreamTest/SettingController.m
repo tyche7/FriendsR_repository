@@ -66,6 +66,7 @@
     self.title = @"Profile";
     
     //code to get friends from web server
+
     //NSString *urlString = @"http://tyche92.pythonanywhere.com/upload/friends/userid/726566112";
     NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/upload/userid/%@", myUserData.userID];
     
