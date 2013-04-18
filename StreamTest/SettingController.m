@@ -66,8 +66,8 @@
     self.title = @"Profile";
     
     //code to get friends from web server
-    //NSString *urlString = @"http://groups.ischool.berkeley.edu/friendly/friends/userid/726566112";
-    NSString *urlString = [NSString stringWithFormat:@"http://groups.ischool.berkeley.edu/friendly/friends/userid/%@", myUserData.userID];
+    //NSString *urlString = @"http://tyche92.pythonanywhere.com/upload/friends/userid/726566112";
+    NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/upload/userid/%@", myUserData.userID];
     
     //PHP file name is being set from the parent view
     //[databaseURL appendString:urlString];
@@ -175,6 +175,7 @@
                  self.userProfileImage.profileID = user.id;
                  self.userLocationLabel.text = [user.location objectForKey:@"name"];
              }
+             
          }];
     }
 }
