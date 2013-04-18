@@ -23,40 +23,25 @@
 
 @synthesize userData;
 
-
+ static UserStore *userStore = nil;
 
 + (UserStore *)sharedStore{
-    static UserStore *userStore = nil;
+   
     if (!userStore) {
+        NSLog(@"userStore is allocated **");
         userStore = [[UserStore alloc] init];
         userStore.userData = [[UserData alloc] init];
         
-
-        /*
-        [[NSNotificationCenter defaultCenter]
-         addObserver:userStore
-         selector:@selector(sessionStateChanged:)
-         name:SCSessionStateChangedNotification
-         object:nil];
-         */
     }
     
     return userStore;
 }
 
-/*
-- (void)sessionStateChanged:(NSNotification*)notification {
-    
-    // need to think about this method
-    // who is going to call? how the return value is back to the caller?
-    
-    NSLog(@"in sessionStateChanged");
-    
-    [self populateUserDetails];
-    [self requestFriends];
-    
+
++ (void)deleteStore{
+    userStore = nil;
 }
-*/
+
 
 - (void)fetchUserDataWithCompletion:(void (^)(UserData* userData, NSError *err))block{
     
@@ -204,12 +189,10 @@
 - (void)viewUnDidLoad
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
 }
 
-// need to check
--(void)logoutButtonWasPressed:(id)sender {
-    [FBSession.activeSession closeAndClearTokenInformation];
-}
 
 -(void) uploadFriendsList:(NSString*)friendList {
     

@@ -154,6 +154,11 @@
 
 -(void)logoutButtonWasPressed:(id)sender {
     [FBSession.activeSession closeAndClearTokenInformation];
+    NSLog(@"Log out in SettingController");
+    
+    [UserStore deleteStore];
+
+    
 }
 
 - (void)populateUserDetails
@@ -175,6 +180,14 @@
                  self.userProfileImage.profileID = user.id;
                  self.userLocationLabel.text = [user.location objectForKey:@"name"];
              }
+             UserStore *userStore = [UserStore sharedStore];
+             userStore.userData.userID = user.id;
+             NSString *userFullName = [NSString stringWithFormat: @"%@ %@", user.first_name,user.last_name];
+             userStore.userData.username = userFullName;
+             NSString *userPictureURL = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", user.id];
+             userStore.userData.userImageURL = userPictureURL;
+             
+                 
          }];
     }
 }
