@@ -160,14 +160,14 @@
                      userData.username = userFullName;
                      userData.userImageURL = userPictureURL;
                      
-                     NSMutableData *data = [[NSMutableData alloc] init];
+                     /*NSMutableData *data = [[NSMutableData alloc] init];
                      NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]
                                                   initForWritingWithMutableData:data];
                      [archiver encodeObject:userData forKey:kDataKey];
                      [archiver finishEncoding];
                      
                      [data writeToFile:[self dataFilePath] atomically:YES];
-                     NSLog(@"writing to file %@", data);
+                     NSLog(@"writing to file %@", data);*/
                      
                      // After getting user data,
                      // (1) set the userData property for other controllers to use this data
