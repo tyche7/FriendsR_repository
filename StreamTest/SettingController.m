@@ -68,7 +68,7 @@
     //code to get friends from web server
 
     //NSString *urlString = @"http://tyche92.pythonanywhere.com/upload/friends/userid/726566112";
-    NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/upload/userid/%@", myUserData.userID];
+    NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/friends/userid/%@", myUserData.userID];
     
     //PHP file name is being set from the parent view
     //[databaseURL appendString:urlString];
