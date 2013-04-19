@@ -106,7 +106,7 @@ NSString *const SCSessionStateChangedNotification =
     
     self.tabBarController = [[UITabBarController alloc] init];
     navController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Toddle" image:[UIImage imageNamed:@"toddle2"] tag:1];
-    navController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Post" image:[UIImage imageNamed:@"write"] tag:2];
+    navController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Post" image:[UIImage imageNamed:@"camera30"] tag:2];
     navController2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"User" image:[UIImage imageNamed:@"user"] tag:3];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:navController, navController1,  navController2, nil];
 
