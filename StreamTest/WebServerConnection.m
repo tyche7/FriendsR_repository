@@ -117,8 +117,8 @@ static NSMutableArray *sharedConnectionList = nil;
         NSString *keyAsString = (NSString *)key;
         NSString *valueAsString = (NSString *)value;
         
-        NSLog(@"key: %@", keyAsString);
-        NSLog(@"value: %@", valueAsString);
+        //NSLog(@"key: %@", keyAsString);
+        //NSLog(@"value: %@", valueAsString);
     }
     
     
@@ -136,8 +136,8 @@ static NSMutableArray *sharedConnectionList = nil;
             
             for (NSDictionary *result in results) {
                 NSString *icon = [result objectForKey:@"name"];
-                NSLog(@"name: %@", icon);
-                NSLog(@"entryid: %@", [result objectForKey:@"entryid"]);
+                //NSLog(@"name: %@", icon);
+                //NSLog(@"entryid: %@", [result objectForKey:@"entryid"]);
                 
                 
                 Rec* rec = [[Rec alloc] init ];
@@ -156,7 +156,7 @@ static NSMutableArray *sharedConnectionList = nil;
                 
                 NSString *timestampString = [result objectForKey:@"create_time"];
                 [rec setDate:[dateFormatter dateFromString:timestampString]];
-                NSLog(@"timestampString: %@", timestampString);
+                //NSLog(@"timestampString: %@", timestampString);
                 
                 
                 [fetchedRecommendationsAtConnection addObject:rec];

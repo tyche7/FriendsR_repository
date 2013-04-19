@@ -176,12 +176,19 @@
     UIImage *uploadPhotoImg = [UIImage imageNamed:@"upload-photo.png"];
     [imageButton setImage:uploadPhotoImg forState:UIControlStateNormal];
     
+    // set rating segment as love
+    ratingSegmentedControl.selectedSegmentIndex = 0;
+    
 
     //erase note(description)
     self.noteController.noteTextView.text = @"";
 
     //set displayMedium
     displayMediumChoice = YES;
+    
+    
+    // go back to Streamview
+    [self.tabBarController setSelectedIndex:0];
     
 }
 
@@ -778,12 +785,13 @@
     
     // show alert message
     
-    NSLog(@"connectionDidFinishLoading");
-    [self showAlertView:@"Success" andMessage:@"successfully uploaded"];
+    //NSLog(@"connectionDidFinishLoading");
+    //[self showAlertView:@"Success" andMessage:@"successfully uploaded"];
     
     
-    //clear all the information user set
+    //clear all the information user set and go back to Stream View
     [self cancel:self];
+    
     
 
     

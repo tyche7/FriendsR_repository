@@ -289,7 +289,7 @@
    // SDWebImageManager *manager = [SDWebImageManager sharedManager];
     
    
-    NSLog(@"%@ image is being downloaded", rec.productName);
+    //NSLog(@"%@ image is being downloaded", rec.productName);
     // NSLog(@"%@", imagePlace);
     
     // showing activity indicator
@@ -320,47 +320,8 @@
              
          }
   }];
-    
-    /*
-    
-    [manager downloadWithURL:imagePlace
-                     options:0
-                    progress:^(NSUInteger receivedSize, long long expectedSize) // a block called while image is downloading
-     {
-         // progression tracking code
-         
-         // how to set placeholder image?
-         
-         
-
-
-     }
-        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL dummy) // a block called when operation has been completed
-     {
-        
-         // stopping activity indicator
-        [spinner stopAnimating];
-         
-         
-         if (image)
-         {
-             // do something with image
-             NSLog(@"%@ Image has been dowloaded, and now is set", rec.productName);
-             //NSLog(@"cell ageband:%d", cell.ageBand);
-             
-        
-             [cell.picView setImage:image];
-             cell.ageBand = rec.ageBand;
-             
-         }
-     }];
-
-    
- */
-    
-
-    
-    
+  
+  
     return cell;
 }
 
