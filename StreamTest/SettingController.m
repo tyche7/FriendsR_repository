@@ -52,6 +52,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewDidUnload
+{
+    //[self setUserLocationLabel:nil];
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.friendPickerController = nil;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (FBSession.activeSession.isOpen) {
+        [self populateUserDetails];
+    }
+    
     // Do any additional setup after loading the view from its nib.
     UserStore *userStore = [UserStore sharedStore];
     UserData *myUserData =  userStore.userData;
@@ -66,7 +86,7 @@
     self.title = @"Profile";
     
     //code to get friends from web server
-
+    /* commenting out the synchronous call code
     //NSString *urlString = @"http://tyche92.pythonanywhere.com/upload/friends/userid/726566112";
     NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/friends/userid/%@", myUserData.userID];
     
@@ -90,21 +110,24 @@
         //TODO: set up stuff that needs to work on the data here.
         //NSLog(@"%@", result);
         //NSString* newStr = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
-       // NSLog(@"%@", newStr);
+        // NSLog(@"%@", newStr);
         
-
+        
         //NSError *myError1 = nil;
         
         //NSDictionary *resJSON = [NSJSONSerialization JSONObjectWithData: [newStr dataUsingEncoding:NSUTF8StringEncoding]
-                                       // options: NSJSONReadingMutableContainers
-                                        //  error: &myError1];
-       // NSLog(@"results JSON : %@", resJSON);
+        // options: NSJSONReadingMutableContainers
+        //  error: &myError1];
+        // NSLog(@"results JSON : %@", resJSON);
         
         NSError *myError = nil;
         NSDictionary *res = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&myError];
         
         // show all values
         NSArray *results = [res objectForKey:@"items"];
+        commenting out the synchronous call code */
+    
+        NSArray *results = nil;
         myUserData.toddleFriends = results;
         
         for (id friend in results) {
@@ -114,36 +137,20 @@
         }
         
         /*for(id key in res) {
-            
-            id value = [res objectForKey:key];
-            
-            NSString *keyAsString = (NSString *)key;
-            NSString *valueAsString = (NSString *)value;
-            
-            NSLog(@"key: %@", keyAsString);
-            NSLog(@"value: %@", valueAsString);
-        }*/
-    }
-
-}
-
-- (void)viewDidUnload
-{
-    //[self setUserLocationLabel:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    self.friendPickerController = nil;
+         
+         id value = [res objectForKey:key];
+         
+         NSString *keyAsString = (NSString *)key;
+         NSString *valueAsString = (NSString *)value;
+         
+         NSLog(@"key: %@", keyAsString);
+         NSLog(@"value: %@", valueAsString);
+         }*/
     
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    if (FBSession.activeSession.isOpen) {
-        [self populateUserDetails];
+    /*commenting out the synchronous call code
     }
+     commenting out the synchronous call code */
+
 }
 
 
