@@ -11,6 +11,8 @@
 #import "UserStore.h"
 @class DetailViewController;
 
+
+
 @interface StreamViewController : UITableViewController <FriendsUpdateDelegate> {
     __block  BOOL fetchUserDataDidCallAndSet;
 }
