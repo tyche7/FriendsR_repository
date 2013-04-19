@@ -180,6 +180,23 @@
                  self.userNameLabel.text = user.name;
                  self.userProfileImage.profileID = user.id;
                  self.userLocationLabel.text = [user.location objectForKey:@"name"];
+                 
+                 //change font size and color of Name Label
+                 self.userNameLabel.font = [UIFont boldSystemFontOfSize:14];
+                 self.userNameLabel.textColor = [UIColor darkGrayColor];
+                 
+                 //change font size and color of Location Label
+                 self.userLocationLabel.font = [UIFont systemFontOfSize:14];
+                 self.userLocationLabel.textColor = [UIColor darkGrayColor];
+                 
+                 //adjust user's Name Label based on length compared to width of rect
+                 self.userNameLabel.adjustsFontSizeToFitWidth = YES;
+                 self.userNameLabel.minimumFontSize = 11;
+                 
+                 //adjust user's Location Label based on length compared to width of rect
+                 self.userLocationLabel.adjustsFontSizeToFitWidth = YES;
+                 self.userLocationLabel.minimumFontSize = 11;
+                 
              }
 
              UserStore *userStore = [UserStore sharedStore];

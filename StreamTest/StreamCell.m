@@ -119,7 +119,7 @@
         
         [frameView addSubview:productNameLabel];
         
-        CGRect ratingRect = CGRectMake(30, 280, 20, 25);
+        CGRect ratingRect = CGRectMake(30, 280, 18, 16);
         
         ratingView = [[UIImageView alloc] initWithFrame:ratingRect];
         ratingView.contentMode = UIViewContentModeScaleAspectFill;
@@ -212,22 +212,22 @@
    
         switch (age) {
             case 1: //newborn
-                ageRange = @"for Newborns";
+                ageRange = @"For Newborns";
                 break;
             case 2: //infant
-                ageRange = @"for Infants";
+                ageRange = @"For Infants";
                 break;
             case 3: //toddler
-                ageRange = @"for Toddlers";
+                ageRange = @"For Toddlers";
                 break;
             case 4: //kid
-                ageRange = @"for Kids";
+                ageRange = @"For Kids";
                 break;
             case 5: //all ages
-                ageRange = @"for All Ages";
+                ageRange = @"For All Ages";
                 break;
             case 6: //mom
-                ageRange = @"for Preparing Mothers";
+                ageRange = @"For Preparing Mothers";
                 break;
             default:
                 break; //do nothing
