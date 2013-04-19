@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/StreamViewController.m"
-         timestampString = "388043472.644354"
+         timestampString = "388102264.220285"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "419"
-         endingLineNumber = "419"
+         startingLineNumber = "428"
+         endingLineNumber = "428"
          landmarkName = "-fetchUserFriends"
          landmarkType = "5">
       </FileBreakpoint>

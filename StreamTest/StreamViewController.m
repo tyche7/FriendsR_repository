@@ -300,12 +300,17 @@
     //create cell reference
     
     __weak StreamCell *weakReferenceToCell = cell;
+  
     
     [cell.picView setImageWithURL:[NSURL URLWithString:imagePlace]
         placeholderImage:[UIImage imageNamed:@"placeholder.png"]
       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
      {    // stopping activity indicator
-         [spinner stopAnimating];
+     
+         
+             [spinner stopAnimating];
+  
+
          
          
          if (image)
@@ -393,10 +398,12 @@
     [[UserStore sharedStore] fetchUserDataWithCompletion:^(UserData *userData, NSError *err) {
         //when the request completes, this block will be called.
         
+        [mainSpinner stopAnimating];
+        
+        
         if (!err) {
            
-            [mainSpinner stopAnimating];
-            
+           
             // now fetch User Friends after getting user data
             
             [self fetchUserFriends];
@@ -413,10 +420,12 @@
 - (void)fetchUserFriends{
     
     [[UserStore sharedStore] fetchUserFriendsWithCompletion:^(NSArray *friendList, NSError *err) {
+        
+        [mainSpinner stopAnimating];
+        
         if (!err) {
              // now dissmiss splash view which blocks or hides the StreamView
-
-            [mainSpinner stopAnimating];
+            
             
             fetchUserDataDidCallAndSet = YES;
             
