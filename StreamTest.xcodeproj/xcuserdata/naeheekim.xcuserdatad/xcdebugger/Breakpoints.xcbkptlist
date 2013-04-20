@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/PostViewController.m"
-         timestampString = "388044627.083394"
+         timestampString = "388128126.319143"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "564"
-         endingLineNumber = "564"
+         startingLineNumber = "568"
+         endingLineNumber = "568"
          landmarkName = "-showActivityIndicatorOnView:"
          landmarkType = "5">
       </FileBreakpoint>

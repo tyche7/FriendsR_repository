@@ -75,6 +75,7 @@
 		30F581E6163F087300718C60 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30F581E5163F087300718C60 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		30F581F9163F11D100718C60 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F581F7163F11D100718C60 /* LoginViewController.m */; };
 		30F581FA163F11D100718C60 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30F581F8163F11D100718C60 /* LoginViewController.xib */; };
+		65311B3B1721F31D00AB9BD1 /* camera30.png in Resources */ = {isa = PBXBuildFile; fileRef = 65311B3A1721F31D00AB9BD1 /* camera30.png */; };
 		653C96C617016FE500EB72AA /* navbartop.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96C517016FE500EB72AA /* navbartop.png */; };
 		653C96C81701725C00EB72AA /* furley_bg_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96C71701725C00EB72AA /* furley_bg_@2X.png */; };
 		653C96CA1701738000EB72AA /* furley_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 653C96C91701738000EB72AA /* furley_bg.png */; };
@@ -187,6 +188,7 @@
 		30F581F6163F11D100718C60 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		30F581F7163F11D100718C60 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		30F581F8163F11D100718C60 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		65311B3A1721F31D00AB9BD1 /* camera30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera30.png; path = ../camera30.png; sourceTree = "<group>"; };
 		653C96C517016FE500EB72AA /* navbartop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navbartop.png; path = ../navbartop.png; sourceTree = "<group>"; };
 		653C96C71701725C00EB72AA /* furley_bg_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "furley_bg_@2X.png"; sourceTree = "<group>"; };
 		653C96C91701738000EB72AA /* furley_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = furley_bg.png; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 		30F581E7163F10AF00718C60 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				65311B3A1721F31D00AB9BD1 /* camera30.png */,
 				65ED1400171D2C0400236BEA /* topnav_black_button.png */,
 				65ED13FE171D2AF000236BEA /* topnav_back_button.png */,
 				65ED13FA171CE16000236BEA /* SplashScreen1@2x.png */,
@@ -500,6 +503,7 @@
 				65ED13FF171D2AF100236BEA /* topnav_back_button.png in Resources */,
 				65ED1401171D2C0400236BEA /* topnav_black_button.png in Resources */,
 				18E416E2171DE7390082D15D /* MyRecommendationViewController.xib in Resources */,
+				65311B3B1721F31D00AB9BD1 /* camera30.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

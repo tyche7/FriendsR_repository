@@ -136,6 +136,10 @@
     if (displayMediumChoice) {
           [self selectMedium:self];
     }
+    
+    // dissmiss keyboard whenever postview appears
+    
+    [self.view endEditing:YES]; 
   
 }
 
