@@ -10,7 +10,8 @@
 
 typedef enum {
     STREAMVIEWCONTROLLER_REC,
-    DETAILVIEWCONTROLLER_CMT
+    DETAILVIEWCONTROLLER_CMT,
+    DETAILVIEWCONTROLLER_ADDCMT
     
 }CONNECTION_TYPE;
 
@@ -23,6 +24,8 @@ typedef enum {
 
 @property (nonatomic, copy) NSURLRequest *request;
 @property (nonatomic, copy) void (^completionBlock)(NSMutableArray* recArray, NSError *err);
+@property (nonatomic, copy) void (^saveCommentCompletionBlock)(NSMutableArray* array, NSError *err);
+
 @property (nonatomic, strong) NSMutableArray *fetchedRecommendationsAtConnection;
 @property (nonatomic, strong) NSMutableArray *fetchedCommentsAtConenction;
 @property (nonatomic) int connectionType;
@@ -30,5 +33,8 @@ typedef enum {
 
 - (id)initWithRequest:(NSURLRequest *)req;
 - (void)start;
+
+
+- (void)postComment:(NSString *)comment WithEntryId:(NSString *)entryId;
 
 @end

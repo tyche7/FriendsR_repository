@@ -19,4 +19,7 @@
 
 - (void)fetchCommentswithRecommendationId:(NSString *)recId  withCompletion:(void (^)(NSMutableArray* fetchedComments, NSError *err))block;
 
+
+- (void)saveComment:(NSString *)comment WithEntryId:(NSString *)entryId WithCompletion:(void (^)(NSMutableArray* fetchedComments, NSError *err))block;
+
 @end

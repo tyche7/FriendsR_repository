@@ -9,11 +9,13 @@
 #import "WebServerConnection.h"
 #import "Rec.h"
 #import "Comment.h"
+#import "UserStore.h"
+#import "UserData.h"
 
 static NSMutableArray *sharedConnectionList = nil;
 
 @implementation WebServerConnection
-@synthesize request, completionBlock, fetchedRecommendationsAtConnection, fetchedCommentsAtConenction ,connectionType, statusCode;
+@synthesize request, completionBlock, saveCommentCompletionBlock ,fetchedRecommendationsAtConnection, fetchedCommentsAtConenction ,connectionType, statusCode;
 
 - (id)initWithRequest:(NSURLRequest *)req
 {
@@ -209,6 +211,101 @@ static NSMutableArray *sharedConnectionList = nil;
     // Now destroy this connection
     [sharedConnectionList removeObject:self];
 
+    
+}
+
+- (void)startPush
+{
+    // Initialize container for data collected from NSURLConnection
+    container = [[NSMutableData alloc] init];
+    
+    NSLog(@"In WebServerConnection: %@", request);
+    
+    // Spawn connection
+    internalConnection = [[NSURLConnection alloc] initWithRequest:[self request] delegate:self startImmediately:YES];
+    
+    // If this is the first connection started, create the array
+    if (!sharedConnectionList)sharedConnectionList = [[NSMutableArray alloc] init];
+    
+    // Add the connection to the array so it doesn't get destroyed
+    [sharedConnectionList addObject:self];
+}
+
+
+- (void)postComment:(NSString *)comment WithEntryId:(NSString *)entryId{
+    
+        UserStore *userStore = [UserStore sharedStore];
+    
+     
+        NSURL *theURL = [NSURL URLWithString:@"http://tyche92.pythonanywhere.com/comments/add"];
+
+      
+        NSMutableURLRequest *postRequest = [[NSMutableURLRequest alloc] initWithURL:theURL
+                                                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                                timeoutInterval:60];
+    
+        [postRequest setHTTPMethod:@"POST"];
+        
+        // We need to add a header field named Content-Type with a value that tells that it's a form and also add a boundary.
+        // I just picked a boundary by using one from a previous trace, you can just copy/paste from the traces.
+        NSString *boundary = @"----WebKitFormBoundarycC4YiaUFwM44F6rT";
+        
+        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+        
+        [postRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
+        // end of what we've added to the header
+        
+        // the body of the post
+        NSMutableData *body = [NSMutableData data];
+        
+        
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"username\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[userStore.userData.username dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userid\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@",userStore.userData.userID] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"entryid\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[entryId dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        
+        
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"comment\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:comment] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        
+        // and again the delimiting boundary
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        // adding the body we've created to the request
+        [postRequest setHTTPBody:body];
+        
+   
+    
+    
+    
+    // Initialize container for data collected from NSURLConnection
+    container = [[NSMutableData alloc] init];
+    
+    // Spawn connection
+    internalConnection =      [[NSURLConnection alloc] initWithRequest:postRequest
+                                                              delegate:self
+                                                      startImmediately:YES  ];
+    
+    // If this is the first connection started, create the array
+    if (!sharedConnectionList)sharedConnectionList = [[NSMutableArray alloc] init];
+    
+    // Add the connection to the array so it doesn't get destroyed
+    [sharedConnectionList addObject:self];
+
+        
+   
     
 }
 

@@ -126,6 +126,25 @@
     
 }
 
+
+- (void)saveComment:(NSString *)comment WithEntryId:(NSString *)entryId WithCompletion:(void (^)(NSMutableArray* fetchedComments, NSError *err))block{
+    
+    NSString *urlString = @"http://tyche92.pythonanywhere.com/comments/add";
+   
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    
+    
+    // create a connection "actor" object that will transfer data from the server
+    WebServerConnection *connection = [[WebServerConnection alloc] initWithRequest:request];
+    
+    // when the connection completes, this block from the controller will be called
+    [connection setSaveCommentCompletionBlock:block];
+    
+    //Begin the connection
+    [connection postComment:comment WithEntryId:entryId];
+    
+}
+
 - (void)setCacheDate:(NSDate *)cacheDate{
     [[NSUserDefaults standardUserDefaults] setObject:cacheDate forKey:@"cacheDate"];
 }
@@ -133,5 +152,7 @@
 - (NSDate *)cacheDate{
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"cacheDate"];
 }
+
+
 
 @end

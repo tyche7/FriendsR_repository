@@ -10,7 +10,7 @@
 @class Rec;
 @class Comment;
 
-@interface DetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DetailViewController : UIViewController <UITextFieldDelegate,UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) int originalHeight;
 @property (nonatomic, strong) Rec *rec;
@@ -21,6 +21,19 @@
 @property (nonatomic, strong) UITableView *commentTableView;
 @property (nonatomic, strong) NSString *productNameAndPurchasePlace;
 
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *ratingView;
+@property (nonatomic, strong)  UILabel *productNameLabel;
+@property (nonatomic, strong)  UILabel *ageLabel;
+@property (nonatomic, strong) UIImageView *profileView;
+@property (nonatomic, strong)  UILabel *nameLabel;
+@property (nonatomic, strong) UITextView *postView;
+@property (nonatomic, strong) UIView *commentView;
+
+
+
 - (void)renderTable;
+
+- (void)postComment:(NSString *) comment;
 
 @end
