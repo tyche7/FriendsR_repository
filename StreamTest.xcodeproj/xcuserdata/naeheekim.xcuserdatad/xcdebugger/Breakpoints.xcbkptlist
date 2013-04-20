@@ -203,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388189538.974514"
+         timestampString = "388191157.87016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/WebServerConnection.m"
-         timestampString = "388143251.287458"
+         timestampString = "388192050.704986"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "264"
-         endingLineNumber = "264"
+         startingLineNumber = "256"
+         endingLineNumber = "256"
          landmarkName = "-postComment:WithEntryId:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388189538.974514"
+         timestampString = "388191157.87016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "206"
-         endingLineNumber = "206"
+         startingLineNumber = "207"
+         endingLineNumber = "207"
          landmarkName = "-resizeTable"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,12 +242,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388190193.670104"
+         timestampString = "388191157.87016"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "453"
-         endingLineNumber = "453"
+         startingLineNumber = "456"
+         endingLineNumber = "456"
          landmarkName = "-fetchComments"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/WebServerConnection.m"
+         timestampString = "388192030.136356"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "209"
+         endingLineNumber = "209"
+         landmarkName = "-connectionDidFinishLoading:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -17,7 +17,7 @@
 
 @implementation DetailViewController
 
-@synthesize rec, productNameAndPurchasePlace, scrollviewContentHeightExceptCommentView;
+@synthesize rec, productNameAndPurchasePlace, scrollviewContentHeightExceptCommentTable;
 @synthesize scrollView, detailPicImage, commentTableView;
 @synthesize imageView, ratingView, productNameLabel, ageLabel, profileView, nameLabel, postView, commentView;
 
@@ -154,11 +154,12 @@
     
     NSLog(@"purchase place type: %d", rec.purchasePlaceType);
 
-    scrollviewContentHeightExceptCommentView = DEFAULT_SCR_CNT_HEIGHT;
+    scrollviewContentHeightExceptCommentTable = DEFAULT_SCR_CNT_HEIGHT;
     // add comment Table View
-    commentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, scrollviewContentHeightExceptCommentView, 320, DEFAULT_CMT_TBL_HEIGHT) style:UITableViewStylePlain];
+    commentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, scrollviewContentHeightExceptCommentTable, 320, DEFAULT_CMT_TBL_HEIGHT) style:UITableViewStylePlain];
     commentTableView.dataSource = self;
     commentTableView.delegate = self;
+
     
     [self.scrollView addSubview:commentTableView];
     
@@ -173,13 +174,13 @@
     commentView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:commentView];
     
-    UITextField *inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 155, 22)];
+    UITextField *inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 200, 22)];
     inputTextField.backgroundColor = [UIColor whiteColor];
     inputTextField.textColor = [UIColor blackColor];
     inputTextField.font = [UIFont systemFontOfSize:12];
     inputTextField.placeholder = @"Leave a comment";
     inputTextField.keyboardType = UIKeyboardTypeDefault;
-    inputTextField.returnKeyType = UIReturnKeyNext;
+    inputTextField.returnKeyType = UIReturnKeyDone;
     inputTextField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
     inputTextField.textAlignment = UITextAlignmentLeft;
     inputTextField.delegate = self;
@@ -206,8 +207,8 @@
     int tableHeight = CELL_HEIGHT * [self.comments count];
     NSLog(@"comment tableHeight: %d", tableHeight);
     
-    scrollView.contentSize=CGSizeMake(320, scrollviewContentHeightExceptCommentView+tableHeight+80);
-    commentTableView.frame = CGRectMake(0, scrollviewContentHeightExceptCommentView, 320, tableHeight);
+    scrollView.contentSize=CGSizeMake(320, scrollviewContentHeightExceptCommentTable+tableHeight+80);
+    commentTableView.frame = CGRectMake(0, scrollviewContentHeightExceptCommentTable, 320, tableHeight);
     
 
 }
@@ -409,6 +410,8 @@
         cell.detailTextLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
         cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
         cell.detailTextLabel.clipsToBounds = YES;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     Comment* cmt = [self.comments objectAtIndex:indexPath.row];

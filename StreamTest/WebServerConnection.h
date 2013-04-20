@@ -24,7 +24,7 @@ typedef enum {
 
 @property (nonatomic, copy) NSURLRequest *request;
 @property (nonatomic, copy) void (^completionBlock)(NSMutableArray* recArray, NSError *err);
-@property (nonatomic, copy) void (^saveCommentCompletionBlock)(NSMutableArray* array, NSError *err);
+@property (nonatomic, copy) void (^saveCommentCompletionBlock)(NSMutableArray* array, NSError *err);  //do not use array for MVP, just set nil
 
 @property (nonatomic, strong) NSMutableArray *fetchedRecommendationsAtConnection;
 @property (nonatomic, strong) NSMutableArray *fetchedCommentsAtConenction;

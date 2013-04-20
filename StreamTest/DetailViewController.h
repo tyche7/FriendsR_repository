@@ -12,7 +12,7 @@
 
 @interface DetailViewController : UIViewController <UITextFieldDelegate,UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic) int scrollviewContentHeightExceptCommentView;
+@property (nonatomic) int scrollviewContentHeightExceptCommentTable;
 @property (nonatomic, strong) Rec *rec;
 @property (nonatomic, strong) NSMutableArray *comments;
 @property (nonatomic, strong) NSMutableData *responseData;

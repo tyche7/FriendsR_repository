@@ -199,7 +199,16 @@ static NSMutableArray *sharedConnectionList = nil;
             // pass "fectedComments" to the completion block - remember, this is the block that the controller supplied.
             if ([self completionBlock])
                 [self completionBlock]([self  fetchedCommentsAtConenction], nil);
+            
+            break;
 
+            
+        case DETAILVIEWCONTROLLER_ADDCMT:
+            
+    
+            if ([self saveCommentCompletionBlock])
+                [self saveCommentCompletionBlock](nil, nil);
+            break;
             
         default:
             break;
@@ -212,23 +221,6 @@ static NSMutableArray *sharedConnectionList = nil;
     [sharedConnectionList removeObject:self];
 
     
-}
-
-- (void)startPush
-{
-    // Initialize container for data collected from NSURLConnection
-    container = [[NSMutableData alloc] init];
-    
-    NSLog(@"In WebServerConnection: %@", request);
-    
-    // Spawn connection
-    internalConnection = [[NSURLConnection alloc] initWithRequest:[self request] delegate:self startImmediately:YES];
-    
-    // If this is the first connection started, create the array
-    if (!sharedConnectionList)sharedConnectionList = [[NSMutableArray alloc] init];
-    
-    // Add the connection to the array so it doesn't get destroyed
-    [sharedConnectionList addObject:self];
 }
 
 

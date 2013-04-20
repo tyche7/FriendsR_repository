@@ -140,6 +140,9 @@
     // when the connection completes, this block from the controller will be called
     [connection setSaveCommentCompletionBlock:block];
     
+    // set connection type
+    [connection setConnectionType:DETAILVIEWCONTROLLER_ADDCMT];
+    
     //Begin the connection
     [connection postComment:comment WithEntryId:entryId];
     
