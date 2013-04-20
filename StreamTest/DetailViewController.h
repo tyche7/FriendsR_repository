@@ -12,7 +12,7 @@
 
 @interface DetailViewController : UIViewController <UITextFieldDelegate,UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic) int originalHeight;
+@property (nonatomic) int scrollviewContentHeightExceptCommentView;
 @property (nonatomic, strong) Rec *rec;
 @property (nonatomic, strong) NSMutableArray *comments;
 @property (nonatomic, strong) NSMutableData *responseData;
@@ -32,7 +32,7 @@
 
 
 
-- (void)renderTable;
+- (void)resizeTable;
 
 - (void)postComment:(NSString *) comment;
 

@@ -17,7 +17,7 @@
 
 @implementation DetailViewController
 
-@synthesize originalHeight, rec, productNameAndPurchasePlace;
+@synthesize rec, productNameAndPurchasePlace, scrollviewContentHeightExceptCommentView;
 @synthesize scrollView, detailPicImage, commentTableView;
 @synthesize imageView, ratingView, productNameLabel, ageLabel, profileView, nameLabel, postView, commentView;
 
@@ -25,6 +25,8 @@
 #define hate 1
 #define CELL_HEIGHT 44
 #define DEFAULT_HEIGHT 480
+#define DEFAULT_SCR_CNT_HEIGHT 600
+#define DEFAULT_CMT_TBL_HEIGHT 44
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,9 +59,9 @@
     CGRect scrollRect=CGRectMake(0, 0, 320, DEFAULT_HEIGHT);
     scrollView=[[UIScrollView alloc] initWithFrame:scrollRect];
     
-    scrollView.contentSize=CGSizeMake(320,DEFAULT_HEIGHT);
-    //scrollView.contentInset=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
-    //scrollView.scrollIndicatorInsets=UIEdgeInsetsMake(64.0,0.0,44.0,0.0);
+    scrollView.contentSize=CGSizeMake(320,DEFAULT_SCR_CNT_HEIGHT);
+    scrollView.contentInset=UIEdgeInsetsMake(0.0,0.0,44.0,0.0);
+    scrollView.scrollIndicatorInsets=UIEdgeInsetsMake(0.0,0.0,44.0,0.0);
     
     scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
     
@@ -151,15 +153,16 @@
 
     
     NSLog(@"purchase place type: %d", rec.purchasePlaceType);
-    
 
-
-    originalHeight = 600;
-    if (rec.ageBand !=0) originalHeight -= 20; // - heigh of ageRect
+    scrollviewContentHeightExceptCommentView = DEFAULT_SCR_CNT_HEIGHT;
+    // add comment Table View
+    commentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, scrollviewContentHeightExceptCommentView, 320, DEFAULT_CMT_TBL_HEIGHT) style:UITableViewStylePlain];
+    commentTableView.dataSource = self;
+    commentTableView.delegate = self;
+    
+    [self.scrollView addSubview:commentTableView];
     
     
-    NSLog(@"scrollview original height:%d", originalHeight);
-    scrollView.contentSize=CGSizeMake(320,originalHeight);
     
     NSLog(@"self view origin y %f", self.view.frame.origin.y);
     NSLog(@"self view height %f", self.view.frame.size.height);
@@ -197,19 +200,16 @@
     
 }
 
-- (void)renderTable
+- (void)resizeTable
 {
     
     int tableHeight = CELL_HEIGHT * [self.comments count];
     NSLog(@"comment tableHeight: %d", tableHeight);
     
-    scrollView.contentSize=CGSizeMake(320, originalHeight+tableHeight+50);
+    scrollView.contentSize=CGSizeMake(320, scrollviewContentHeightExceptCommentView+tableHeight+80);
+    commentTableView.frame = CGRectMake(0, scrollviewContentHeightExceptCommentView, 320, tableHeight);
     
-    commentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, originalHeight+50, 320, tableHeight) style:UITableViewStylePlain];
-    commentTableView.dataSource = self;
-    commentTableView.delegate = self;
-    
-    [self.scrollView addSubview:commentTableView];
+
 }
 
 #pragma mark - View lifecycle
@@ -244,21 +244,16 @@
     [super viewWillAppear:animated];
     
     [self setContent];
-    
-    
-    
-    
-    
-    
-    
-    self.comments = [[NSMutableArray alloc] init];
+  
+  
     
     // web connection
     
     [self fetchComments];
     
+    // scroll to top
     
-    NSLog(@"content size HEIGHT: %f", commentTableView.contentSize.height);
+    [self.scrollView setContentOffset:CGPointZero animated:YES];
     
     // dissmiss keyboard whenever postview appears
     
@@ -403,17 +398,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
         
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.font = [UIFont systemFontOfSize:11];
         cell.textLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
         //cell.textLabel.lineBreakMode = UILineBreakModeTailTruncation;
         //cell.textLabel.clipsToBounds = YES;
         
         cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.detailTextLabel.textColor = [ UIColor blackColor];
         cell.detailTextLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-        cell.detailTextLabel.textColor = [UIColor colorWithRed:0.4
-                                                         green:0.6
-                                                          blue:0.8
-                                                         alpha:1];
         cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
         cell.detailTextLabel.clipsToBounds = YES;
     }
@@ -421,8 +414,8 @@
     Comment* cmt = [self.comments objectAtIndex:indexPath.row];
     NSLog(@"comment: %@", cmt.comment);
 
-    cell.textLabel.text = cmt.comment;
-    cell.detailTextLabel.text = cmt.userName;
+    cell.textLabel.text = cmt.userName;
+    cell.detailTextLabel.text = cmt.comment;
 
     
     return cell;
@@ -446,6 +439,8 @@
 
 
 - (void)fetchComments{
+    
+    self.comments = [[NSMutableArray alloc] init];
     //Initiate the request
     
     [[DataFeedStore sharedStore]fetchCommentswithRecommendationId:rec.recId withCompletion:^(NSMutableArray *fetchedComments, NSError *err) {
@@ -455,7 +450,7 @@
             
         
             self.comments = fetchedComments;
-            [self renderTable];
+            [self resizeTable];
             [[self commentTableView] reloadData];
             
         }else{
@@ -499,6 +494,9 @@
 
 - (void)postComment:(NSString *) comment{
     
+    // if comment is empty string or nil, return
+    if(comment.length == 0) return;
+    
     NSString* entryId = rec.recId;
     
 
@@ -517,7 +515,7 @@
         }
         
         // need to reload after posting
-        //[[self tableView] reloadData];
+      [self fetchComments];
         
     }];
     
