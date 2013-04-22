@@ -17,7 +17,7 @@
 
 @implementation DetailViewController
 
-@synthesize rec, productNameAndPurchasePlace, scrollviewContentHeightExceptCommentTable;
+@synthesize rec, productNameAndPurchasePlace, scrollviewContentHeightExceptCommentTable, postViewHeight;
 @synthesize scrollView, detailPicImage, commentTableView;
 @synthesize imageView, ratingView, productNameLabel, ageLabel, profileView, nameLabel, postView, commentView;
 
@@ -25,7 +25,7 @@
 #define hate 1
 #define CELL_HEIGHT 44
 #define DEFAULT_HEIGHT 480
-#define DEFAULT_SCR_CNT_HEIGHT 600
+#define DEFAULT_SCR_CNT_HEIGHT 450
 #define DEFAULT_CMT_TBL_HEIGHT 44
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,8 +45,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-// reference: http://developer.apple.com/library/ios/#documentation/WindowsViews/Conceptual/UIScrollView_pg/CreatingBasicScrollViews/CreatingBasicScrollViews.html
-// Implement loadView to create a view hierarchy programmatically, without using a nib
+
 // loadview is called when loading starts
 
 - (void)loadView {
@@ -134,7 +133,7 @@
     [scrollView addSubview:profileView];
     
     // user's name
-    CGRect nameLabelRect = CGRectMake(70,400,200,20);
+    CGRect nameLabelRect = CGRectMake(70,420,200,20);
     nameLabel = [[UILabel alloc] initWithFrame:nameLabelRect];
     nameLabel.textAlignment = UITextAlignmentLeft;
     nameLabel.font = [UIFont systemFontOfSize:14];
@@ -142,12 +141,13 @@
     [scrollView addSubview:nameLabel];
     
     // user's note  
-    CGRect postRect = CGRectMake(70, 420, 240, 150);
+    CGRect postRect = CGRectMake(20, 450, 280, 0);
+    postViewHeight  = 0;
     postView = [[UITextView alloc] initWithFrame:postRect];
     [postView setEditable:NO];
     postView.font = [UIFont fontWithName:@"Helvetica" size:13];
     postView.textAlignment = UITextAlignmentLeft;
-    postView.backgroundColor = [UIColor clearColor];
+    postView.backgroundColor = [UIColor blueColor];
     [scrollView addSubview:postView];
     
 
@@ -168,11 +168,18 @@
     NSLog(@"self view origin y %f", self.view.frame.origin.y);
     NSLog(@"self view height %f", self.view.frame.size.height);
     NSLog(@"%f", self.navigationController.view.frame.size.height);
-    CGRect commentRect = CGRectMake(0, self.view.frame.origin.y +self.view.frame.size.height - 104, 320, 44);
+    
+    
+    CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+    //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
+    CGRect commentRect = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);
+    
+
     
     commentView = [[UIView alloc] initWithFrame:commentRect];
     commentView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:commentView];
+    [self.view bringSubviewToFront:commentView];
     
     UITextField *inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 200, 22)];
     inputTextField.backgroundColor = [UIColor whiteColor];
@@ -201,15 +208,25 @@
     
 }
 
-- (void)resizeTable
+- (void)resizeTableAndScrollViews
 {
+    
+    
+    // ********** problem
+    // cangnot get tableview hegith as following
+    // http://stackoverflow.com/questions/2528073/get-height-of-uitableview-without-scroll-bars
+    // when using dynamic height of cell, it is not possible to cacculate table height as it is
     
     int tableHeight = CELL_HEIGHT * [self.comments count];
     NSLog(@"comment tableHeight: %d", tableHeight);
     
-    scrollView.contentSize=CGSizeMake(320, scrollviewContentHeightExceptCommentTable+tableHeight+80);
-    commentTableView.frame = CGRectMake(0, scrollviewContentHeightExceptCommentTable, 320, tableHeight);
+   // [commentTableView layoutIfNeeded];  //calculate the table's layout
     
+    commentTableView.frame = CGRectMake(0, scrollviewContentHeightExceptCommentTable + postViewHeight +20, 320, tableHeight);
+    
+    CGSize tobeSize = CGSizeMake(320, scrollviewContentHeightExceptCommentTable + postViewHeight + tableHeight + 80);
+    
+    scrollView.contentSize=tobeSize;
 
 }
 
@@ -245,10 +262,18 @@
     [super viewWillAppear:animated];
     
     [self setContent];
-  
-  
     
-    // web connection
+    [self adjustHeightOfNoteFrame];
+    
+    //[self adjustHeightOfScrollViewFrame];
+  
+    // show empty table at first ( refresh table)
+    
+    self.comments = [[NSMutableArray alloc] init];
+    [self resizeTableAndScrollViews];
+    [[self commentTableView] reloadData];
+    
+    // then go to web to fetch comments, and reload table with comments
     
     [self fetchComments];
     
@@ -295,9 +320,12 @@
     
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
+
     
-    //CGRect aRect = commentView.frame
-    commentView.frame = CGRectMake(0, self.view.frame.origin.y + self.view.frame.size.height -44-kbSize.height, 320, 44);
+    
+    CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+    //set y position: fullScreenRect.size.height 460 - navbar height - comment view height-keyboard height
+    commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-44-kbSize.height, 320, 44);
 
 
     
@@ -310,7 +338,9 @@
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 
 {
-     commentView.frame = CGRectMake(0, self.view.frame.origin.y +self.view.frame.size.height - 44, 320, 44);
+     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+      //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
+    commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);
 
     
 }
@@ -379,8 +409,24 @@
     nameLabel.text = rec.userName;
     postView.text = rec.postText;
     
+    
+    
+  
+    
 
 }
+
+- (void)adjustHeightOfNoteFrame{
+    
+    CGRect frame =  postView.frame;
+    frame.size.height = postView.contentSize.height;
+    postView.frame = frame;
+    
+    postViewHeight = postView.contentSize.height;
+    
+}
+
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -443,7 +489,7 @@
 
 - (void)fetchComments{
     
-    self.comments = [[NSMutableArray alloc] init];
+
     //Initiate the request
     
     [[DataFeedStore sharedStore]fetchCommentswithRecommendationId:rec.recId withCompletion:^(NSMutableArray *fetchedComments, NSError *err) {
@@ -453,7 +499,7 @@
             
         
             self.comments = fetchedComments;
-            [self resizeTable];
+            [self resizeTableAndScrollViews];
             [[self commentTableView] reloadData];
             
         }else{
