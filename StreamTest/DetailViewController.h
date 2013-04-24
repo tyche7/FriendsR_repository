@@ -10,7 +10,7 @@
 @class Rec;
 @class Comment;
 
-@interface DetailViewController : UIViewController <UITextFieldDelegate,UITableViewDataSource, UITableViewDelegate>
+@interface DetailViewController : UIViewController <UITextFieldDelegate,UITextViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) int scrollviewContentHeightExceptCommentTable;
 @property (nonatomic) int postViewHeight;
@@ -30,6 +30,9 @@
 @property (nonatomic, strong)  UILabel *nameLabel;
 @property (nonatomic, strong) UITextView *postView;
 @property (nonatomic, strong) UIView *commentView;
+@property (nonatomic, strong) UITextView *commentTextView;
+
+@property (nonatomic) CGSize keyboardSize;
 
 
 

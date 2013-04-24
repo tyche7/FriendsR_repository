@@ -181,7 +181,7 @@ static NSMutableArray *sharedConnectionList = nil;
             for (NSDictionary *result in results) {
                // NSString *icon = [result objectForKey:@"name"];
                 
-                NSLog(@"comment: %@", [result objectForKey:@"comment"]);
+                //NSLog(@"comment: %@", [result objectForKey:@"comment"]);
                 
                 
                 Comment* comment = [[Comment alloc] init ];

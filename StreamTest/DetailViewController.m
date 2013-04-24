@@ -19,7 +19,7 @@
 
 @synthesize rec, productNameAndPurchasePlace, scrollviewContentHeightExceptCommentTable, postViewHeight;
 @synthesize scrollView, detailPicImage, commentTableView;
-@synthesize imageView, ratingView, productNameLabel, ageLabel, profileView, nameLabel, postView, commentView;
+@synthesize imageView, ratingView, productNameLabel, ageLabel, profileView, nameLabel, postView, commentView, commentTextView, keyboardSize;
 
 #define love 0
 #define hate 1
@@ -99,7 +99,7 @@
     
 
         
-        NSLog(@"age band: %d", rec.ageBand);
+        //NSLog(@"age band: %d", rec.ageBand);
         
 
         
@@ -147,7 +147,8 @@
     [postView setEditable:NO];
     postView.font = [UIFont fontWithName:@"Helvetica" size:13];
     postView.textAlignment = UITextAlignmentLeft;
-    postView.backgroundColor = [UIColor blueColor];
+    postView.backgroundColor = [UIColor whiteColor];
+    postView.layer.cornerRadius = 2.0f;
     [scrollView addSubview:postView];
     
 
@@ -159,6 +160,7 @@
     commentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, scrollviewContentHeightExceptCommentTable, 320, DEFAULT_CMT_TBL_HEIGHT) style:UITableViewStylePlain];
     commentTableView.dataSource = self;
     commentTableView.delegate = self;
+    commentTableView.scrollEnabled = NO;
 
     
     [self.scrollView addSubview:commentTableView];
@@ -174,37 +176,24 @@
     //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
     CGRect commentRect = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);
     
+    NSLog(@"comment view Frame -at first: y: %f", commentRect.origin.y);
 
     
     commentView = [[UIView alloc] initWithFrame:commentRect];
     commentView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:commentView];
     [self.view bringSubviewToFront:commentView];
-    
-    UITextField *inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 200, 22)];
-    inputTextField.backgroundColor = [UIColor whiteColor];
-    inputTextField.textColor = [UIColor blackColor];
-    inputTextField.font = [UIFont systemFontOfSize:12];
-    inputTextField.placeholder = @"Leave a comment";
-    inputTextField.keyboardType = UIKeyboardTypeDefault;
-    inputTextField.returnKeyType = UIReturnKeyDone;
-    inputTextField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
-    inputTextField.textAlignment = UITextAlignmentLeft;
-    inputTextField.delegate = self;
+    commentView.layer.zPosition = 1000;
     
     
-    inputTextField.clearButtonMode = UITextFieldViewModeNever; // no clear 'x' button to the right
-    
-    
-    [commentView addSubview:inputTextField];
-    
-    
-    
-    
-    
-    
-    
-    
+    commentTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 200, 24)];
+    commentTextView.backgroundColor = [UIColor whiteColor];
+    commentTextView.text = @"Leave a comment";
+    commentTextView.textColor = [UIColor lightGrayColor];
+    commentTextView.autocorrectionType = UITextAutocorrectionTypeNo;
+    commentTextView.delegate = self;
+    [commentView addSubview:commentTextView];
+   
     
 }
 
@@ -217,10 +206,14 @@
     // http://stackoverflow.com/questions/2528073/get-height-of-uitableview-without-scroll-bars
     // when using dynamic height of cell, it is not possible to cacculate table height as it is
     
-    int tableHeight = CELL_HEIGHT * [self.comments count];
-    NSLog(@"comment tableHeight: %d", tableHeight);
+    //int tableHeight = CELL_HEIGHT * [self.comments count];
+    //NSLog(@"comment tableHeight: %d", tableHeight);
     
-   // [commentTableView layoutIfNeeded];  //calculate the table's layout
+    [commentTableView layoutIfNeeded];  //calculate the table's layout
+    
+    float tableHeight = commentTableView.contentSize.height;
+    
+    NSLog(@" *** Table Height *** : %f", tableHeight);
     
     commentTableView.frame = CGRectMake(0, scrollviewContentHeightExceptCommentTable + postViewHeight +20, 320, tableHeight);
     
@@ -270,8 +263,9 @@
     // show empty table at first ( refresh table)
     
     self.comments = [[NSMutableArray alloc] init];
-    [self resizeTableAndScrollViews];
+   
     [[self commentTableView] reloadData];
+     [self resizeTableAndScrollViews];
     
     // then go to web to fetch comments, and reload table with comments
     
@@ -320,14 +314,22 @@
     
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
+    keyboardSize = kbSize;
+    
 
     
     
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     //set y position: fullScreenRect.size.height 460 - navbar height - comment view height-keyboard height
-    commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-44-kbSize.height, 320, 44);
+    commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-44-kbSize.height, 320, 44);  //y: 156
 
-
+ 
+    
+    NSLog(@"After keyboard was shown");
+    NSLog(@"comment View : x - %f", commentView.frame.origin.x);
+    NSLog(@"comment View : y - %f", commentView.frame.origin.y);
+    NSLog(@"comment View : width - %f", commentView.frame.size.width);
+    //NSLog(@"comment View : height - %f", commentView. );
     
 }
 
@@ -341,8 +343,12 @@
      CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
       //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
     commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);
-
     
+  
+
+    NSLog(@"After keyboard was hidden");
+    NSLog(@"comment View : y - %f", commentView.frame.origin.y);
+    NSLog(@"comment View : height - %f", commentView.frame.size.height);
 }
 
 
@@ -439,39 +445,56 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
+    
     UITableViewCell *cell = (UITableViewCell*)[tableView
                                                dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
         
-        cell.textLabel.font = [UIFont systemFontOfSize:11];
-        cell.textLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-        cell.textLabel.textColor = [UIColor darkGrayColor];
-        //cell.textLabel.lineBreakMode = UILineBreakModeTailTruncation;
-        //cell.textLabel.clipsToBounds = YES;
-        
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-        cell.detailTextLabel.textColor = [ UIColor blackColor];
-        cell.detailTextLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-        cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
-        cell.detailTextLabel.clipsToBounds = YES;
-        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UILabel *cellUserLable = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 15)];
+        cellUserLable.font = [UIFont systemFontOfSize:11];
+        cellUserLable.textColor = [UIColor darkGrayColor];;
+        cellUserLable.tag = 10;
+        
+        [cell.contentView addSubview:cellUserLable];
+        
+        
+        UITextView *cellTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 17, 320, 22)];
+        
+        cellTextView.font = [UIFont systemFontOfSize:11];
+        cellTextView.editable = NO;
+        cellTextView.layer.zPosition = 100;
+        cellTextView.tag=11;
+        
+        [cell.contentView addSubview:cellTextView];
+
+        
     }
     
-    Comment* cmt = [self.comments objectAtIndex:indexPath.row];
-    NSLog(@"comment: %@", cmt.comment);
-
-    cell.textLabel.text = cmt.userName;
-    cell.detailTextLabel.text = cmt.comment;
-
     
+       
+    Comment* cmt = [self.comments objectAtIndex:indexPath.row];
+    //NSLog(@"comment: %@", cmt.comment);
+    
+    UILabel *userLabel = (UILabel *)[cell.contentView viewWithTag:10];
+    userLabel.text = cmt.userName;
+    
+    UITextView *cmtTextView = (UITextView *)[cell.contentView viewWithTag:11];
+    cmtTextView.text = cmt.comment;
+    
+    //resize the height of cellTextview
+    CGRect frame = cmtTextView.frame;
+    frame.size.height   = cmtTextView.contentSize.height;
+    cmtTextView.frame = frame;
+
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"number of commnets:%d", [self.comments count]);
+    //NSLog(@"number of commnets:%d", [self.comments count]);
     return [self.comments count];
 }
 
@@ -483,6 +506,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    Comment *cmt = [self.comments objectAtIndex:indexPath.row];
+    
+    int cell_content_margin = 10;
+    
+    CGSize constraint = CGSizeMake(320-cell_content_margin*2, 2000.0f);
+    
+    CGSize size = [cmt.comment sizeWithFont:[UIFont systemFontOfSize:11] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    
+    //size.height+namelable.height(15)
+
+    CGFloat height = MAX(size.height+15+cell_content_margin*2, 44.0f);
+    
+    NSLog(@"cell height: %f", height);
+    
+    return height;
 }
 
 
@@ -499,8 +540,9 @@
             
         
             self.comments = fetchedComments;
-            [self resizeTableAndScrollViews];
+          
             [[self commentTableView] reloadData];
+              [self resizeTableAndScrollViews];
             
         }else{
             //if things went bad, show an alert view
@@ -524,19 +566,7 @@
 }
 
 
-//This method is called after the text field resigns its first responder status
--(void)textFieldDidEndEditing:(UITextField *)textField{
 
-    [self postComment:[NSMutableString stringWithString:textField.text]];
-    textField.text = @"";
-    
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    NSLog(@"textfiled should begin edi");
-    
-    return YES;
-}
 
 
 
@@ -568,6 +598,106 @@
         
     }];
     
+}
+
+#pragma mark -
+#pragma mark TextView Delegate methods
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    if (textView.textColor == [UIColor lightGrayColor]){
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+    
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    if (textView.text.length == 0){
+        textView.textColor= [UIColor lightGrayColor];
+        textView.text = @"Leave a comment";
+        [textView resignFirstResponder];
+    }
+}
+
+
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    
+  
+    NSLog(@"DidEndEditing");
+  
+    [self postComment:[NSMutableString stringWithString:textView.text]];
+    textView.textColor= [UIColor lightGrayColor];
+    textView.text = @"Leave a comment";
+    
+    return TRUE;
+}
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    
+   
+    
+    CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+    //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
+    CGRect commentRect = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);  
+    commentView.frame = commentRect;
+
+    
+    NSLog(@"After posting");
+    NSLog(@"comment View : y - %f", commentView.frame.origin.y);
+    NSLog(@"comment View : height - %f", commentView.frame.size.height);
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
+ replacementText:(NSString *)text
+{
+    
+   // NSLog(@"shouldchangeTextinRange");
+    //Boolean heightChanged = NO;
+    
+    CGRect frame = textView.frame;
+
+    if (textView.contentSize.height > frame.size.height) {
+        
+        
+        frame.size.height = textView.contentSize.height;
+        textView.frame = frame;
+        
+        NSLog (@"textview frame height: %f", textView.frame.size.height);
+    
+    
+        CGRect commentViewFrame = commentView.frame;
+        commentViewFrame.size.height = textView.contentSize.height;
+        
+         CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+        
+
+        //set y position: fullScreenRect.size.height 460 - navbar height - comment view height-keyboard height - 20 (padding)
+        commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-textView.frame.size.height-keyboardSize.height-20, 320, textView.frame.size.height+20);
+        
+        NSLog (@"commentview frame origin: %f", commentView.frame.origin.y);
+         NSLog (@"commentview frame height: %f", commentView.frame.size.height);
+        
+        
+    }
+    
+    
+    // Any new character added is passed in as the "text" parameter
+    if ([text isEqualToString:@"\n"]) {
+        // Be sure to test for equality using the "isEqualToString" message
+        [textView resignFirstResponder];
+        
+        // Return FALSE so that the final '\n' character doesn't get added
+        return FALSE;
+    }
+   
+    
+    // For any other character return TRUE so that the text gets added to the view
+    return TRUE;
 }
 
 
