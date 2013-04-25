@@ -180,18 +180,31 @@
 
     
     commentView = [[UIView alloc] initWithFrame:commentRect];
-    commentView.backgroundColor = [UIColor greenColor];
+    commentView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:commentView];
     [self.view bringSubviewToFront:commentView];
-    commentView.layer.zPosition = 1000;
+
+    
+
     
     
-    commentTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 200, 24)];
+    commentTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 6, 220, 31)];
     commentTextView.backgroundColor = [UIColor whiteColor];
     commentTextView.text = @"Leave a comment";
     commentTextView.textColor = [UIColor lightGrayColor];
     commentTextView.autocorrectionType = UITextAutocorrectionTypeNo;
     commentTextView.delegate = self;
+    
+    commentTextView.layer.cornerRadius = 2.0f;
+    
+    [commentTextView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [commentTextView.layer setBorderWidth:0.5f];
+    //[commentTextView.layer setShadowColor:[UIColor grayColor].CGColor];
+    //[commentTextView.layer setShadowOpacity:0.5];
+    //[commentTextView.layer setShadowRadius:3.0];
+    //[commentTextView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+    
+    
     [commentView addSubview:commentTextView];
    
     
