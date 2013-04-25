@@ -644,11 +644,16 @@
     //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
     CGRect commentRect = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);  
     commentView.frame = commentRect;
+    
+    CGRect textViewFrame = textView.frame;
+    textViewFrame.size.height = 31.0f;  //initialize the height
+    textView.frame = textViewFrame;
 
     
     NSLog(@"After posting");
     NSLog(@"comment View : y - %f", commentView.frame.origin.y);
     NSLog(@"comment View : height - %f", commentView.frame.size.height);
+    NSLog(@"text view : height - %f", textView.frame.size.height);
     
 }
 
@@ -660,6 +665,9 @@
     //Boolean heightChanged = NO;
     
     CGRect frame = textView.frame;
+    
+    NSLog(@" textView.contentSize.height:%f", textView.contentSize.height);
+    NSLog(@" frame.size.height:%f", frame.size.height);
 
     if (textView.contentSize.height > frame.size.height) {
         
