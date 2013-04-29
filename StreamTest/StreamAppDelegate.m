@@ -48,7 +48,7 @@ NSString *const SCSessionStateChangedNotification =
                                 UITextAttributeTextColor: [UIColor colorWithRed:56.0/255.0 green:152.0/255.0 blue:255.0/255.0 alpha:1.0],
                           UITextAttributeTextShadowColor: [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
                          UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)],
-                                     UITextAttributeFont: [UIFont fontWithName:@"Lilly" size:20.0f]
+                                     UITextAttributeFont: [UIFont fontWithName:@"CherrySwash-Bold" size:22.0f]
      }];
     
     UIImage *button30 = [[UIImage imageNamed:@"topnav_black_button"]
