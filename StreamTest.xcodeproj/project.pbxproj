@@ -87,10 +87,12 @@
 		65BFE827171A0BE800CACE5E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE826171A0BE800CACE5E /* icon@2x.png */; };
 		65BFE829171A0BFB00CACE5E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE828171A0BFB00CACE5E /* icon.png */; };
 		65BFE833171A280B00CACE5E /* loginBackgroundIPadLandscape@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE832171A280A00CACE5E /* loginBackgroundIPadLandscape@2x.jpg */; };
-		65BFE837171C7BF800CACE5E /* SplashScreenBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFE836171C7BF700CACE5E /* SplashScreenBackground2.png */; };
+		65CCE7AC172DFC9F00AAA415 /* SplashScreenBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 65CCE7AB172DFC9F00AAA415 /* SplashScreenBackground.png */; };
+		65CCE7AE172DFCB500AAA415 /* SplashScreen1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65CCE7AD172DFCB500AAA415 /* SplashScreen1@2x.png */; };
+		65CCE7B0172DFDE300AAA415 /* CherrySwash-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65CCE7AF172DFDE300AAA415 /* CherrySwash-Regular.ttf */; };
+		65CCE7B2172DFE0200AAA415 /* CherrySwash-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65CCE7B1172DFE0200AAA415 /* CherrySwash-Bold.ttf */; };
 		65ED13F7171C86E200236BEA /* toddle.png in Resources */ = {isa = PBXBuildFile; fileRef = 65ED13F6171C86E200236BEA /* toddle.png */; };
 		65ED13F9171C881500236BEA /* toddle2.png in Resources */ = {isa = PBXBuildFile; fileRef = 65ED13F8171C881500236BEA /* toddle2.png */; };
-		65ED13FB171CE16000236BEA /* SplashScreen1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65ED13FA171CE16000236BEA /* SplashScreen1@2x.png */; };
 		65ED13FF171D2AF100236BEA /* topnav_back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 65ED13FE171D2AF000236BEA /* topnav_back_button.png */; };
 		65ED1401171D2C0400236BEA /* topnav_black_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 65ED1400171D2C0400236BEA /* topnav_black_button.png */; };
 		E24BB77617023BEE005DCA9A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24BB77517023BEE005DCA9A /* FacebookSDK.framework */; };
@@ -200,10 +202,12 @@
 		65BFE826171A0BE800CACE5E /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		65BFE828171A0BFB00CACE5E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		65BFE832171A280A00CACE5E /* loginBackgroundIPadLandscape@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "loginBackgroundIPadLandscape@2x.jpg"; path = "FBUserSettingsViewResources.bundle/images/loginBackgroundIPadLandscape@2x.jpg"; sourceTree = "<group>"; };
-		65BFE836171C7BF700CACE5E /* SplashScreenBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreenBackground2.png; sourceTree = "<group>"; };
+		65CCE7AB172DFC9F00AAA415 /* SplashScreenBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SplashScreenBackground.png; path = ../SplashScreenBackground.png; sourceTree = "<group>"; };
+		65CCE7AD172DFCB500AAA415 /* SplashScreen1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreen1@2x.png"; sourceTree = "<group>"; };
+		65CCE7AF172DFDE300AAA415 /* CherrySwash-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CherrySwash-Regular.ttf"; sourceTree = "<group>"; };
+		65CCE7B1172DFE0200AAA415 /* CherrySwash-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CherrySwash-Bold.ttf"; sourceTree = "<group>"; };
 		65ED13F6171C86E200236BEA /* toddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = toddle.png; path = ../toddle.png; sourceTree = "<group>"; };
 		65ED13F8171C881500236BEA /* toddle2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toddle2.png; sourceTree = "<group>"; };
-		65ED13FA171CE16000236BEA /* SplashScreen1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SplashScreen1@2x.png"; path = "../SplashScreen1@2x.png"; sourceTree = "<group>"; };
 		65ED13FE171D2AF000236BEA /* topnav_back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = topnav_back_button.png; path = ../topnav_back_button.png; sourceTree = "<group>"; };
 		65ED1400171D2C0400236BEA /* topnav_black_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topnav_black_button.png; sourceTree = "<group>"; };
 		E24BB77517023BEE005DCA9A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 		308B419C1612E6700064F541 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65CCE7B1172DFE0200AAA415 /* CherrySwash-Bold.ttf */,
+				65CCE7AF172DFDE300AAA415 /* CherrySwash-Regular.ttf */,
 				65BFE824170FE7FA00CACE5E /* Lilly__.ttf */,
 				18C7B26C16D5A42D00813A66 /* bicycle.JPG */,
 				18C7B26A16D5A3CF00813A66 /* FBUserSettingsViewResources.bundle */,
@@ -358,13 +364,13 @@
 		30F581E7163F10AF00718C60 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				65CCE7AD172DFCB500AAA415 /* SplashScreen1@2x.png */,
+				65CCE7AB172DFC9F00AAA415 /* SplashScreenBackground.png */,
 				65311B3A1721F31D00AB9BD1 /* camera30.png */,
 				65ED1400171D2C0400236BEA /* topnav_black_button.png */,
 				65ED13FE171D2AF000236BEA /* topnav_back_button.png */,
-				65ED13FA171CE16000236BEA /* SplashScreen1@2x.png */,
 				65ED13F6171C86E200236BEA /* toddle.png */,
 				65ED13F8171C881500236BEA /* toddle2.png */,
-				65BFE836171C7BF700CACE5E /* SplashScreenBackground2.png */,
 				1866D07B17024A73008796F0 /* write.png */,
 				65BFE820170EA21600CACE5E /* topnav_button_black4.png */,
 				653C96CF1701FF0900EB72AA /* nav_button_black.png */,
@@ -496,14 +502,16 @@
 				65BFE827171A0BE800CACE5E /* icon@2x.png in Resources */,
 				65BFE829171A0BFB00CACE5E /* icon.png in Resources */,
 				65BFE833171A280B00CACE5E /* loginBackgroundIPadLandscape@2x.jpg in Resources */,
-				65BFE837171C7BF800CACE5E /* SplashScreenBackground2.png in Resources */,
 				65ED13F7171C86E200236BEA /* toddle.png in Resources */,
 				65ED13F9171C881500236BEA /* toddle2.png in Resources */,
-				65ED13FB171CE16000236BEA /* SplashScreen1@2x.png in Resources */,
 				65ED13FF171D2AF100236BEA /* topnav_back_button.png in Resources */,
 				65ED1401171D2C0400236BEA /* topnav_black_button.png in Resources */,
 				18E416E2171DE7390082D15D /* MyRecommendationViewController.xib in Resources */,
 				65311B3B1721F31D00AB9BD1 /* camera30.png in Resources */,
+				65CCE7AC172DFC9F00AAA415 /* SplashScreenBackground.png in Resources */,
+				65CCE7AE172DFCB500AAA415 /* SplashScreen1@2x.png in Resources */,
+				65CCE7B0172DFDE300AAA415 /* CherrySwash-Regular.ttf in Resources */,
+				65CCE7B2172DFE0200AAA415 /* CherrySwash-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
