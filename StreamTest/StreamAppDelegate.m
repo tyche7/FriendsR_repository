@@ -32,7 +32,7 @@ NSString *const SCSessionStateChangedNotification =
 - (void)customizeAppearance
 {
     // Create resizable images
-    UIImage *gradientImage44 = [[UIImage imageNamed:@"UINavigation_Purple6"]
+    UIImage *gradientImage44 = [[UIImage imageNamed:@"UINavigation_Purple7"]
                                 resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
 //    UIImage *gradientImage32 = [[UIImage imageNamed:@"surf_gradient_textured_32"]
 //                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
