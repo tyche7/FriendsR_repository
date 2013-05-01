@@ -39,6 +39,10 @@
 		18D422B816DFF5BA0051EE06 /* WebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D422B716DFF5BA0051EE06 /* WebServerConnection.m */; };
 		18E416E1171DE7390082D15D /* MyRecommendationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E416DF171DE7390082D15D /* MyRecommendationViewController.m */; };
 		18E416E2171DE7390082D15D /* MyRecommendationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E416E0171DE7390082D15D /* MyRecommendationViewController.xib */; };
+		18F050A517304F5000EB66C9 /* Post1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F050A317304F5000EB66C9 /* Post1ViewController.m */; };
+		18F050A617304F5000EB66C9 /* Post1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F050A417304F5000EB66C9 /* Post1ViewController.xib */; };
+		18F050AA17306AFA00EB66C9 /* Post2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F050A817306AFA00EB66C9 /* Post2ViewController.m */; };
+		18F050AB17306AFA00EB66C9 /* Post2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F050A917306AFA00EB66C9 /* Post2ViewController.xib */; };
 		18F51BB216D7E8A6005894B3 /* love.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F51BB116D7E8A6005894B3 /* love.png */; };
 		18F51BB416D7E928005894B3 /* hate.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F51BB316D7E928005894B3 /* hate.png */; };
 		300DFECD168259EF00696D06 /* upload-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 300DFECC168259EF00696D06 /* upload-photo.png */; };
@@ -137,6 +141,12 @@
 		18E416DE171DE7390082D15D /* MyRecommendationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRecommendationViewController.h; sourceTree = "<group>"; };
 		18E416DF171DE7390082D15D /* MyRecommendationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRecommendationViewController.m; sourceTree = "<group>"; };
 		18E416E0171DE7390082D15D /* MyRecommendationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyRecommendationViewController.xib; sourceTree = "<group>"; };
+		18F050A217304F5000EB66C9 /* Post1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post1ViewController.h; sourceTree = "<group>"; };
+		18F050A317304F5000EB66C9 /* Post1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post1ViewController.m; sourceTree = "<group>"; };
+		18F050A417304F5000EB66C9 /* Post1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Post1ViewController.xib; sourceTree = "<group>"; };
+		18F050A717306AFA00EB66C9 /* Post2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post2ViewController.h; sourceTree = "<group>"; };
+		18F050A817306AFA00EB66C9 /* Post2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post2ViewController.m; sourceTree = "<group>"; };
+		18F050A917306AFA00EB66C9 /* Post2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Post2ViewController.xib; sourceTree = "<group>"; };
 		18F51BB116D7E8A6005894B3 /* love.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = love.png; sourceTree = "<group>"; };
 		18F51BB316D7E928005894B3 /* hate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hate.png; sourceTree = "<group>"; };
 		300DFECC168259EF00696D06 /* upload-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload-photo.png"; sourceTree = "<group>"; };
@@ -323,9 +333,9 @@
 				30D0834816292A91004E499F /* SettingController.m */,
 				30D0834916292A91004E499F /* SettingController.xib */,
 				181E552316EB16EE00A8F4CD /* OptionViewController.h */,
-				181E552516EB170E00A8F4CD /* OptionViewController.m */,
 				181E552116EB16DA00A8F4CD /* OptionViewController.xib */,
 				1801069016F120B50000A1CB /* AgeListViewController.h */,
+				181E552516EB170E00A8F4CD /* OptionViewController.m */,
 				1801069116F120B60000A1CB /* AgeListViewController.m */,
 				1801069216F120B60000A1CB /* AgeListViewController.xib */,
 				1812660016F2E69A0079B9F5 /* NoteViewController.h */,
@@ -334,6 +344,12 @@
 				30C1AE9C162A92E600EE0BC6 /* PostViewController.h */,
 				30C1AE9D162A92E700EE0BC6 /* PostViewController.m */,
 				181E552716EE66C000A8F4CD /* PostViewController.xib */,
+				18F050A717306AFA00EB66C9 /* Post2ViewController.h */,
+				18F050A817306AFA00EB66C9 /* Post2ViewController.m */,
+				18F050A917306AFA00EB66C9 /* Post2ViewController.xib */,
+				18F050A217304F5000EB66C9 /* Post1ViewController.h */,
+				18F050A317304F5000EB66C9 /* Post1ViewController.m */,
+				18F050A417304F5000EB66C9 /* Post1ViewController.xib */,
 				30F581F6163F11D100718C60 /* LoginViewController.h */,
 				30F581F7163F11D100718C60 /* LoginViewController.m */,
 				30F581F8163F11D100718C60 /* LoginViewController.xib */,
@@ -504,6 +520,8 @@
 				65ED1401171D2C0400236BEA /* topnav_black_button.png in Resources */,
 				18E416E2171DE7390082D15D /* MyRecommendationViewController.xib in Resources */,
 				65311B3B1721F31D00AB9BD1 /* camera30.png in Resources */,
+				18F050A617304F5000EB66C9 /* Post1ViewController.xib in Resources */,
+				18F050AB17306AFA00EB66C9 /* Post2ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +552,8 @@
 				187ED9DE16FBABB20040F013 /* UserStore.m in Sources */,
 				188110EF16FBBA1200DDDF32 /* UserData.m in Sources */,
 				18E416E1171DE7390082D15D /* MyRecommendationViewController.m in Sources */,
+				18F050A517304F5000EB66C9 /* Post1ViewController.m in Sources */,
+				18F050AA17306AFA00EB66C9 /* Post2ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

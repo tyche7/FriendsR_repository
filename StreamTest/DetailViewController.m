@@ -117,7 +117,7 @@
     
     // add a line
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(20, 385, scrollView.bounds.size.width-40, 1)];
-    lineView.backgroundColor = [UIColor grayColor];
+    lineView.backgroundColor = [UIColor lightGrayColor];
     [scrollView addSubview:lineView];
     
     // user's profile photo
@@ -141,13 +141,13 @@
     [scrollView addSubview:nameLabel];
     
     // user's note  
-    CGRect postRect = CGRectMake(20, 450, 280, 0);
+    CGRect postRect = CGRectMake(20, 445, 280, 0);
     postViewHeight  = 0;
     postView = [[UITextView alloc] initWithFrame:postRect];
     [postView setEditable:NO];
     postView.font = [UIFont fontWithName:@"Helvetica" size:13];
     postView.textAlignment = UITextAlignmentLeft;
-    postView.backgroundColor = [UIColor whiteColor];
+    postView.backgroundColor = [UIColor clearColor];
     postView.layer.cornerRadius = 2.0f;
     [scrollView addSubview:postView];
     
@@ -197,10 +197,10 @@
     
     commentTextView.layer.cornerRadius = 2.0f;
     
-    [commentTextView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [commentTextView.layer setBorderColor:[UIColor blackColor].CGColor];
     [commentTextView.layer setBorderWidth:0.5f];
-    //[commentTextView.layer setShadowColor:[UIColor grayColor].CGColor];
-    //[commentTextView.layer setShadowOpacity:0.5];
+    [commentTextView.layer setShadowColor:[UIColor lightGrayColor].CGColor];
+    [commentTextView.layer setShadowOpacity:0.5];
     //[commentTextView.layer setShadowRadius:3.0];
     //[commentTextView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     

@@ -11,7 +11,7 @@
 #import "StreamAppDelegate.h"
 #import "StreamViewController.h"
 #import "DetailViewController.h"
-#import "PostViewController.h"
+#import "Post1ViewController.h"
 #import "MyViewController.h"
 #import "SettingController.h"
 #import "LoginViewController.h"
@@ -98,7 +98,7 @@ NSString *const SCSessionStateChangedNotification =
  
     navController = [[UINavigationController alloc] initWithRootViewController:rootController];
 
-    UIViewController *postController = [[PostViewController  alloc] initWithNibName:@"PostViewController" bundle:nil];
+    UIViewController *postController = [[Post1ViewController  alloc] initWithNibName:@"Post1ViewController" bundle:nil];
     navController1 = [[UINavigationController alloc] initWithRootViewController:postController];
     
     UIViewController *settingController= [[SettingController alloc] initWithNibName:@"SettingController" bundle:nil];
