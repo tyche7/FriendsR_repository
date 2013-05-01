@@ -32,7 +32,7 @@ NSString *const SCSessionStateChangedNotification =
 - (void)customizeAppearance
 {
     // Create resizable images
-    UIImage *gradientImage44 = [[UIImage imageNamed:@"navbartop"]
+    UIImage *gradientImage44 = [[UIImage imageNamed:@"UINavigation_Purple7"]
                                 resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
 //    UIImage *gradientImage32 = [[UIImage imageNamed:@"surf_gradient_textured_32"]
 //                                resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
@@ -45,10 +45,10 @@ NSString *const SCSessionStateChangedNotification =
     
     // Customize the title text for *all* UINavigationBars
     [[UINavigationBar appearance] setTitleTextAttributes: @{
-                                UITextAttributeTextColor: [UIColor colorWithRed:56.0/255.0 green:152.0/255.0 blue:255.0/255.0 alpha:1.0],
+                                UITextAttributeTextColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0],
                           UITextAttributeTextShadowColor: [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
                          UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0.0f, 1.0f)],
-                                     UITextAttributeFont: [UIFont fontWithName:@"Lilly" size:20.0f]
+                                     UITextAttributeFont: [UIFont fontWithName:@"CherrySwash-Regular" size:25.0f]
      }];
     
     UIImage *button30 = [[UIImage imageNamed:@"topnav_black_button"]
