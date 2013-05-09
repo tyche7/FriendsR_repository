@@ -122,7 +122,7 @@
         [frameView bringSubviewToFront:ageLabel];
         
         
-        CGRect productNameLabelRect = CGRectMake(30, 280, 200, 20);
+        CGRect productNameLabelRect = CGRectMake(30, 280, 240, 20);
         UILabel *productNameLabel = [[UILabel alloc] initWithFrame:productNameLabelRect];
         productNameLabel.textAlignment = UITextAlignmentCenter;
         productNameLabel.backgroundColor = [UIColor clearColor];

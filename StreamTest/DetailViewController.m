@@ -199,7 +199,10 @@
     [sendButton addTarget:self action:@selector(send:) forControlEvents:UIControlEventTouchUpInside];
     sendButton.frame = CGRectMake(240, 6, 70, 31);
     [sendButton setTitle:@"send" forState:UIControlStateNormal];
-    //sendButton.titleLabel.textColor = [UIColor blackColor];
+    [sendButton setBackgroundImage:[UIImage imageNamed:@"topnav_black_button.png"] forState:UIControlStateNormal];
+    //[sendButton setBackgroundImage:[UIImage imageNamed:@"buttonHighlighted.png"] forState:UIControlStateHighlighted];
+
+    sendButton.titleLabel.textColor = [UIColor whiteColor];
 
     [commentView addSubview:sendButton];
 
