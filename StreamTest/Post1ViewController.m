@@ -87,28 +87,6 @@
     imageButton.frame = CGRectMake(110, 210, 100, 100);
     [self.view addSubview:imageButton];
     
-   
-    /*
-    // TextField for Product name
-    CGRect productNameLabelRect = CGRectMake(0, 20, 100, 50);
-    productNameLabel = [[UILabel alloc] initWithFrame:productNameLabelRect];
-    productNameLabel.text = @"Product Name";
-    [self.view addSubview:productNameLabel];
-                    
-    CGRect productNameFieldRect = CGRectMake(0,120,150,25);
-    productNameField = [[UITextField alloc] initWithFrame:productNameFieldRect];
-    productNameField.placeholder = @"purchasePlace (optional)";
-    productNameField.font = [UIFont systemFontOfSize:15];
-    productNameField.autocorrectionType = UITextAutocorrectionTypeNo;
-    productNameField.keyboardType = UIKeyboardTypeDefault;
-    productNameField.returnKeyType = UIReturnKeyDone;
-    
-    
-    //[ purchasePlaceField addTarget:self action:@selector(setPurchasePlace:) forControlEvents:UIControlEventEditingDidEndOnExit];
-    
-    [self.view addSubview:productNameField];
-
-     */
                        
     // Rating
     
@@ -180,6 +158,15 @@
 
 -(IBAction)cancel:(id)sender{
     
+    [self eraseContent];
+    
+    // go back to Streamview
+    [self.tabBarController setSelectedIndex:0];
+    
+}
+
+-(void)eraseContent{
+    
     //dismiss keyboard if it is active
     [self.view endEditing:YES];
     
@@ -193,14 +180,11 @@
     
     // set rating segment as love
     ratingSegmentedControl.selectedSegmentIndex = 0;
-
+    
     
     //set displayMedium
     displayMediumChoice = YES;
-    
-    
-    // go back to Streamview
-    [self.tabBarController setSelectedIndex:0];
+
     
 }
 
@@ -317,9 +301,8 @@
 }
 
 -(void)nextButtonWasPressed:(id)sender{
-    
-    /*******  TEMPORARILY COMMENT OUT
-   
+
+
      NSString* msg;
     if ([productNameField.text length] == 0) {
         msg = @"Please enter a product name";
@@ -332,14 +315,13 @@
         [self showAlertView:@"Message" andMessage:msg];
         return;
     }
-     
-     ************/
     
     rec.productName = productNameField.text;
     
     Post2ViewController* post2viewController = [[Post2ViewController alloc] init];
     post2viewController.rec = self.rec;
     post2viewController.productImage =self.productImage;
+    post2viewController.delegate = self;
     [self.navigationController pushViewController:post2viewController animated:true];
     
 }
@@ -427,6 +409,11 @@
                                delegate:nil
                       cancelButtonTitle:NSLocalizedString(@"OK", @"")
                       otherButtonTitles:nil] show];
+}
+
+// implement delegate method
+- (void)didSave{
+    [self eraseContent];
 }
 
 

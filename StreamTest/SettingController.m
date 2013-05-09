@@ -86,7 +86,7 @@
     self.title = @"Profile";
     
     //code to get friends from web server
-    /* commenting out the synchronous call code
+    
     //NSString *urlString = @"http://tyche92.pythonanywhere.com/upload/friends/userid/726566112";
     NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/friends/userid/%@", myUserData.userID];
     
@@ -125,9 +125,9 @@
         
         // show all values
         NSArray *results = [res objectForKey:@"items"];
-        commenting out the synchronous call code */
     
-        NSArray *results = nil;
+    
+        //NSArray *results = nil;
         myUserData.toddleFriends = results;
         
         for (id friend in results) {
@@ -151,6 +151,8 @@
     }
      commenting out the synchronous call code */
 
+}
+    
 }
 
 

@@ -16,7 +16,7 @@
 @synthesize date;
 @synthesize post;
 @synthesize image, rating, ageBand;
-@synthesize picView, ratingView;
+@synthesize picView, ratingView, triangleView;
 @synthesize productNameAndPurchasePlace;
 
 
@@ -86,11 +86,26 @@
         
         picView = [[UIImageView alloc] initWithFrame:imageRect];
         //http://stackoverflow.com/questions/3182649/ios-sdk-uiviewcontentmodescaleaspectfit-vs-uiviewcontentmodescaleaspectfill
-        picView.contentMode = UIViewContentModeScaleAspectFit;
-        //imageView.contentMode = UIViewContentModeScaleAspectFill;
+        picView.contentMode = UIViewContentModeScaleAspectFill;
         picView.clipsToBounds = YES;
         picView.tag =kImageTag;
         [frameView addSubview:picView];
+        
+        
+        CGRect triangleRect = CGRectMake(0, 0, 60, 60);
+        triangleView = [[UIImageView alloc] initWithFrame:triangleRect];
+        triangleView.image = [UIImage imageNamed:@"triangle.png"];
+        triangleView.alpha = 0.f;
+        //triangleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cornerimage6.png"]];
+
+        [picView addSubview:triangleView];
+        
+        CGRect ratingRect = CGRectMake(10, 10, 18, 16);
+        
+        ratingView = [[UIImageView alloc] initWithFrame:ratingRect];
+        ratingView.contentMode = UIViewContentModeScaleAspectFill;
+        ratingView.tag =kRatingImageTag;
+        [picView addSubview:ratingView];
         
         
         CGRect transparentAgeRect = CGRectMake(30, 250, 240, 20);
@@ -107,7 +122,7 @@
         [frameView bringSubviewToFront:ageLabel];
         
         
-        CGRect productNameLabelRect = CGRectMake(60, 280, 200, 20);
+        CGRect productNameLabelRect = CGRectMake(30, 280, 200, 20);
         UILabel *productNameLabel = [[UILabel alloc] initWithFrame:productNameLabelRect];
         productNameLabel.textAlignment = UITextAlignmentCenter;
         productNameLabel.backgroundColor = [UIColor clearColor];
@@ -119,12 +134,8 @@
         
         [frameView addSubview:productNameLabel];
         
-        CGRect ratingRect = CGRectMake(30, 280, 18, 16);
         
-        ratingView = [[UIImageView alloc] initWithFrame:ratingRect];
-        ratingView.contentMode = UIViewContentModeScaleAspectFill;
-        ratingView.tag =kRatingImageTag;
-        [frameView addSubview:ratingView];
+
         
         
         
@@ -188,9 +199,18 @@
 }
 
 - (void)setRating:(int )r{
-
-        UIImageView *rView = (UIImageView *)[self.contentView viewWithTag:kRatingImageTag];
     
+     UIImageView *rView = (UIImageView *)[self.contentView viewWithTag:kRatingImageTag];
+    
+    if (r == -1) {  // set initial value
+        triangleView.alpha = 0.f;
+        rView.alpha = 0.f;
+        
+    }else{
+    
+        triangleView.alpha = 0.5f;
+        rView.alpha = 1.f;
+
         if (r == love) {  //love
             rView.image = [UIImage imageNamed:@"pink_heart2.png"];
 
@@ -198,6 +218,7 @@
         {
             rView.image = [UIImage imageNamed:@"broken_heart.png"];
         }
+    }
 
 }
 

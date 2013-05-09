@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIImage *image;
 @property (nonatomic) int rating;
 @property (strong, nonatomic) UIImageView *picView;
+@property (strong, nonatomic) UIImageView *triangleView;
 @property (strong, nonatomic) UIImageView *ratingView;
 @property (strong, nonatomic) NSString *productNameAndPurchasePlace;
 @property (nonatomic) int ageBand;

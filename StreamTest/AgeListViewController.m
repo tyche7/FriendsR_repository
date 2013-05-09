@@ -30,6 +30,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
+    
     self.title = @"Age Range";
     
     self.selectedRow = -1; //initialize as -1

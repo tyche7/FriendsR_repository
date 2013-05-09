@@ -28,7 +28,7 @@
 
 @implementation Post2ViewController
 
-
+@synthesize delegate;
 @synthesize ageController;
 @synthesize postView, purchasePlaceField, rec, productImage;
 @synthesize ageLabel;
@@ -66,9 +66,7 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
     
     // Do any additional setup after loading the view from its nib.
-
-    
-    
+  
     
     UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     bbiLeft.enabled = YES;
@@ -148,13 +146,14 @@
         field.text = @"";
     }
     
+    // initialize the age by -1
+    rec.ageBand = -1;
+    
     //erase note(description)
     self.noteController.noteTextView.text = @"";
     
     
 }
-
-
 
 
 
@@ -220,6 +219,8 @@
             inputTextField.tag = purchaseFieldTag;
             [inputTextField setEnabled: YES];
             self.purchasePlaceField = inputTextField;
+
+            cell.accessoryType = UITableViewCellAccessoryNone;
             break;
             
         case 1:
@@ -237,6 +238,8 @@
             [inputTextField setEnabled:NO];
             inputTextField.tag = ageFieldTag;
             
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
         case 2:
@@ -244,6 +247,8 @@
             inputTextField.placeholder = @"optional";
             [inputTextField setEnabled:NO];
             inputTextField.tag = noteFieldTag;
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             break;
             
@@ -573,21 +578,20 @@
     
     // enable save button again
     [bbiRight setEnabled:YES];
-    
-    // show alert message
-    
-    //NSLog(@"connectionDidFinishLoading");
-    //[self showAlertView:@"Success" andMessage:@"successfully uploaded"];
-    
+  
     
     //clear all the information user set 
     [self eraseContent];
+    
+    //notify post1viewcontroller, save is done
+    [self.delegate didSave];
+    
     
     // go back to Streamview
     [self.tabBarController setSelectedIndex:0];
     
     
-  
+
     
 }
 

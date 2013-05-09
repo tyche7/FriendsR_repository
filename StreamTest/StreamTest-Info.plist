@@ -12,6 +12,8 @@
 	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
+		<string>ToddleIcon</string>
+		<string>ToddleIcon@2x</string>
 		<string>icon@2x.png</string>
 		<string>icon.png</string>
 	</array>

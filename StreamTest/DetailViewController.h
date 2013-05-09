@@ -40,6 +40,8 @@
 
 - (void)postComment:(NSString *) comment;
 
+- (void)send:(id)sender;
+
 - (void)adjustHeightOfNoteFrame;
 //- (void)djustHeightOfScrollViewFrame;
 

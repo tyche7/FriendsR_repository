@@ -81,11 +81,21 @@
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [scrollView addSubview:imageView];
     
+    // triangle image
+    
+    CGRect triangleRect = CGRectMake(0, 0, 60, 60);
+    UIImageView *triangleView = [[UIImageView alloc] initWithFrame:triangleRect];
+    triangleView.image = [UIImage imageNamed:@"triangle.png"];
+    triangleView.alpha = 0.5f;
+    
+    [imageView addSubview:triangleView];
+    
+    
     // rating image
     CGRect ratingRect = CGRectMake(5, 5, 18, 16);
     ratingView = [[UIImageView alloc] initWithFrame:ratingRect];
 
-    [scrollView addSubview:ratingView];
+    [imageView addSubview:ratingView];
     
     // product name and purchase place
     CGRect productNameLabelRect = CGRectMake(20, 340, 280, 20);
@@ -183,8 +193,15 @@
     commentView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:commentView];
     [self.view bringSubviewToFront:commentView];
-
     
+    
+    UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [sendButton addTarget:self action:@selector(send:) forControlEvents:UIControlEventTouchUpInside];
+    sendButton.frame = CGRectMake(240, 6, 70, 31);
+    [sendButton setTitle:@"send" forState:UIControlStateNormal];
+    //sendButton.titleLabel.textColor = [UIColor blackColor];
+
+    [commentView addSubview:sendButton];
 
     
     
@@ -445,6 +462,10 @@
     
 }
 
+- (void)send:(id)sender{
+      [commentTextView resignFirstResponder];
+}
+
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -612,6 +633,7 @@
     }];
     
 }
+
 
 #pragma mark -
 #pragma mark TextView Delegate methods

@@ -19,17 +19,12 @@
 
 
 @interface UserStore : NSObject <NSURLConnectionDelegate>
-
-
-
 @property (strong, nonatomic) UserData *userData;
 @property (weak, nonatomic) id <FriendsUpdateDelegate> delegate;
 
 
 + (UserStore *)sharedStore;
 + (void)deleteStore;
-
-
 
 
 - (void)fetchUserDataWithCompletion:(void (^)(UserData* userData,NSError *err))block;

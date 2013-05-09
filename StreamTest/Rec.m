@@ -10,7 +10,10 @@
 
 @implementation Rec
 
-@synthesize recId, userId, userName, date, userImage, postTitle, postText, productName, productImage, brandName, purchasePlace, price, additionalInfo, comments, imagePlace, fileName, rating, purchasePlaceType, ageBand;
+@synthesize recId, userId, userName, date, userImage, postTitle, postText, productName, productImage, brandName, purchasePlace, price, additionalInfo, comments, imagePlace, fileName, rating, purchasePlaceType, ageBandName;
+
+@synthesize ageBand = _ageBand;
+
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:recId forKey:@"recId"];
@@ -29,9 +32,10 @@
     [aCoder encodeObject:comments forKey:@"comments"];
     [aCoder encodeObject:imagePlace forKey:@"imagePlace"];
     [aCoder encodeObject:fileName forKey:@"fileName"];
+    [aCoder encodeObject:ageBandName forKey:@"ageBandName"];
     [aCoder encodeInt:rating forKey:@"rating"];
     [aCoder encodeInt:purchasePlaceType forKey:@"purchasePlaceType"];
-    [aCoder encodeInt:ageBand forKey:@"ageBand"];
+    [aCoder encodeInt:_ageBand forKey:@"ageBand"];
     
 }
 
@@ -56,6 +60,7 @@
         [self setComments:[aDecoder decodeObjectForKey:@"comments"]];
         [self setImagePlace:[aDecoder decodeObjectForKey:@"imagePlace"]];
         [self setFileName:[aDecoder decodeObjectForKey:@"fileName"]];
+        [self setAgeBandName:[aDecoder decodeObjectForKey:@"ageBandName"]];
         [self setRating:[aDecoder decodeIntForKey:@"rating"]];
         [self setPurchasePlaceType:[aDecoder decodeIntForKey:@"purchasePlaceType"]];
         [self setAgeBand:[aDecoder decodeIntForKey:@"ageBand"]];
@@ -63,6 +68,41 @@
     }
     
     return self;
+}
+
+- (void)setAgeBand:(int)ageBand{
+    _ageBand = ageBand;
+    
+    
+    
+    NSString *ageRange;
+    switch (ageBand) {
+        case 1: //newborn
+            ageRange = @"Newborns";
+            break;
+        case 2: //infant
+            ageRange = @"Infants";
+            break;
+        case 3: //toddler
+            ageRange = @"Toddlers";
+            break;
+        case 4: //kid
+            ageRange = @"Kids";
+            break;
+        case 5: //all ages
+            ageRange = @"All Ages";
+            break;
+        case 6: //mom
+            ageRange = @"Maternity";
+            break;
+        default:
+            break; //do nothing
+    }
+    
+
+    
+    [self setAgeBandName:ageRange];
+
 }
 
 

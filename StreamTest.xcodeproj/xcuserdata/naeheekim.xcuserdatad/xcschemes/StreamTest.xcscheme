@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "308E528E1610F4E800C90EDE"
-               BuildableName = "StreamTest.app"
-               BlueprintName = "StreamTest"
+               BuildableName = "toddle.app"
+               BlueprintName = "toddle"
                ReferencedContainer = "container:StreamTest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "308E528E1610F4E800C90EDE"
-            BuildableName = "StreamTest.app"
-            BlueprintName = "StreamTest"
+            BuildableName = "toddle.app"
+            BlueprintName = "toddle"
             ReferencedContainer = "container:StreamTest.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,8 +52,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "308E528E1610F4E800C90EDE"
-            BuildableName = "StreamTest.app"
-            BlueprintName = "StreamTest"
+            BuildableName = "toddle.app"
+            BlueprintName = "toddle"
             ReferencedContainer = "container:StreamTest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,8 +70,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "308E528E1610F4E800C90EDE"
-            BuildableName = "StreamTest.app"
-            BlueprintName = "StreamTest"
+            BuildableName = "toddle.app"
+            BlueprintName = "toddle"
             ReferencedContainer = "container:StreamTest.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

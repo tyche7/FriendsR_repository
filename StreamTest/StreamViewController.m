@@ -271,7 +271,7 @@
     
     cell.name = rec.userName;
     cell.date = [dateFormatter stringFromDate:rec.date];
-    cell.rating = rec.rating;
+    cell.rating = -1;  // set initial value for making it transparent
     cell.ageBand = 0; //set initial value
 
   
@@ -288,8 +288,7 @@
     }
     
     
-    [cell.picView setImage:[UIImage imageNamed:@"hera_foundation.jpg"]];
-    
+   //[cell.picView setImage:[UIImage imageNamed:@"hera_foundation.jpg"]];
     
     
     //Downloads the image at the given URL if not present in cache or return the cached version otherwise.
@@ -317,19 +316,16 @@
      
          
              [spinner stopAnimating];
-  
-
-         
+    
          
          if (image)
          {
              // do something with image
              NSLog(@"%@ Image has been dowloaded, and now is set", rec.productName);
              //NSLog(@"cell ageband:%d", cell.ageBand);
-             
-
-             
+          
              weakReferenceToCell.ageBand = rec.ageBand;
+             weakReferenceToCell.rating = rec.rating;
              
          }
   }];
@@ -416,10 +412,6 @@
             
             [self fetchUserFriends];
 
-            
-            
-            
- 
             
         }
     }];
@@ -508,12 +500,16 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
-    NSPredicate *resultPredicate = [NSPredicate
-                                    predicateWithFormat:@"productName contains[cd] %@",
-                                    searchText];
-    
-    searchResults = [recs filteredArrayUsingPredicate:resultPredicate];
-}
+  
+      
+        NSPredicate *resultPredicate = [NSPredicate
+                                        predicateWithFormat:@"productName contains[cd] %@ OR ageBandName contains[cd] %@",
+                                        searchText, searchText];
+        
+        searchResults = [recs filteredArrayUsingPredicate:resultPredicate];
+    }
+
+
 
 
 - (IBAction)showSearchBar{

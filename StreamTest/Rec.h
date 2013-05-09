@@ -28,6 +28,7 @@
 @property (nonatomic) int rating;
 @property (nonatomic) int purchasePlaceType;
 @property (nonatomic) int ageBand;
+@property (nonatomic, strong) NSString *ageBandName;
 
 
 @property (nonatomic, strong) NSMutableArray *comments;

@@ -11,11 +11,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Rec.h"
-
+#import "Post2ViewController.h"
 @class CameraViewController;
 
 
-@interface Post1ViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>{
+@interface Post1ViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, Post2ViewControllerDelegate>{
     
     BOOL    newMedia;
     BOOL    displayMediumChoice;

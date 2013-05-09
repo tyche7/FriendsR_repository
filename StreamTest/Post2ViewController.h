@@ -12,9 +12,14 @@
 #import "NoteViewController.h"
 @class CameraViewController;
 
+@protocol Post2ViewControllerDelegate;
+
 @interface Post2ViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, NSURLConnectionDelegate, NSURLConnectionDataDelegate, UITableViewDataSource, UITableViewDelegate, AgeListViewControllerDelegate, NoteViewControllerDelegate>{
     
 }
+
+
+@property (nonatomic, assign) id<Post2ViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) AgeListViewController* ageController;
 @property (nonatomic, strong) NoteViewController* noteController;
@@ -48,8 +53,12 @@
 - (void)showAlertView:(NSString*)title andMessage:(NSString*)msg;
 
 - (UIActivityIndicatorView *)showActivityIndicatorOnView:(UIView*)aView;
+@end
 
+@protocol Post2ViewControllerDelegate <NSObject>
 
+-(void)didSave;
 
 @end
+
 

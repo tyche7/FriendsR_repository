@@ -84,6 +84,7 @@ static NSMutableArray *sharedConnectionList = nil;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSLog(@"connectionDidFinishLoading");
     NSLog(@"Succeeded!! Received %d bytes of data",[container length]);
+
     
     // before parsing, check if statusCode is 400, 404, or 503
     // if so, pass the error through the completionBolck
@@ -105,6 +106,8 @@ static NSMutableArray *sharedConnectionList = nil;
         
     // else if there is no web conenctio error
     // parse the received data
+        
+
 
     // convert to JSON
     NSError *myError = nil;
@@ -119,8 +122,8 @@ static NSMutableArray *sharedConnectionList = nil;
         NSString *keyAsString = (NSString *)key;
         NSString *valueAsString = (NSString *)value;
         
-        //NSLog(@"key: %@", keyAsString);
-        //NSLog(@"value: %@", valueAsString);
+        NSLog(@"key: %@", keyAsString);
+        NSLog(@"value: %@", valueAsString);
     }
     
     

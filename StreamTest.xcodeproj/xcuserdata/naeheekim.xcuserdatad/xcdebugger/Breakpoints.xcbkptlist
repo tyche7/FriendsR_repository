@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/StreamCell.m"
-         timestampString = "387873854.802828"
+         timestampString = "389649379.435232"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "194"
-         endingLineNumber = "194"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
          landmarkName = "-setRating:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -85,19 +85,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "StreamTest/WebServerConnection.m"
-         timestampString = "388143251.287458"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
-         landmarkName = "-connectionDidFinishLoading:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "StreamTest/DataFeedStore.m"
          timestampString = "385676595.313902"
          startingColumnNumber = "9223372036854775807"
@@ -112,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/StreamViewController.m"
-         timestampString = "388436139.122719"
+         timestampString = "389597942.791598"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "436"
-         endingLineNumber = "436"
+         startingLineNumber = "437"
+         endingLineNumber = "437"
          landmarkName = "-fetchUserFriends"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388298455.090333"
+         timestampString = "389598459.779418"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125"
+         startingLineNumber = "135"
+         endingLineNumber = "135"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388475930.882277"
+         timestampString = "389598459.779418"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "180"
-         endingLineNumber = "180"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -229,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "222"
-         endingLineNumber = "222"
+         startingLineNumber = "239"
+         endingLineNumber = "239"
          landmarkName = "-resizeTableAndScrollViews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "556"
-         endingLineNumber = "556"
+         startingLineNumber = "577"
+         endingLineNumber = "577"
          landmarkName = "-fetchComments"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388475930.882277"
+         timestampString = "389598459.779418"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "175"
-         endingLineNumber = "175"
+         startingLineNumber = "185"
+         endingLineNumber = "185"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -281,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388475930.882277"
+         timestampString = "389598459.779418"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "184"
-         endingLineNumber = "184"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "337"
-         endingLineNumber = "337"
+         startingLineNumber = "354"
+         endingLineNumber = "354"
          landmarkName = "-keyboardWasShown:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -307,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "356"
-         endingLineNumber = "356"
+         startingLineNumber = "373"
+         endingLineNumber = "373"
          landmarkName = "-keyboardWillBeHidden:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "231"
-         endingLineNumber = "231"
+         startingLineNumber = "248"
+         endingLineNumber = "248"
          landmarkName = "-resizeTableAndScrollViews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "280"
-         endingLineNumber = "280"
+         startingLineNumber = "297"
+         endingLineNumber = "297"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -346,11 +333,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "235"
-         endingLineNumber = "235"
+         startingLineNumber = "252"
+         endingLineNumber = "252"
          landmarkName = "-resizeTableAndScrollViews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -359,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "682"
-         endingLineNumber = "682"
+         startingLineNumber = "704"
+         endingLineNumber = "704"
          landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -398,11 +385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "704"
-         endingLineNumber = "704"
+         startingLineNumber = "726"
+         endingLineNumber = "726"
          landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -411,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "687"
-         endingLineNumber = "687"
+         startingLineNumber = "709"
+         endingLineNumber = "709"
          landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "701"
-         endingLineNumber = "701"
+         startingLineNumber = "723"
+         endingLineNumber = "723"
          landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -437,11 +424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "656"
-         endingLineNumber = "656"
+         startingLineNumber = "678"
+         endingLineNumber = "678"
          landmarkName = "-textViewDidEndEditing:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -450,11 +437,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "670"
-         endingLineNumber = "670"
+         startingLineNumber = "692"
+         endingLineNumber = "692"
          landmarkName = "-textViewDidEndEditing:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -463,11 +450,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "341"
-         endingLineNumber = "341"
+         startingLineNumber = "358"
+         endingLineNumber = "358"
          landmarkName = "-keyboardWasShown:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -476,11 +463,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "691"
-         endingLineNumber = "691"
+         startingLineNumber = "713"
+         endingLineNumber = "713"
          landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -489,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "229"
-         endingLineNumber = "229"
+         startingLineNumber = "246"
+         endingLineNumber = "246"
          landmarkName = "-resizeTableAndScrollViews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -502,12 +489,155 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "StreamTest/DetailViewController.m"
-         timestampString = "388568496.540801"
+         timestampString = "389662116.053251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "281"
-         endingLineNumber = "281"
+         startingLineNumber = "298"
+         endingLineNumber = "298"
          landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/WebServerConnection.m"
+         timestampString = "389219978.125901"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "-connectionDidFinishLoading:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/WebServerConnection.m"
+         timestampString = "389551549.716931"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "103"
+         endingLineNumber = "103"
+         landmarkName = "-connectionDidFinishLoading:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/Post2ViewController.m"
+         timestampString = "389641465.0481"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "141"
+         endingLineNumber = "141"
+         landmarkName = "-eraseContent"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/Post1ViewController.m"
+         timestampString = "389641602.448738"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "415"
+         endingLineNumber = "415"
+         landmarkName = "-didSave"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/DetailViewController.m"
+         timestampString = "389662116.053251"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "466"
+         endingLineNumber = "466"
+         landmarkName = "-send:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/DetailViewController.m"
+         timestampString = "389662116.053251"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "664"
+         endingLineNumber = "664"
+         landmarkName = "-textViewShouldEndEditing:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/Rec.m"
+         timestampString = "389743674.067804"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
+         landmarkName = "-setAgeBand:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/Rec.m"
+         timestampString = "389743698.518654"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "-setAgeBand:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/DetailViewController.m"
+         timestampString = "389747145.422081"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "390"
+         endingLineNumber = "390"
+         landmarkName = "-setContent"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/DetailViewController.m"
+         timestampString = "389747234.47941"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "393"
+         endingLineNumber = "393"
+         landmarkName = "-setContent"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "StreamTest/DetailViewController.m"
+         timestampString = "389747236.23683"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "391"
+         endingLineNumber = "391"
+         landmarkName = "-setContent"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
