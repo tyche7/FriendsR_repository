@@ -114,11 +114,7 @@
     [ purchasePlaceField addTarget:self action:@selector(setPurchasePlace:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [scrollView addSubview:purchasePlaceField];
-    
-    
-
-    
-    
+      
     
     NSArray *ageArray = [NSArray arrayWithObjects: @"newborn", @"infant", @"toddler", @"child", nil];
     ageSegmentedControl = [[UISegmentedControl alloc] initWithItems:ageArray];

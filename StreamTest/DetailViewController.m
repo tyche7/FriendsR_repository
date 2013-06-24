@@ -51,8 +51,8 @@
 - (void)loadView {
     
     
-     [super loadView];
-   
+    [super loadView];
+    
     // create scrollView
     
     CGRect scrollRect=CGRectMake(0, 0, 320, DEFAULT_HEIGHT);
@@ -68,11 +68,7 @@
     //self.view=scrollView;
     
     // add a view, or views, as a subview of the scroll view.
-   // Initialization code
-    
-    // reference this if you want to resize your image
-    // http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
-    // at this point, I assume that the image size from server has only one size
+    // Initialization code
     
     // product image - square
     CGRect imageRect = CGRectMake(0, 0, 320, 320);
@@ -94,7 +90,7 @@
     // rating image
     CGRect ratingRect = CGRectMake(5, 5, 18, 16);
     ratingView = [[UIImageView alloc] initWithFrame:ratingRect];
-
+    
     [imageView addSubview:ratingView];
     
     // product name and purchase place
@@ -107,23 +103,15 @@
     productNameLabel.backgroundColor = [UIColor clearColor];
     [scrollView addSubview:productNameLabel];
     
-
-        
-        //NSLog(@"age band: %d", rec.ageBand);
-        
-
-        
-        CGRect ageRect = CGRectMake(20, 360, 280, 20);
-        ageLabel = [[UILabel alloc] initWithFrame:ageRect];
-        ageLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
-        
-
-
-        ageLabel.backgroundColor = [UIColor clearColor];
-        
-        [scrollView addSubview:ageLabel];
-        
-
+    
+    CGRect ageRect = CGRectMake(20, 360, 280, 20);
+    ageLabel = [[UILabel alloc] initWithFrame:ageRect];
+    ageLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
+    ageLabel.backgroundColor = [UIColor clearColor];
+    
+    [scrollView addSubview:ageLabel];
+    
+    
     
     // add a line
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(20, 385, scrollView.bounds.size.width-40, 1)];
@@ -134,9 +122,9 @@
     CGRect profileRect = CGRectMake(20, 400, 40, 40);
     
     profileView = [[UIImageView alloc] initWithFrame:profileRect];
-
     
-
+    
+    
     profileView.contentMode = UIViewContentModeScaleAspectFit;
     profileView.layer.cornerRadius = 5.0f;
     profileView.layer.masksToBounds = YES;
@@ -150,7 +138,7 @@
     nameLabel.backgroundColor = [UIColor clearColor];
     [scrollView addSubview:nameLabel];
     
-    // user's note  
+    // user's note
     CGRect postRect = CGRectMake(20, 445, 280, 0);
     postViewHeight  = 0;
     postView = [[UITextView alloc] initWithFrame:postRect];
@@ -161,17 +149,17 @@
     postView.layer.cornerRadius = 2.0f;
     [scrollView addSubview:postView];
     
-
+    
     
     NSLog(@"purchase place type: %d", rec.purchasePlaceType);
-
+    
     scrollviewContentHeightExceptCommentTable = DEFAULT_SCR_CNT_HEIGHT;
     // add comment Table View
     commentTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, scrollviewContentHeightExceptCommentTable, 320, DEFAULT_CMT_TBL_HEIGHT) style:UITableViewStylePlain];
     commentTableView.dataSource = self;
     commentTableView.delegate = self;
     commentTableView.scrollEnabled = NO;
-
+    
     
     [self.scrollView addSubview:commentTableView];
     
@@ -187,7 +175,7 @@
     CGRect commentRect = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);
     
     NSLog(@"comment view Frame -at first: y: %f", commentRect.origin.y);
-
+    
     
     commentView = [[UIView alloc] initWithFrame:commentRect];
     commentView.backgroundColor = [UIColor lightGrayColor];
@@ -201,11 +189,11 @@
     [sendButton setTitle:@"send" forState:UIControlStateNormal];
     [sendButton setBackgroundImage:[UIImage imageNamed:@"topnav_black_button.png"] forState:UIControlStateNormal];
     //[sendButton setBackgroundImage:[UIImage imageNamed:@"buttonHighlighted.png"] forState:UIControlStateHighlighted];
-
+    
     sendButton.titleLabel.textColor = [UIColor whiteColor];
-
+    
     [commentView addSubview:sendButton];
-
+    
     
     
     commentTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 6, 220, 31)];
@@ -226,7 +214,7 @@
     
     
     [commentView addSubview:commentTextView];
-   
+    
     
 }
 
@@ -253,7 +241,7 @@
     CGSize tobeSize = CGSizeMake(320, scrollviewContentHeightExceptCommentTable + postViewHeight + tableHeight + 80);
     
     scrollView.contentSize=tobeSize;
-
+    
 }
 
 #pragma mark - View lifecycle
@@ -264,12 +252,11 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"furley_bg"]];
     
     // Do any additional setup after loading the view from its nib.
     
     [self registerForKeyboardNotifications];
-
+    
     
 }
 
@@ -291,14 +278,13 @@
     
     [self adjustHeightOfNoteFrame];
     
-    //[self adjustHeightOfScrollViewFrame];
-  
+    
     // show empty table at first ( refresh table)
     
     self.comments = [[NSMutableArray alloc] init];
-   
+    
     [[self commentTableView] reloadData];
-     [self resizeTableAndScrollViews];
+    [self resizeTableAndScrollViews];
     
     // then go to web to fetch comments, and reload table with comments
     
@@ -349,14 +335,14 @@
     
     keyboardSize = kbSize;
     
-
+    
     
     
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     //set y position: fullScreenRect.size.height 460 - navbar height - comment view height-keyboard height
     commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-44-kbSize.height, 320, 44);  //y: 156
-
- 
+    
+    
     
     NSLog(@"After keyboard was shown");
     NSLog(@"comment View : x - %f", commentView.frame.origin.x);
@@ -373,12 +359,12 @@
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 
 {
-     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
-      //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
+    CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+    //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
     commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);
     
-  
-
+    
+    
     NSLog(@"After keyboard was hidden");
     NSLog(@"comment View : y - %f", commentView.frame.origin.y);
     NSLog(@"comment View : height - %f", commentView.frame.size.height);
@@ -450,9 +436,9 @@
     
     
     
-  
     
-
+    
+    
 }
 
 - (void)adjustHeightOfNoteFrame{
@@ -466,7 +452,7 @@
 }
 
 - (void)send:(id)sender{
-      [commentTextView resignFirstResponder];
+    [commentTextView resignFirstResponder];
 }
 
 
@@ -474,7 +460,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-        return (interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -507,12 +493,12 @@
         cellTextView.tag=11;
         
         [cell.contentView addSubview:cellTextView];
-
+        
         
     }
     
     
-       
+    
     Comment* cmt = [self.comments objectAtIndex:indexPath.row];
     //NSLog(@"comment: %@", cmt.comment);
     
@@ -526,7 +512,7 @@
     CGRect frame = cmtTextView.frame;
     frame.size.height   = cmtTextView.contentSize.height;
     cmtTextView.frame = frame;
-
+    
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -542,7 +528,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -555,7 +541,7 @@
     CGSize size = [cmt.comment sizeWithFont:[UIFont systemFontOfSize:11] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     
     //size.height+namelable.height(15)
-
+    
     CGFloat height = MAX(size.height+15+cell_content_margin*2, 44.0f);
     
     NSLog(@"cell height: %f", height);
@@ -567,7 +553,7 @@
 
 - (void)fetchComments{
     
-
+    
     //Initiate the request
     
     [[DataFeedStore sharedStore]fetchCommentswithRecommendationId:rec.recId withCompletion:^(NSMutableArray *fetchedComments, NSError *err) {
@@ -575,11 +561,11 @@
         
         if (!err){
             
-        
+            
             self.comments = fetchedComments;
-          
+            
             [[self commentTableView] reloadData];
-              [self resizeTableAndScrollViews];
+            [self resizeTableAndScrollViews];
             
         }else{
             //if things went bad, show an alert view
@@ -595,11 +581,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-
     
-      [textField resignFirstResponder];
-
-        return NO; // We do not want UITextField to insert line-breaks.
+    
+    [textField resignFirstResponder];
+    
+    return NO; // We do not want UITextField to insert line-breaks.
 }
 
 
@@ -611,18 +597,16 @@
 - (void)postComment:(NSString *) comment{
     
     // if comment is empty string or nil, return
-    if(comment.length == 0) return;
+    if(comment.length == 0 || [comment isEqualToString:@"Leave a comment"]) return;
     
     NSString* entryId = rec.recId;
     
-
+    
     [[DataFeedStore sharedStore] saveComment:comment WithEntryId:entryId WithCompletion:^(NSMutableArray* fetchedComments, NSError *err) {
         // when the request completes, this block will be called.
         
         if (!err){
             NSLog(@"posting comment - success");
-      
-            
             
         }else{
             //if things went bad, show an alert view
@@ -631,7 +615,7 @@
         }
         
         // need to reload after posting
-      [self fetchComments];
+        [self fetchComments];
         
     }];
     
@@ -663,9 +647,9 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
     
-  
+    
     NSLog(@"DidEndEditing");
-  
+    
     [self postComment:[NSMutableString stringWithString:textView.text]];
     textView.textColor= [UIColor lightGrayColor];
     textView.text = @"Leave a comment";
@@ -676,22 +660,17 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     
-   
+    
     
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     //set y position: fullScreenRect.size.height 460 - navbar height - comment view height
-    CGRect commentRect = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);  
+    CGRect commentRect = CGRectMake(0, fullScreenRect.size.height-44-44, 320, 44);
     commentView.frame = commentRect;
     
     CGRect textViewFrame = textView.frame;
     textViewFrame.size.height = 31.0f;  //initialize the height
     textView.frame = textViewFrame;
-
     
-    NSLog(@"After posting");
-    NSLog(@"comment View : y - %f", commentView.frame.origin.y);
-    NSLog(@"comment View : height - %f", commentView.frame.size.height);
-    NSLog(@"text view : height - %f", textView.frame.size.height);
     
 }
 
@@ -699,14 +678,12 @@
  replacementText:(NSString *)text
 {
     
-   // NSLog(@"shouldchangeTextinRange");
-    //Boolean heightChanged = NO;
     
     CGRect frame = textView.frame;
     
     NSLog(@" textView.contentSize.height:%f", textView.contentSize.height);
     NSLog(@" frame.size.height:%f", frame.size.height);
-
+    
     if (textView.contentSize.height > frame.size.height) {
         
         
@@ -714,19 +691,15 @@
         textView.frame = frame;
         
         NSLog (@"textview frame height: %f", textView.frame.size.height);
-    
-    
+        
+        
         CGRect commentViewFrame = commentView.frame;
         commentViewFrame.size.height = textView.contentSize.height;
+        CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
         
-         CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
         
-
         //set y position: fullScreenRect.size.height 460 - navbar height - comment view height-keyboard height - 20 (padding)
         commentView.frame = CGRectMake(0, fullScreenRect.size.height-44-textView.frame.size.height-keyboardSize.height-20, 320, textView.frame.size.height+20);
-        
-        NSLog (@"commentview frame origin: %f", commentView.frame.origin.y);
-         NSLog (@"commentview frame height: %f", commentView.frame.size.height);
         
         
     }
@@ -740,7 +713,7 @@
         // Return FALSE so that the final '\n' character doesn't get added
         return FALSE;
     }
-   
+    
     
     // For any other character return TRUE so that the text gets added to the view
     return TRUE;

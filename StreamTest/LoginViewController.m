@@ -38,7 +38,7 @@
 {
     [self.spinner startAnimating];
     
-    StreamAppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    StreamAppDelegate* appDelegate = (StreamAppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate openSession];
 }
 

@@ -47,7 +47,6 @@
     
     
     NSString* userid = [[[UserStore sharedStore] userData] userID];
-    NSLog(@"userID: %@", userid);
     
     NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/entries"];
     
@@ -90,7 +89,6 @@
     [connection start];
     
     
-    NSLog(@"size of the cached rec.. array:%d",[cachedRecArray count]);
     return cachedRecArray;
     
 }

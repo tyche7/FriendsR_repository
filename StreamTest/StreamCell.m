@@ -20,8 +20,6 @@
 @synthesize productNameAndPurchasePlace;
 
 
-
-
 #define kNameTag 1
 #define kDateTag 2
 #define kPostTag 3
@@ -85,7 +83,6 @@
         CGRect imageRect = CGRectMake(30, 30, 240, 240);
         
         picView = [[UIImageView alloc] initWithFrame:imageRect];
-        //http://stackoverflow.com/questions/3182649/ios-sdk-uiviewcontentmodescaleaspectfit-vs-uiviewcontentmodescaleaspectfill
         picView.contentMode = UIViewContentModeScaleAspectFill;
         picView.clipsToBounds = YES;
         picView.tag =kImageTag;

@@ -1,11 +1,3 @@
-//
-//  RecommendViewController.m
-//  StreamTest
-//
-//  Created by Naehee Kim on 10/13/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 
 #import <FacebookSDK/FacebookSDK.h>
 #import "PostViewController.h"
@@ -557,7 +549,6 @@
 }
 
 // Activity indicator
-// http://stackoverflow.com/questions/6336788/ios-waiting-screen
 
 - (UIActivityIndicatorView *)showActivityIndicatorOnView:(UIView*)aView
 {
@@ -735,7 +726,7 @@
     
     // We now need to tell the receiver what content type we have
     // In my case it's a png image. If you have a jpg, set it to 'image/jpg'
-    [body appendData:[[NSString stringWithString:@"Content-Type: image/jpg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Type: image/jpg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
     // Now we append the actual image data
     [body appendData:[NSData dataWithData:imageData]];
@@ -746,7 +737,7 @@
     // adding the body we've created to the request
     [request setHTTPBody:body];
     
-    [[NSURLConnection alloc] initWithRequest:request
+    (void)[[NSURLConnection alloc] initWithRequest:request
                                                                   delegate:self
                                                           startImmediately:YES  ];
     
@@ -787,19 +778,10 @@
     // enable save button again
     [bbiRight setEnabled:YES];
     
-    // show alert message
-    
-    //NSLog(@"connectionDidFinishLoading");
-    //[self showAlertView:@"Success" andMessage:@"successfully uploaded"];
-    
     
     //clear all the information user set and go back to Stream View
     [self cancel:self];
-    
-    
-
-    
-    
+ 
     
 }
 

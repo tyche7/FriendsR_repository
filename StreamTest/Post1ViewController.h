@@ -27,10 +27,6 @@
 @property (nonatomic, strong) IBOutlet UIButton *imageButton;
 @property (strong, nonatomic) IBOutlet UIImage *productImage;
 @property (nonatomic, strong) IBOutlet UITextField *productNameField;
-
-
-//@property (strong, nonatomic) IBOutlet UIButton *cameraButton;
-//@property (strong, nonatomic) IBOutlet UIButton *cameraRollButton;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *ratingSegmentedControl;
 @property (nonatomic, strong) Rec *rec;
 

@@ -155,14 +155,6 @@
 
     NSLog(@"VIEW WILL APPEAR");
     
-    // ****************************************
-    // for test, termporarily comment out 
-    //fetch data whenever this controller becomes activated
-    //Need to handle the case that fetchData is called, before having userData *****
-    //of call fetchData, only after user post his data or explicitly want to refresh the view.
-    //[self fetchData];
-    // ***************************************
-    
     if (fetchUserDataDidCallAndSet) {
         [self fetchData];
     }
@@ -212,8 +204,7 @@
     activityIndicatorView.bounds = CGRectMake(0, 0, 65, 65);
     activityIndicatorView.hidesWhenStopped = YES;
     activityIndicatorView.alpha = 0.7f;
-    //activityIndicatorView.backgroundColor = [UIColor blackColor];
-    //activityIndicatorView.layer.cornerRadius = 10.0f;
+
     
     // display it in the center of your view
     activityIndicatorView.center = CGPointMake(viewSize.width / 2.0, viewSize.height / 2.0);
@@ -274,10 +265,7 @@
     cell.rating = -1;  // set initial value for making it transparent
     cell.ageBand = 0; //set initial value
 
-  
-    
-    //NSLog(@"TIME: %@", rec.date);
-    //cell.post = rec.postText;
+
     NSString* imagePlace = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/photos/%@", rec.fileName];
     
     if (!rec.purchasePlace || [rec.purchasePlace isEqualToString:@"None"] || [rec.purchasePlace isEqualToString:@""]) {
@@ -287,17 +275,7 @@
         cell.productNameAndPurchasePlace = [NSString stringWithFormat:@"%@ from %@", rec.productName, rec.purchasePlace];
     }
     
-    
-   //[cell.picView setImage:[UIImage imageNamed:@"hera_foundation.jpg"]];
-    
-    
-    //Downloads the image at the given URL if not present in cache or return the cached version otherwise.
-    
-   // SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    
-   
-    //NSLog(@"%@ image is being downloaded", rec.productName);
-    // NSLog(@"%@", imagePlace);
+
     
     // showing activity indicator
     UIActivityIndicatorView *spinner;
@@ -314,15 +292,11 @@
       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
      {    // stopping activity indicator
      
-         
              [spinner stopAnimating];
-    
          
          if (image)
          {
-             // do something with image
-             NSLog(@"%@ Image has been dowloaded, and now is set", rec.productName);
-             //NSLog(@"cell ageband:%d", cell.ageBand);
+
           
              weakReferenceToCell.ageBand = rec.ageBand;
              weakReferenceToCell.rating = rec.rating;
@@ -367,34 +341,12 @@
 
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    // http://stackoverflow.com/questions/2213024/uitableview-flexible-dynamic-heightforrowatindexpath
-    // Notice: from this method, it's not possible to get a cell using indexpath
-    // because indexpath is 0 when this method is called.
-    // StreamCell *cell = (StreamCell *)[tableView cellForRowAtIndexPath:indexPath];
-
-    // solution: to calcuate the cell height
-    // it's necessary to use data ojbects
-
-    //Rec* rec = [recs objectAtIndex:indexPath.row];
-    
-     //CGFloat postTextHeight = 0;
-    
-    /* commented out for MVP version
-    UIFont* font = [UIFont fontWithName:@"Helvetica" size:14];
-    CGSize size= [rec.postText sizeWithFont:font];
-    CGFloat postTextHeight = ceil(size.width/300)*(float)size.height;
-    NSLog(@"post text height: %f", postTextHeight);
-    */
-    
    
     
     CGFloat contentHeight = 320.f;
     
     return MAX(contentHeight, 44.0f);
     
-    
-    //return 320.0f;
 }
 
 - (void)fetchUserData{
@@ -482,7 +434,6 @@
     
 }
 
-// reference: http://www.appcoda.com/how-to-add-search-bar-uitableview/
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller
 shouldReloadTableForSearchString:(NSString *)searchString
@@ -496,7 +447,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
 }
 
 
-// reference: http://www.peterfriese.de/using-nspredicate-to-filter-data/
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {

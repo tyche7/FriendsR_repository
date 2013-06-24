@@ -1,20 +1,3 @@
-//
-//  Post1ViewController.m
-//  StreamTest
-//
-//  Created by Naehee Kim on 4/30/13.
-//
-//
-
-//
-//  RecommendViewController.m
-//  StreamTest
-//
-//  Created by Naehee Kim on 10/13/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
-
 
 #import "Post1ViewController.h"
 #import "Post2ViewController.h"
@@ -351,7 +334,7 @@
 
 
 
-//http://stackoverflow.com/questions/1347779/how-to-navigate-through-textfields-next-done-buttons
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 
@@ -360,7 +343,7 @@
         [textField resignFirstResponder];
         NSLog(@"resign first responder");
         rec.productName = textField.text;
-        NSLog(@"productname: %@", rec.productName);
+ 
 
     return NO; // We do not want UITextField to insert line-breaks.
 }
@@ -375,7 +358,7 @@
 
 
 // Activity indicator
-// http://stackoverflow.com/questions/6336788/ios-waiting-screen
+
 
 - (UIActivityIndicatorView *)showActivityIndicatorOnView:(UIView*)aView
 {

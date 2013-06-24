@@ -87,11 +87,7 @@
     
     //code to get friends from web server
     
-    //NSString *urlString = @"http://tyche92.pythonanywhere.com/upload/friends/userid/726566112";
     NSString *urlString = [NSString stringWithFormat:@"http://tyche92.pythonanywhere.com/friends/userid/%@", myUserData.userID];
-    
-    //PHP file name is being set from the parent view
-    //[databaseURL appendString:urlString];
     
     //call ASIHTTP delegates (Used to connect to database)
     NSURL *url = [NSURL URLWithString:urlString];
@@ -107,18 +103,6 @@
         NSLog(@"Error");
     } else {
         
-        //TODO: set up stuff that needs to work on the data here.
-        //NSLog(@"%@", result);
-        //NSString* newStr = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
-        // NSLog(@"%@", newStr);
-        
-        
-        //NSError *myError1 = nil;
-        
-        //NSDictionary *resJSON = [NSJSONSerialization JSONObjectWithData: [newStr dataUsingEncoding:NSUTF8StringEncoding]
-        // options: NSJSONReadingMutableContainers
-        //  error: &myError1];
-        // NSLog(@"results JSON : %@", resJSON);
         
         NSError *myError = nil;
         NSDictionary *res = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&myError];
@@ -135,21 +119,6 @@
             NSLog(@"friendname: %@", [friend objectForKey:@"friendname"]);
             NSLog(@"friendurl: %@", [friend objectForKey:@"friendurl"]);
         }
-        
-        /*for(id key in res) {
-         
-         id value = [res objectForKey:key];
-         
-         NSString *keyAsString = (NSString *)key;
-         NSString *valueAsString = (NSString *)value;
-         
-         NSLog(@"key: %@", keyAsString);
-         NSLog(@"value: %@", valueAsString);
-         }*/
-    
-    /*commenting out the synchronous call code
-    }
-     commenting out the synchronous call code */
 
 }
     
@@ -251,9 +220,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+       
         
-        cell.textLabel.font = [UIFont systemFontOfSize:16];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.textLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
         cell.textLabel.lineBreakMode = UILineBreakModeTailTruncation;
         cell.textLabel.clipsToBounds = YES;
@@ -267,6 +236,8 @@
         cell.detailTextLabel.lineBreakMode = UILineBreakModeTailTruncation;
         cell.detailTextLabel.clipsToBounds = YES;
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     switch (indexPath.row) {
         case 0:

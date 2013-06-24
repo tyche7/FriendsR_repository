@@ -13,6 +13,7 @@
 		1801069416F120B60000A1CB /* AgeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1801069216F120B60000A1CB /* AgeListViewController.xib */; };
 		1812660316F2E69A0079B9F5 /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1812660116F2E69A0079B9F5 /* NoteViewController.m */; };
 		1812660416F2E69A0079B9F5 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1812660216F2E69A0079B9F5 /* NoteViewController.xib */; };
+		1813BAAA173C3BD900D1ECD5 /* purple_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1813BAA9173C3BD800D1ECD5 /* purple_background.jpg */; };
 		181E552216EB16DA00A8F4CD /* OptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181E552116EB16DA00A8F4CD /* OptionViewController.xib */; };
 		181E552416EB16EE00A8F4CD /* OptionViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 181E552316EB16EE00A8F4CD /* OptionViewController.h */; };
 		181E552616EB170E00A8F4CD /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E552516EB170E00A8F4CD /* OptionViewController.m */; };
@@ -98,6 +99,7 @@
 		1812660016F2E69A0079B9F5 /* NoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewController.h; sourceTree = "<group>"; };
 		1812660116F2E69A0079B9F5 /* NoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewController.m; sourceTree = "<group>"; };
 		1812660216F2E69A0079B9F5 /* NoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteViewController.xib; sourceTree = "<group>"; };
+		1813BAA9173C3BD800D1ECD5 /* purple_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = purple_background.jpg; sourceTree = "<group>"; };
 		181E552116EB16DA00A8F4CD /* OptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionViewController.xib; sourceTree = "<group>"; };
 		181E552316EB16EE00A8F4CD /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
 		181E552516EB170E00A8F4CD /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		30F581E7163F10AF00718C60 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				1813BAA9173C3BD800D1ECD5 /* purple_background.jpg */,
 				1877750A17385D7B00B4BD77 /* triangle.png */,
 				187775081738554E00B4BD77 /* cornerimage7.png */,
 				65C841CD1730571F00F381BA /* UINavigation_Purple7.png */,
@@ -474,6 +477,7 @@
 				1877750B17385D7B00B4BD77 /* triangle.png in Resources */,
 				188244F817399C98008CEBF1 /* icon@2x.png in Resources */,
 				188244FA17399D6B008CEBF1 /* icon.png in Resources */,
+				1813BAAA173C3BD900D1ECD5 /* purple_background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +527,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1889563E173EBF2B00FD33AC /* Ad Hoc Distribution 1 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-lsqlite3.0";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad Hoc Distribution 1";
+		};
+		1889563F173EBF2B00FD33AC /* Ad Hoc Distribution 1 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				BUILD_VARIANTS = normal;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../../../../FacebookSDK\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StreamTest/StreamTest-Prefix.pch";
+				INFOPLIST_FILE = "StreamTest/StreamTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				New_Setting = "";
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Ad Hoc Distribution 1";
+		};
 		308E52A51610F4E800C90EDE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -640,6 +698,7 @@
 			buildConfigurations = (
 				308E52A51610F4E800C90EDE /* Debug */,
 				308E52A61610F4E800C90EDE /* Release */,
+				1889563E173EBF2B00FD33AC /* Ad Hoc Distribution 1 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -649,6 +708,7 @@
 			buildConfigurations = (
 				308E52A81610F4E800C90EDE /* Debug */,
 				308E52A91610F4E800C90EDE /* Release */,
+				1889563F173EBF2B00FD33AC /* Ad Hoc Distribution 1 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

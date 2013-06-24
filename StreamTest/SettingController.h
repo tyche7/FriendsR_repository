@@ -11,7 +11,7 @@
 
 @interface SettingController : UIViewController < UITableViewDataSource, UITableViewDelegate,  FBFriendPickerDelegate>
 
-//Vimal added
+
 @property (nonatomic, strong) MyRecommendationViewController* myRecommendationViewController;
 
 @property (strong, nonatomic) NSArray* selectedFriends;
