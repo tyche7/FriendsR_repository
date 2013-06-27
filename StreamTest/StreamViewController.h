@@ -19,10 +19,11 @@
 
 @property (nonatomic, strong) NSMutableArray *recs;
 @property (nonatomic, strong) NSArray *searchResults;
-@property (nonatomic, strong) IBOutlet DetailViewController *detailController;
 @property (nonatomic, strong) NSString *userid;
 @property  (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) UIActivityIndicatorView *mainSpinner;
+
+@property (nonatomic, weak) IBOutlet DetailViewController *detailController;
 
 
 - (void)fetchUserData;

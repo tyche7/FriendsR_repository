@@ -109,7 +109,7 @@ static UserStore *userStore = nil;
                      // adding the body we've created to the request
                      [request setHTTPBody:body];
                      
-                     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request
+                     (void)[[NSURLConnection alloc] initWithRequest:request
                                                                                    delegate:self
                                                                            startImmediately:YES  ];
                      //Vimal end

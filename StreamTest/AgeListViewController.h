@@ -13,7 +13,7 @@
 
 @interface AgeListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) IBOutlet  UITableView* ageTableView;
+@property (nonatomic, weak) IBOutlet  UITableView* ageTableView;
 
 @property (nonatomic, assign) id<AgeListViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSString* ageLabel;

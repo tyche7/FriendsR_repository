@@ -14,10 +14,6 @@
 		1812660316F2E69A0079B9F5 /* NoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1812660116F2E69A0079B9F5 /* NoteViewController.m */; };
 		1812660416F2E69A0079B9F5 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1812660216F2E69A0079B9F5 /* NoteViewController.xib */; };
 		1813BAAA173C3BD900D1ECD5 /* purple_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1813BAA9173C3BD800D1ECD5 /* purple_background.jpg */; };
-		181E552216EB16DA00A8F4CD /* OptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181E552116EB16DA00A8F4CD /* OptionViewController.xib */; };
-		181E552416EB16EE00A8F4CD /* OptionViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 181E552316EB16EE00A8F4CD /* OptionViewController.h */; };
-		181E552616EB170E00A8F4CD /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E552516EB170E00A8F4CD /* OptionViewController.m */; };
-		181E552816EE66C000A8F4CD /* PostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 181E552716EE66C000A8F4CD /* PostViewController.xib */; };
 		187775091738554E00B4BD77 /* cornerimage7.png in Resources */ = {isa = PBXBuildFile; fileRef = 187775081738554E00B4BD77 /* cornerimage7.png */; };
 		1877750B17385D7B00B4BD77 /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1877750A17385D7B00B4BD77 /* triangle.png */; };
 		187ED9DE16FBABB20040F013 /* UserStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 187ED9DD16FBABB20040F013 /* UserStore.m */; };
@@ -53,7 +49,6 @@
 		308E52A01610F4E800C90EDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 308E529F1610F4E800C90EDE /* main.m */; };
 		308E52A41610F4E800C90EDE /* StreamAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 308E52A31610F4E800C90EDE /* StreamAppDelegate.m */; };
 		308E52B41610F5E800C90EDE /* StreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 308E52B31610F5E800C90EDE /* StreamCell.m */; };
-		30C1AE9F162A92E700EE0BC6 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C1AE9D162A92E700EE0BC6 /* PostViewController.m */; };
 		30C3133A16117EBF002657B9 /* StreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C3133816117EBF002657B9 /* StreamViewController.m */; };
 		30C3133B16117EBF002657B9 /* StreamViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30C3133916117EBF002657B9 /* StreamViewController.xib */; };
 		30D082F41628A43D004E499F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D082F21628A43D004E499F /* DetailViewController.m */; };
@@ -100,10 +95,6 @@
 		1812660116F2E69A0079B9F5 /* NoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewController.m; sourceTree = "<group>"; };
 		1812660216F2E69A0079B9F5 /* NoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteViewController.xib; sourceTree = "<group>"; };
 		1813BAA9173C3BD800D1ECD5 /* purple_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = purple_background.jpg; sourceTree = "<group>"; };
-		181E552116EB16DA00A8F4CD /* OptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionViewController.xib; sourceTree = "<group>"; };
-		181E552316EB16EE00A8F4CD /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
-		181E552516EB170E00A8F4CD /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
-		181E552716EE66C000A8F4CD /* PostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewController.xib; sourceTree = "<group>"; };
 		187775081738554E00B4BD77 /* cornerimage7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cornerimage7.png; sourceTree = "<group>"; };
 		1877750A17385D7B00B4BD77 /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
 		187ED9DC16FBABB10040F013 /* UserStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserStore.h; sourceTree = "<group>"; };
@@ -153,8 +144,6 @@
 		308E52A31610F4E800C90EDE /* StreamAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StreamAppDelegate.m; sourceTree = "<group>"; };
 		308E52B21610F5E800C90EDE /* StreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamCell.h; sourceTree = "<group>"; };
 		308E52B31610F5E800C90EDE /* StreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamCell.m; sourceTree = "<group>"; };
-		30C1AE9C162A92E600EE0BC6 /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
-		30C1AE9D162A92E700EE0BC6 /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		30C3133716117EBF002657B9 /* StreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamViewController.h; sourceTree = "<group>"; };
 		30C3133816117EBF002657B9 /* StreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamViewController.m; sourceTree = "<group>"; };
 		30C3133916117EBF002657B9 /* StreamViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreamViewController.xib; sourceTree = "<group>"; };
@@ -276,9 +265,6 @@
 				308E529A1610F4E800C90EDE /* Supporting Files */,
 				308E52B21610F5E800C90EDE /* StreamCell.h */,
 				308E52B31610F5E800C90EDE /* StreamCell.m */,
-				18E416DE171DE7390082D15D /* MyRecommendationViewController.h */,
-				18E416DF171DE7390082D15D /* MyRecommendationViewController.m */,
-				18E416E0171DE7390082D15D /* MyRecommendationViewController.xib */,
 				188110ED16FBBA1200DDDF32 /* UserData.h */,
 				188110EE16FBBA1200DDDF32 /* UserData.m */,
 				187ED9DC16FBABB10040F013 /* UserStore.h */,
@@ -303,9 +289,6 @@
 				30D0834716292A91004E499F /* SettingController.h */,
 				30D0834816292A91004E499F /* SettingController.m */,
 				30D0834916292A91004E499F /* SettingController.xib */,
-				181E552316EB16EE00A8F4CD /* OptionViewController.h */,
-				181E552516EB170E00A8F4CD /* OptionViewController.m */,
-				181E552116EB16DA00A8F4CD /* OptionViewController.xib */,
 				1801069016F120B50000A1CB /* AgeListViewController.h */,
 				1801069116F120B60000A1CB /* AgeListViewController.m */,
 				1801069216F120B60000A1CB /* AgeListViewController.xib */,
@@ -318,12 +301,12 @@
 				18D6E7C21731B8DA005B2239 /* Post2ViewController.h */,
 				18D6E7C31731B8DA005B2239 /* Post1ViewController.m */,
 				18D6E7C41731B8DA005B2239 /* Post1ViewController.h */,
-				30C1AE9C162A92E600EE0BC6 /* PostViewController.h */,
-				30C1AE9D162A92E700EE0BC6 /* PostViewController.m */,
-				181E552716EE66C000A8F4CD /* PostViewController.xib */,
 				30F581F6163F11D100718C60 /* LoginViewController.h */,
 				30F581F7163F11D100718C60 /* LoginViewController.m */,
 				30F581F8163F11D100718C60 /* LoginViewController.xib */,
+				18E416DE171DE7390082D15D /* MyRecommendationViewController.h */,
+				18E416DF171DE7390082D15D /* MyRecommendationViewController.m */,
+				18E416E0171DE7390082D15D /* MyRecommendationViewController.xib */,
 				308742401657153100E17AA9 /* CameraViewController.h */,
 				308742411657153100E17AA9 /* CameraViewController.m */,
 				308742421657153100E17AA9 /* CameraViewController.xib */,
@@ -445,9 +428,6 @@
 				18C7B26516D5A1DF00813A66 /* facebook.png in Resources */,
 				18C7B26916D5A3C800813A66 /* FacebookSDKResources.bundle in Resources */,
 				18C7B26B16D5A3CF00813A66 /* FBUserSettingsViewResources.bundle in Resources */,
-				181E552216EB16DA00A8F4CD /* OptionViewController.xib in Resources */,
-				181E552416EB16EE00A8F4CD /* OptionViewController.h in Resources */,
-				181E552816EE66C000A8F4CD /* PostViewController.xib in Resources */,
 				1801069416F120B60000A1CB /* AgeListViewController.xib in Resources */,
 				1812660416F2E69A0079B9F5 /* NoteViewController.xib in Resources */,
 				18009F1016FAD1DC003AB257 /* placeholder.png in Resources */,
@@ -496,13 +476,11 @@
 				30D082F81628A4D5004E499F /* Rec.m in Sources */,
 				30D08345162929AE004E499F /* MyViewController.m in Sources */,
 				30D0834A16292A91004E499F /* SettingController.m in Sources */,
-				30C1AE9F162A92E700EE0BC6 /* PostViewController.m in Sources */,
 				30F581F9163F11D100718C60 /* LoginViewController.m in Sources */,
 				308742431657153100E17AA9 /* CameraViewController.m in Sources */,
 				30262B6B1685193500A02C3B /* Comment.m in Sources */,
 				18D422B216DFEC9A0051EE06 /* DataFeedStore.m in Sources */,
 				18D422B816DFF5BA0051EE06 /* WebServerConnection.m in Sources */,
-				181E552616EB170E00A8F4CD /* OptionViewController.m in Sources */,
 				1801069316F120B60000A1CB /* AgeListViewController.m in Sources */,
 				1812660316F2E69A0079B9F5 /* NoteViewController.m in Sources */,
 				187ED9DE16FBABB20040F013 /* UserStore.m in Sources */,

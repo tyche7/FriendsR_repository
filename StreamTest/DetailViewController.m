@@ -266,6 +266,19 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     
+    scrollView = nil;
+    detailPicImage = nil;
+    commentTextView = nil;
+    commentTableView = nil;
+    commentView = nil;
+    imageView = nil;
+    ratingView = nil;
+    productNameLabel = nil;
+    ageLabel = nil;
+    profileView = nil;
+    nameLabel = nil;
+    postView = nil;
+    
 }
 
 //viewWillAppear is called every time the view appears

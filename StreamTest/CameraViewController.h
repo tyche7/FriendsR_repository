@@ -13,7 +13,7 @@
 
     BOOL newMedia;
 }
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 - (IBAction)useCamera;
 - (IBAction)useCameraRoll;
 

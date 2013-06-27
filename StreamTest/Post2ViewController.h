@@ -24,18 +24,18 @@
 @property (nonatomic, strong) AgeListViewController* ageController;
 @property (nonatomic, strong) NoteViewController* noteController;
 
-@property (strong, nonatomic) IBOutlet UITableView *infoTableView;
+@property (weak, nonatomic) IBOutlet UITableView *infoTableView;
 
-@property (nonatomic, strong) IBOutlet UITextView *postView;
-@property (nonatomic, strong) IBOutlet UITextField *productField;
-@property (nonatomic, strong) IBOutlet UITextField *purchasePlaceField;
+@property (weak, nonatomic) IBOutlet UITextView *postView;
+@property (weak, nonatomic) IBOutlet UITextField *productField;
+@property (weak, nonatomic) IBOutlet UITextField *purchasePlaceField;
 @property (strong, nonatomic) UIImage *productImage;
 
 @property (nonatomic, strong) Rec *rec;
 @property (nonatomic, strong) NSString* ageLabel;
 
-@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) UIActivityIndicatorView *spinner;
 
 @property (strong, nonatomic) UIBarButtonItem *bbiRight;
 

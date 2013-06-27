@@ -13,7 +13,7 @@
 @interface NoteViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, assign) id<NoteViewControllerDelegate> delegate;
-@property (nonatomic, strong) IBOutlet UITextView* noteTextView;
+@property (nonatomic, weak) IBOutlet UITextView* noteTextView;
 
 @end
 

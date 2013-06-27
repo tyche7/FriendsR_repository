@@ -23,15 +23,15 @@
 }
 
 
-@property (nonatomic, strong) IBOutlet UIImageView *photoImage;
-@property (nonatomic, strong) IBOutlet UIButton *imageButton;
-@property (strong, nonatomic) IBOutlet UIImage *productImage;
-@property (nonatomic, strong) IBOutlet UITextField *productNameField;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImage;
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
+@property (weak, nonatomic) IBOutlet UIImage *productImage;
+@property (weak, nonatomic) IBOutlet UITextField *productNameField;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *ratingSegmentedControl;
 @property (nonatomic, strong) Rec *rec;
 
 @property (nonatomic, weak) UIActionSheet *actionSheet;
-@property (nonatomic, strong) UITextField *currentField;
+@property (nonatomic, weak) UITextField *currentField;
 
 @property (strong, nonatomic) UIBarButtonItem *bbiRight;
 

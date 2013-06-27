@@ -14,7 +14,6 @@
 #import "UserStore.h"
 #import "UserData.h"
 #import "CameraViewController.h"
-#import "OptionViewController.h"
 #import "AgeListViewController.h"
 #import "NoteViewController.h"
 #import <QuartzCore/QuartzCore.h>
@@ -168,11 +167,6 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
-
-
-// table view
-// http://stackoverflow.com/questions/409259/having-a-uitextfield-in-a-uitableviewcell
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -529,7 +523,7 @@
     
     // We now need to tell the receiver what content type we have
     // In my case it's a png image. If you have a jpg, set it to 'image/jpg'
-    [body appendData:[[NSString stringWithString:@"Content-Type: image/jpg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Type: image/jpg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
     // Now we append the actual image data
     [body appendData:[NSData dataWithData:imageData]];
@@ -540,7 +534,7 @@
     // adding the body we've created to the request
     [request setHTTPBody:body];
     
-    [[NSURLConnection alloc] initWithRequest:request
+    (void)[[NSURLConnection alloc] initWithRequest:request
                                     delegate:self
                             startImmediately:YES  ];
     

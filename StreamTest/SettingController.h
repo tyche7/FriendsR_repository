@@ -15,11 +15,11 @@
 @property (nonatomic, strong) MyRecommendationViewController* myRecommendationViewController;
 
 @property (strong, nonatomic) NSArray* selectedFriends;
-@property (strong, nonatomic) IBOutlet UILabel *userLocationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userLocationLabel;
 
-@property (strong, nonatomic) IBOutlet FBProfilePictureView *userProfileImage;
-@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (strong, nonatomic) IBOutlet UITableView *menuTableView;
+@property (weak, nonatomic) IBOutlet FBProfilePictureView *userProfileImage;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UITableView *menuTableView;
 
 @property (strong, nonatomic) UINavigationController *navigationControllerOfSettingController;
 

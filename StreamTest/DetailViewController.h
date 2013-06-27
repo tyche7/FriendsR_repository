@@ -17,11 +17,11 @@
 @property (nonatomic, strong) Rec *rec;
 @property (nonatomic, strong) NSMutableArray *comments;
 @property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong) NSString *productNameAndPurchasePlace;
+
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImage *detailPicImage;
 @property (nonatomic, strong) UITableView *commentTableView;
-@property (nonatomic, strong) NSString *productNameAndPurchasePlace;
-
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImageView *ratingView;
 @property (nonatomic, strong)  UILabel *productNameLabel;
